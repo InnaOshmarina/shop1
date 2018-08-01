@@ -1,0 +1,73 @@
+import axios from 'axios';
+
+import { GET_ERRORS, GET_CATEGORY, GET_CATEGORIES, DELETE_CATEGORY } from './types';
+
+// Create Category
+export const addCategory = (categoryData, history) => dispatch => {
+  axios
+    .post('/api/categories', categoryData)
+    .then(res => history.push('/categories'))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+// Get category by id
+export const getCategory = id => dispatch => {
+    axios
+        .get(`/api/categories/${id}`)
+        .then(res =>
+            dispatch({
+                type: GET_CATEGORY,
+                payload: res.data
+            })
+        )
+        .catch(err =>
+            dispatch({
+                type: GET_CATEGORY,
+                payload: {}
+            })
+        );
+};
+
+// Get all categories
+export const getCategories = () => dispatch => {
+    axios
+        .get('/api/categories')
+        .then(res =>
+            dispatch({
+                type: GET_CATEGORIES,
+                payload: res.data
+            })
+        )
+        .catch(err =>
+            dispatch({
+                type: GET_CATEGORIES,
+                payload: null
+            })
+        );
+};
+
+// Delete Category
+export const deleteCategory = id => dispatch => {
+    if (window.confirm('Are you sure? This can NOT be undone!')) {
+        axios
+            .delete(`/api/categories/${id}`)
+            .then(res =>
+                dispatch({
+                    type: DELETE_CATEGORY,
+                    payload: id
+                })
+            )
+            .catch(err =>
+                dispatch({
+                    type: GET_ERRORS,
+                    payload: err.response.data
+                })
+            );
+    }
+};
+

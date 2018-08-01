@@ -7,6 +7,7 @@ import ProductsList from '../product/ProductsList';
 import OrdersList from '../order/OrdersList';
 import Statistics from '../statistics/Statistics';
 import CategoryAdding from '../category/CategoryAdding';
+import CategoryDetails from '../category/CategoryDetails';
 // import Spinner from '../shared/Spinner';
 import '../../css/ProtectedLayout.css';
 
@@ -36,6 +37,7 @@ class ProtectedLayout extends Component {
                                 <Route exact path="/checkout" component={OrdersList} />
                                 <Route exact path="/statistics" component={Statistics} />
                                 <Route exact path="/category-adding" component={CategoryAdding} />
+                                <Route exact path="/category-details" component={CategoryDetails} />
                             </div>
                         </div>
                     </div>

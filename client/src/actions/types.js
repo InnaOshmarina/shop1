@@ -1,3 +1,9 @@
 export const GET_ERRORS = 'GET_ERRORS';
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+export const GET_CATEGORY = 'GET_CATEGORY';
+export const GET_CATEGORIES = 'GET_CATEGORIES';
+export const DELETE_CATEGORY = 'DELETE_CATEGORY';
+export const GET_PRODUCT = 'GET_PRODUCT';
+export const GET_PRODUCTS = 'GET_PRODUCTS';
+
 
