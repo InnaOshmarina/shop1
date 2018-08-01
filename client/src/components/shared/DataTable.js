@@ -1,4 +1,5 @@
 import React from 'react';
+import {TextFormat} from "../../helpers/TableHelper";
 
 const DataTable = (props) => {
     const data = props.data;
@@ -22,7 +23,9 @@ const DataTable = (props) => {
                                 <tr key={dataItemIndex}>
                                     {
                                         headers.map((headerItem, headerItemIndex) => (
-                                            <td key={headerItemIndex}>{dataItem[headerItem.name]}</td>
+                                        <td key={headerItemIndex}>
+                                            {TextFormat(dataItem[headerItem.name], headerItem.options.type)}
+                                        </td>
                                         ))
                                     }
                                 </tr>

@@ -54,8 +54,8 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getCategories } from '../../actions/categoryActions';
-// import CategoryItem from './CategoryItem';
 import DataTable from '../shared/DataTable';
+import { TEXTFORMAT } from "../../constans/GlobalConstans";
 
 class CategoriesList extends Component {
     componentDidMount() {
@@ -71,19 +71,22 @@ class CategoriesList extends Component {
             {
                 name: 'title',
                 options: {
-                    headerName: 'Name of category'
+                    headerName: 'Name of category',
+                    type: TEXTFORMAT.string
                 }
             },
             {
                 name: 'description',
                 options: {
-                    headerName: 'Brief description'
+                    headerName: 'Brief description',
+                    type: TEXTFORMAT.string
                 }
             },
             {
                 name: 'date',
                 options: {
-                    headerName: 'Date of adding'
+                    headerName: 'Date of adding',
+                    type: TEXTFORMAT.date
                 }
             }
         ];
