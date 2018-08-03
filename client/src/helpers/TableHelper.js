@@ -1,5 +1,5 @@
 import * as moment from 'moment';
-import {TEXTFORMAT} from "../constans/GlobalConstans";
+import { TEXTFORMAT } from "../constans/GlobalConstans";
 
 export const TextFormat = (item, type) => {
     let answer = item;

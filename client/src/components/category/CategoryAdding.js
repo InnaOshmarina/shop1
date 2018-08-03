@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import TextFieldGroup from '../shared/TextFieldGroup';
-import {addCategory} from '../../actions/categoryActions';
+import {addCategory, getCategory, editCategory} from '../../actions/categoryActions';
 
 class CategoryAdding extends Component {
     constructor(props) {
@@ -18,9 +18,20 @@ class CategoryAdding extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
 
+    componentDidMount() {
+        if(this.props.match.params.id) {
+            this.props.getCategory(this.props.match.params.id);
+        }
+
+    }
+
     componentWillReceiveProps(nextProps) {
         if (nextProps.errors) {
             this.setState({errors: nextProps.errors});
+        }
+
+        if(nextProps.category.category) {
+            this.setState(nextProps.category.category)
         }
     }
 
@@ -32,7 +43,11 @@ class CategoryAdding extends Component {
             description: this.state.description
         };
 
-        this.props.addCategory(categoryData, this.props.history);
+        if(this.props.match.params.id) {
+            this.props.editCategory(this.props.match.params.id, categoryData, this.props.history);
+        } else {
+            this.props.addCategory(categoryData, this.props.history);
+        }
     }
 
     onChange(e) {
@@ -85,7 +100,7 @@ const mapStateToProps = state => ({
     errors: state.errors
 });
 
-export default connect(mapStateToProps, { addCategory })(
+export default connect(mapStateToProps, { addCategory, getCategory, editCategory })(
     withRouter(CategoryAdding)
 );
 

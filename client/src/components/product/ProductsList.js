@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getProducts } from '../../actions/productActions';
 import DataTable from '../shared/DataTable';
-import { TEXTFORMAT } from "../../constans/GlobalConstans";
+import {SORTACTION, TEXTFORMAT} from "../../constans/GlobalConstans";
 
 class ProductsList extends Component {
     componentDidMount() {
@@ -53,7 +53,32 @@ class ProductsList extends Component {
             }
         ];
 
-        console.log(headers);
+        const operations = [
+            {
+                name: 'detail view',
+                options: {
+                    icon: SORTACTION.eye,
+                    type: SORTACTION.link,
+                    linkTemplate: ''
+                }
+            },
+            {
+                name: 'editing',
+                options: {
+                    icon: SORTACTION.pencil,
+                    type: SORTACTION.link,
+                    linkTemplate: 'products/edit/:_id'
+                }
+            },
+            {
+                name: 'removal',
+                options: {
+                    icon: SORTACTION.trashBin,
+                    type: SORTACTION.action,
+                    actionFunction: () => {}
+                }
+            }
+        ];
 
         return (
             <div>
@@ -63,6 +88,7 @@ class ProductsList extends Component {
                 <DataTable
                     data={products}
                     headers={headers}
+                    operations={operations}
                 />
             </div>
         );

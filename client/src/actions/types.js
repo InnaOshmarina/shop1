@@ -3,8 +3,10 @@ export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const GET_CATEGORY = 'GET_CATEGORY';
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const DELETE_CATEGORY = 'DELETE_CATEGORY';
+export const EDIT_CATEGORY = 'EDIT_CATEGORY';
 export const GET_PRODUCT = 'GET_PRODUCT';
 export const GET_PRODUCTS = 'GET_PRODUCTS';
 export const DELETE_PRODUCT = 'DELETE_PRODUCT';
+
 
 

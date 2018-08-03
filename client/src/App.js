@@ -49,7 +49,7 @@ class App extends Component {
                     <Route exact path="/login" component={Login} />
                   </div>
                     <Switch>
-                        <PrivateRoute exact path="/dashboard" component={ProtectedLayout} />
+                        <PrivateRoute path="/" component={ProtectedLayout} />
                     </Switch>
                   <Footer />
                 </div>

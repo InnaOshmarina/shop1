@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { GET_ERRORS, GET_CATEGORY, GET_CATEGORIES, DELETE_CATEGORY } from './types';
+import {GET_ERRORS, GET_CATEGORY, GET_CATEGORIES, DELETE_CATEGORY, EDIT_CATEGORY} from './types';
 
 // Create Category
 export const addCategory = (categoryData, history) => dispatch => {
@@ -46,7 +46,7 @@ export const getCategories = () => dispatch => {
         .catch(err =>
             dispatch({
                 type: GET_CATEGORIES,
-                payload: null
+                payload: []
             })
         );
 };
@@ -70,4 +70,24 @@ export const deleteCategory = id => dispatch => {
             );
     }
 };
+
+// Edit Category
+export const editCategory = (id, category, history) => dispatch => {
+        axios
+            .post(`/api/categories/${id}`, category)
+            .then(res =>
+                dispatch({
+                    type: EDIT_CATEGORY,
+                    payload: id
+                })
+            )
+            .then(res => history.push('/categories'))
+            .catch(err =>
+                dispatch({
+                    type: GET_ERRORS,
+                    payload: err.response.data
+                })
+            );
+};
+
 

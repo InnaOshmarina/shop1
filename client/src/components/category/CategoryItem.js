@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { deleteCategory } from '../../actions/categoryActions';
+import { getCategory, deleteCategory } from '../../actions/categoryActions';
 
 class CategoryItem extends Component {
+    componentDidMount() {
+        this.props.getCategory(this.props.match.params.id);
+    }
 
     onDeleteClick(id) {
         this.props.deleteCategory(id);
@@ -29,7 +32,14 @@ class CategoryItem extends Component {
 
 CategoryItem.propTypes = {
   category: PropTypes.object.isRequired,
-    deleteCategory: PropTypes.func.isRequired
+    deleteCategory: PropTypes.func.isRequired,
+    getCategory: PropTypes.func.isRequired
 };
 
-export default connect(null, { deleteCategory })(CategoryItem);
+const mapStateToProps = state => ({
+    category: state.category.category,
+    errors: state.errors
+});
+
+
+export default connect(mapStateToProps, { getCategory, deleteCategory })(CategoryItem);

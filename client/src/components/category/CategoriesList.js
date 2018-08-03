@@ -1,61 +1,10 @@
-// import React, {Component} from 'react';
-// import PropTypes from 'prop-types';
-// import { Link } from 'react-router-dom';
-// import { connect } from 'react-redux';
-// import { getCategories } from '../../actions/categoryActions';
-// import CategoryItem from './CategoryItem';
-// import Spinner from '../shared/Spinner';
-//
-// class CategoriesList extends Component {
-//     componentDidMount() {
-//         this.props.getCategories();
-//     }
-//
-//     render() {
-//         const { categories } = this.props.category;
-//
-//         let categoryItems;
-//
-//         if(categories === null ) {
-//             categoryItems = <Spinner />
-//         } else {
-//             if (categories.length > 0) {
-//                 categoryItems = categories.map(category => (
-//                     <CategoryItem key={category._id} category={category} />
-//                 ));
-//             } else {
-//                 categoryItems = <h4>No categories found...</h4>;
-//             }
-//         }
-//         return (
-//             <div>
-//                 <Link to="/category-adding">
-//                     <button type="button" className="btn btn-success">Add Category</button>
-//                 </Link>
-//                 {categoryItems}
-//             </div>
-//         );
-//     }
-// }
-//
-// CategoriesList.propTypes = {
-//     getCategories: PropTypes.func.isRequired,
-//     category: PropTypes.object.isRequired
-// };
-//
-// const mapStateToProps = state => ({
-//     category: state.category
-// });
-//
-// export default connect(mapStateToProps, { getCategories })(CategoriesList);
-
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getCategories } from '../../actions/categoryActions';
+import { getCategories, deleteCategory } from '../../actions/categoryActions';
 import DataTable from '../shared/DataTable';
-import { TEXTFORMAT } from "../../constans/GlobalConstans";
+import {SORTACTION, TEXTFORMAT} from "../../constans/GlobalConstans";
 
 class CategoriesList extends Component {
     componentDidMount() {
@@ -64,7 +13,6 @@ class CategoriesList extends Component {
 
     render() {
         const { categories } = this.props;
-        console.log(this.props);
 
         // const headers = ['title', 'description', 'date' ];
         const headers = [
@@ -91,7 +39,35 @@ class CategoriesList extends Component {
             }
         ];
 
-        console.log(headers);
+
+        const operations = [
+            {
+                name: 'detail view',
+                options: {
+                    icon: SORTACTION.eye,
+                    type: SORTACTION.link,
+                    linkTemplate: ''
+                }
+            },
+            {
+                name: 'editing',
+                options: {
+                    icon: SORTACTION.pencil,
+                    type: SORTACTION.link,
+                    linkTemplate: 'categories/edit/:_id'
+                }
+            },
+            {
+                name: 'removal',
+                options: {
+                    icon: SORTACTION.trashBin,
+                    type: SORTACTION.action,
+                    actionFunction: (id) => {
+                        this.props.deleteCategory(id);
+                    }
+                }
+            }
+        ];
 
         return (
             <div>
@@ -101,6 +77,7 @@ class CategoriesList extends Component {
                 <DataTable
                     data={categories}
                     headers={headers}
+                    operations={operations}
                 />
             </div>
         );
@@ -116,4 +93,4 @@ const mapStateToProps = state => ({
     categories: state.category.categories
 });
 
-export default connect(mapStateToProps, { getCategories })(CategoriesList);
+export default connect(mapStateToProps, { getCategories, deleteCategory })(CategoriesList);

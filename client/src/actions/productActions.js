@@ -51,7 +51,7 @@ export const getProducts = () => dispatch => {
         .catch(err =>
             dispatch({
                 type: GET_PRODUCTS,
-                payload: null
+                payload: []
             })
         );
 };

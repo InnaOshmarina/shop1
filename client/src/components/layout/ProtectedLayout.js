@@ -35,7 +35,9 @@ class ProtectedLayout extends Component {
                             <div className="col-md-9">
                                 <Route exact path="/dashboard" component={Dashboard} />
                                 <Route exact path="/categories" component={CategoriesList} />
+                                <Route exact path="/categories/edit/:id" component={CategoryAdding} />
                                 <Route exact path="/products" component={ProductsList} />
+                                <Route exact path="/products/edit/:id" component={ProductAdding} />
                                 <Route exact path="/checkout" component={OrdersList} />
                                 <Route exact path="/statistics" component={Statistics} />
                                 <Route exact path="/category-adding" component={CategoryAdding} />
