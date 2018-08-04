@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import TextFieldGroup from '../shared/TextFieldGroup';
-import {addProduct, getProduct, editProduct} from '../../actions/productActions';
+import {addProduct, getProduct, editProduct } from '../../actions/productActions';
+import {getCategories} from "../../actions/categoryActions";
+import SelectListGroup from "../shared/SelectListGroup";
 
 class ProductAdding extends Component {
     constructor(props) {
@@ -13,7 +15,8 @@ class ProductAdding extends Component {
             description: '',
             price: '',
             quantityInStock: '',
-            errors: {}
+            errors: {},
+            category: ''
         };
 
         this.onChange = this.onChange.bind(this);
@@ -24,6 +27,8 @@ class ProductAdding extends Component {
         if(this.props.match.params.id) {
             this.props.getProduct(this.props.match.params.id);
         }
+
+        this.props.getCategories();
     }
 
     componentWillReceiveProps(nextProps) {
@@ -44,6 +49,7 @@ class ProductAdding extends Component {
             description: this.state.description,
             price: this.state.price,
             quantityInStock: this.state.quantityInStock,
+            category: this.state.category
         };
 
         if(this.props.match.params.id) {
@@ -80,6 +86,15 @@ class ProductAdding extends Component {
                                     value={this.state.title}
                                     onChange={this.onChange}
                                     error={errors.title}
+                                />
+                                <SelectListGroup
+                                    placeholder="Category"
+                                    name="category"
+                                    value={this.state.category}
+                                    onChange={this.onChange}
+                                    options={this.props.categories}
+                                    error={errors.category}
+                                    info="Select the category to which this product belongs"
                                 />
                                 <TextFieldGroup
                                     placeholder="Description Of Product"
@@ -122,14 +137,16 @@ ProductAdding.propTypes = {
 
 const mapStateToProps = state => ({
     product: state.product,
-    errors: state.errors
+    errors: state.errors,
+    categories: state.category.categories
 });
 
 // Here are actions
 const mapDispatchToProps = {
     addProduct,
     getProduct,
-    editProduct
+    editProduct,
+    getCategories
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ProductAdding));

@@ -1,6 +1,8 @@
 import React from 'react';
+import lodash from 'lodash';
 import {TextFormat} from "../../helpers/TableHelper";
 import Actions from "./Actions";
+
 
 const DataTable = (props) => {
     const data = props.data;
@@ -29,7 +31,8 @@ const DataTable = (props) => {
                             {
                                 headers.map((headerItem, headerItemIndex) => (
                                     <td key={headerItemIndex}>
-                                        {TextFormat(dataItem[headerItem.name], headerItem.options.type)}
+                                        {/*{TextFormat(dataItem[headerItem.name], headerItem.options.type)}*/}
+                                        {TextFormat(lodash.get(dataItem, headerItem.name), headerItem.options.type)}
                                     </td>
                                 ))
                             }

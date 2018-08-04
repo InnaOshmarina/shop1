@@ -24,6 +24,13 @@ class ProductsList extends Component {
                 }
             },
             {
+                name: 'category.title',
+                options: {
+                    headerName: 'category',
+                    type: TEXTFORMAT.string
+                }
+            },
+            {
                 name: 'description',
                 options: {
                     headerName: 'Brief description',

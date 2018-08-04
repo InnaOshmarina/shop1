@@ -44,7 +44,7 @@ class CategoriesList extends Component {
                 options: {
                     icon: SORTACTION.eye,
                     type: SORTACTION.link,
-                    linkTemplate: ''
+                    linkTemplate: 'categories/detail/:_id'
                 }
             },
             {

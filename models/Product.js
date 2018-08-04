@@ -7,6 +7,11 @@ const ProductSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'users'
     },
+    category :
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'category'
+        },
     title: {
         type: String,
         required: true
@@ -16,11 +21,11 @@ const ProductSchema = new Schema({
         required: true
     },
     price: {
-        type: Number,
+        type: String,
         required: true
     },
     quantityInStock: {
-        type: Number,
+        type: String,
         required: true
     },
     date: {

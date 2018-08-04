@@ -31,7 +31,7 @@ class ProtectedLayout extends Component {
                                 <Route exact path="/categories" component={CategoriesList} />
                                 <Route exact path="/category-adding" component={CategoryAdding} />
                                 <Route exact path="/categories/edit/:id" component={CategoryAdding} />
-                                <Route exact path="/category-details" component={CategoryDetails} />
+                                <Route exact path="/categories/detail/:id" component={CategoryDetails} />
                                 <Route exact path="/products" component={ProductsList} />
                                 <Route exact path="/product-adding" component={ProductAdding} />
                                 <Route exact path="/products/edit/:id" component={ProductAdding} />
