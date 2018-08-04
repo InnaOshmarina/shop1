@@ -4,7 +4,8 @@ import {
     GET_ERRORS,
     GET_PRODUCT,
     GET_PRODUCTS,
-    DELETE_PRODUCT
+    DELETE_PRODUCT,
+    EDIT_PRODUCT
 } from './types';
 
 // Create Product
@@ -74,5 +75,24 @@ export const deleteProduct = id => dispatch => {
                 })
             );
     }
+};
+
+// Edit Product
+export const editProduct = (id, productData, history) => dispatch => {
+    axios
+        .post(`/api/products/${id}`, productData)
+        .then(res =>
+            dispatch({
+                type: EDIT_PRODUCT,
+                payload: id
+            })
+        )
+        .then(res => history.push('/products'))
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        );
 };
 

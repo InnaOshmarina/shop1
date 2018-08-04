@@ -14,7 +14,6 @@ class CategoriesList extends Component {
     render() {
         const { categories } = this.props;
 
-        // const headers = ['title', 'description', 'date' ];
         const headers = [
             {
                 name: 'title',
@@ -38,7 +37,6 @@ class CategoriesList extends Component {
                 }
             }
         ];
-
 
         const operations = [
             {

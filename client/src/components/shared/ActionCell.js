@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {SORTACTION} from "../../constans/GlobalConstans";
 import {getLinkTemplate} from "../../helpers/GlobalHelper";
+import '../../css/ActionCell.css';
 
 const ActionCell = (props) => {
 
@@ -9,30 +10,30 @@ const ActionCell = (props) => {
     let answer = '';
 
     // Формирование иконки
-    let currentItem = '';
+    let currentIcon = '';
     switch (operation.options.icon) {
         case SORTACTION.eye:
-            currentItem = "far fa-eye";
+            currentIcon = "far fa-eye";
             break;
         case SORTACTION.pencil:
-            currentItem = "far fa-edit";
+            currentIcon = "far fa-edit";
             break;
         case SORTACTION.trashBin:
-            currentItem = "far fa-trash-alt";
+            currentIcon = "far fa-trash-alt";
             break;
     }
 
     const iconContent = (
-           <i className={currentItem} />
+           <i className={currentIcon} />
     );
 
     if(operation.options.type === SORTACTION.link) {
         const linkTemplate = getLinkTemplate(operation.options.linkTemplate, row);
-        answer = <Link to={linkTemplate}>{iconContent}</Link>;
+        answer = <Link to={linkTemplate} className="link">{iconContent}</Link>;
     }
 
     if(operation.options.type === SORTACTION.action) {
-        answer = <span onClick={() => operation.options.actionFunction(row._id)}>{iconContent}</span>;
+        answer = <span className="action" onClick={() => operation.options.actionFunction(row._id)}>{iconContent}</span>;
     }
 
     return answer;

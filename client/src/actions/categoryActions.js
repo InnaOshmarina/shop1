@@ -72,9 +72,9 @@ export const deleteCategory = id => dispatch => {
 };
 
 // Edit Category
-export const editCategory = (id, category, history) => dispatch => {
+export const editCategory = (id, categoryData, history) => dispatch => {
         axios
-            .post(`/api/categories/${id}`, category)
+            .post(`/api/categories/${id}`, categoryData)
             .then(res =>
                 dispatch({
                     type: EDIT_CATEGORY,

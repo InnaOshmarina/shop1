@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import TextFieldGroup from '../shared/TextFieldGroup';
-import {addProduct} from '../../actions/productActions';
+import {addProduct, getProduct, editProduct} from '../../actions/productActions';
 
 class ProductAdding extends Component {
     constructor(props) {
@@ -20,9 +20,19 @@ class ProductAdding extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
 
+    componentDidMount() {
+        if(this.props.match.params.id) {
+            this.props.getProduct(this.props.match.params.id);
+        }
+    }
+
     componentWillReceiveProps(nextProps) {
         if (nextProps.errors) {
             this.setState({errors: nextProps.errors});
+        }
+
+        if(nextProps.product.product) {
+            this.setState(nextProps.product.product)
         }
     }
 
@@ -36,7 +46,11 @@ class ProductAdding extends Component {
             quantityInStock: this.state.quantityInStock,
         };
 
-        this.props.addProduct(productData, this.props.history);
+        if(this.props.match.params.id) {
+            this.props.editProduct(this.props.match.params.id, productData, this.props.history);
+        } else {
+            this.props.addProduct(productData, this.props.history);
+        }
     }
 
     onChange(e) {
@@ -46,12 +60,19 @@ class ProductAdding extends Component {
     render() {
         const { errors } = this.state;
 
+        let title;
+        if(this.props.match.params.id) {
+            title = "Editing Of Product";
+        } else {
+            title = "Add Of New Product";
+        }
+
         return (
             <div className="category-adding">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-8 m-auto">
-                            <h4 className="text-center">Add New Product</h4>
+                            <h4 className="text-center mb-4">{title}</h4>
                             <form onSubmit={this.onSubmit}>
                                 <TextFieldGroup
                                     placeholder="Title Of Product"
@@ -104,7 +125,12 @@ const mapStateToProps = state => ({
     errors: state.errors
 });
 
-export default connect(mapStateToProps, { addProduct })(
-    withRouter(ProductAdding)
-);
+// Here are actions
+const mapDispatchToProps = {
+    addProduct,
+    getProduct,
+    editProduct
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ProductAdding));
 

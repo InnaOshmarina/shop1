@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getProducts } from '../../actions/productActions';
+import { getProducts, deleteProduct } from '../../actions/productActions';
 import DataTable from '../shared/DataTable';
 import {SORTACTION, TEXTFORMAT} from "../../constans/GlobalConstans";
 
@@ -75,7 +75,9 @@ class ProductsList extends Component {
                 options: {
                     icon: SORTACTION.trashBin,
                     type: SORTACTION.action,
-                    actionFunction: () => {}
+                    actionFunction: (id) => {
+                        this.props.deleteProduct(id);
+                    }
                 }
             }
         ];
@@ -104,4 +106,4 @@ const mapStateToProps = state => ({
     products: state.product.products
 });
 
-export default connect(mapStateToProps, { getProducts })(ProductsList);
+export default connect(mapStateToProps, { getProducts, deleteProduct })(ProductsList);

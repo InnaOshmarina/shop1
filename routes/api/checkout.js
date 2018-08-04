@@ -16,6 +16,8 @@ const User = require('../../models/User');
 router.get('/test', (req, res) => res.json({ msg: 'Checkout Works' }));
 
 const logIn = passport.authenticate('jwt', { session: false });
+
+
 // @route          POST api/checkout
 // @description    Add checkout
 // @access         Public and private

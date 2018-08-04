@@ -1,7 +1,6 @@
 import React from 'react';
 import {TextFormat} from "../../helpers/TableHelper";
 import Actions from "./Actions";
-import {SORTACTION} from "../../constans/GlobalConstans";
 
 const DataTable = (props) => {
     const data = props.data;
