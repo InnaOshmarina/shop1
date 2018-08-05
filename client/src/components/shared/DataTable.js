@@ -11,36 +11,56 @@ const DataTable = (props) => {
     let tableContent;
 
     tableContent = (
-        <table className="table">
-            <thead>
-            <tr>
+        <div>
+            <table className="table">
+                <thead>
+                <tr>
+                    {
+                        headers.map((headerItem, index) => {
+                            return <th key={index}>{headerItem.options.headerName}</th>
+                        })
+                    }
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
                 {
-                    headers.map((headerItem, index) => {
-                        return <th key={index}>{headerItem.options.headerName}</th>
+                    data.map((dataItem, dataItemIndex) => {
+                        return (
+                            <tr key={dataItemIndex}>
+                                {
+                                    headers.map((headerItem, headerItemIndex) => (
+                                        <td key={headerItemIndex}>
+                                            {TextFormat(dataItem[headerItem.name], headerItem.options.type)}
+                                        </td>
+                                    ))
+                                }
+                                <Actions operations={operations} row={dataItem}/>
+                            </tr>
+                        );
                     })
                 }
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            {
-                data.map((dataItem, dataItemIndex) => {
-                    return (
-                        <tr key={dataItemIndex}>
-                            {
-                                headers.map((headerItem, headerItemIndex) => (
-                                    <td key={headerItemIndex}>
-                                        {TextFormat(dataItem[headerItem.name], headerItem.options.type)}
-                                    </td>
-                                ))
-                            }
-                            <Actions operations={operations} row={dataItem}/>
-                        </tr>
-                    );
-                })
-            }
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+            <nav aria-label="...">
+                <ul className="pagination">
+                    <li className="page-item disabled">
+                        <span className="page-link">Previous</span>
+                    </li>
+                    <li className="page-item"><a className="page-link" href="#">1</a></li>
+                    <li className="page-item active">
+                      <span className="page-link">
+                        2
+                        <span className="sr-only">(current)</span>
+                      </span>
+                    </li>
+                    <li className="page-item"><a className="page-link" href="#">3</a></li>
+                    <li className="page-item">
+                        <a className="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     );
 
     return (

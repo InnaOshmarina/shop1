@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
+const queryHelper = require('../../helpers/queryHelper');
 
 // Load Input Validation
 const validateCategoryInput = require('../../validation/category');
@@ -15,11 +16,17 @@ router.get('/test', (req, res) => res.json({ msg: 'Categories Works' }));
 // @route          GET api/categories
 // @description    Get categories
 // @access         Public
-router.get('/', (req, res) => {
-    Category.find()
-        .sort({ date: -1 })
-        .then(categories => res.json(categories))
-        .catch(err => res.status(404).json({ nocategoryfound: 'No category found' }));
+router.get('/', async (request, response) => {
+
+    try {
+        const categories = await queryHelper('Category', request);
+        response.json(categories);
+    } catch (err) {
+        response.status(500).json({
+            error: err.message
+        });
+    }
+    // queryHelper('Category', req, res)
 });
 
 // @route          GET api/categories/:id

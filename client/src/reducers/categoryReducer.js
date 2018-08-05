@@ -4,9 +4,14 @@ import {
     DELETE_CATEGORY
 } from '../actions/types';
 
-const initialState = {
+export const initialState = {
   category: {},
-  categories: []
+  categories: {
+      docs: [],
+      total: 0,
+      limit: 0,
+      offset: 0
+  }
 };
 
 export default function(state = initialState, action) {
@@ -17,6 +22,7 @@ export default function(state = initialState, action) {
         category: action.payload
       };
     case GET_CATEGORIES:
+      console.log(action.payload);
       return {
         ...state,
         categories: action.payload

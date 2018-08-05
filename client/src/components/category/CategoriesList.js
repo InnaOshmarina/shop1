@@ -75,7 +75,7 @@ class CategoriesList extends Component {
                     <button type="button" className="btn btn-success">Add Category</button>
                 </Link>
                 <DataTable
-                    data={categories}
+                    data={categories.docs}
                     headers={headers}
                     operations={operations}
                 />
@@ -86,7 +86,7 @@ class CategoriesList extends Component {
 
 CategoriesList.propTypes = {
     getCategories: PropTypes.func.isRequired,
-    categories: PropTypes.array.isRequired
+    categories: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
