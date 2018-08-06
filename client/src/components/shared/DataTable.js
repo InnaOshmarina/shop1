@@ -73,7 +73,8 @@ const DataTable = (props) => {
 DataTable.propTypes = {
     data: PropTypes.array.isRequired,
     headers: PropTypes.array.isRequired,
-    operations: PropTypes.array.isRequired
+    operations: PropTypes.array.isRequired,
+    getData: PropTypes.func.isRequired
 };
 
 export default DataTable;

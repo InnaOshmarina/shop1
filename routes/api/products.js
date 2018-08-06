@@ -30,7 +30,7 @@ router.get('/', async (request, response) => {
             error: err.message
         });
     }
-// queryHelper('Category', req, res)
+// queryHelper('Product', req, res)
 });
 
 // @route          GET api/products/:id

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import TextFieldGroup from '../shared/TextFieldGroup';
+import TextAreaFieldGroup from "../shared/TextAreaFieldGroup";
 import {addCategory, getCategory, editCategory} from '../../actions/categoryActions';
 
 class CategoryAdding extends Component {
@@ -77,7 +78,7 @@ class CategoryAdding extends Component {
                                     onChange={this.onChange}
                                     error={errors.title}
                                 />
-                                <TextFieldGroup
+                                <TextAreaFieldGroup
                                     placeholder="Description Of Category"
                                     name="description"
                                     value={this.state.description}

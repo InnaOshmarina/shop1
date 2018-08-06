@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import TextFieldGroup from '../shared/TextFieldGroup';
+import TextAreaFieldGroup from "../shared/TextAreaFieldGroup";
 import {addProduct, getProduct, editProduct } from '../../actions/productActions';
 import {getCategories} from "../../actions/categoryActions";
 import SelectListGroup from "../shared/SelectListGroup";
@@ -96,7 +97,7 @@ class ProductAdding extends Component {
                                     error={errors.category}
                                     info="Select the category to which this product belongs"
                                 />
-                                <TextFieldGroup
+                                <TextAreaFieldGroup
                                     placeholder="Description Of Product"
                                     name="description"
                                     value={this.state.description}

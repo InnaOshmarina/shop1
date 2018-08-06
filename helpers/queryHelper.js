@@ -7,7 +7,7 @@ async function queryHelper(entityName, req, customOptions = {}) {
         const query   = {};
         const options = {
             ...customOptions,
-            sort:     { date: -1 }
+            sort: { date: -1 }
         };
 
         if (reqParams.offset) {

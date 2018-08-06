@@ -4,7 +4,7 @@ import {
     DELETE_PRODUCT
 } from '../actions/types';
 
-const initialState = {
+export const initialState = {
     product: {},
     products: {
         docs: [],
