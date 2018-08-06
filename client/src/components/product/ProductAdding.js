@@ -92,7 +92,7 @@ class ProductAdding extends Component {
                                     name="category"
                                     value={this.state.category}
                                     onChange={this.onChange}
-                                    options={this.props.categories}
+                                    options={this.props.categories.docs}
                                     error={errors.category}
                                     info="Select the category to which this product belongs"
                                 />
