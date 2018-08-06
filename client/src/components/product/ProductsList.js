@@ -82,8 +82,8 @@ class ProductsList extends Component {
                 options: {
                     icon: SORTACTION.trashBin,
                     type: SORTACTION.action,
-                    actionFunction: (id) => {
-                        this.props.deleteProduct(id);
+                    actionFunction: ({_id}) => {
+                        this.props.deleteProduct(_id);
                     }
                 }
             }
@@ -95,7 +95,10 @@ class ProductsList extends Component {
                     <button type="button" className="btn btn-success">Add Product</button>
                 </Link>
                 <DataTable
-                    data={products}
+                    getData={this.props.getProducts}
+                    data={products.docs}
+                    total={products.total}
+                    limit={products.limit}
                     headers={headers}
                     operations={operations}
                 />
@@ -107,9 +110,7 @@ class ProductsList extends Component {
 ProductsList.propTypes = {
     getProducts: PropTypes.func.isRequired,
     deleteProduct: PropTypes.func.isRequired,
-    products: PropTypes.array.isRequired,
-    headers: PropTypes.array.isRequired,
-    operations: PropTypes.array.isRequired
+    products: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({

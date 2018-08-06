@@ -22,13 +22,13 @@ class CategoriesList extends Component {
                     type: TEXTFORMAT.string
                 }
             },
-            {
-                name: 'description',
-                options: {
-                    headerName: 'Description',
-                    type: TEXTFORMAT.string
-                }
-            },
+            // {
+            //     name: 'description',
+            //     options: {
+            //         headerName: 'Description',
+            //         type: TEXTFORMAT.string
+            //     }
+            // },
             {
                 name: 'date',
                 options: {
@@ -60,8 +60,8 @@ class CategoriesList extends Component {
                 options: {
                     icon: SORTACTION.trashBin,
                     type: SORTACTION.action,
-                    actionFunction: (id) => {
-                        this.props.deleteCategory(id);
+                    actionFunction: (row) => {
+                        this.props.deleteCategory(row._id);
                     }
                 }
             }
@@ -88,8 +88,6 @@ class CategoriesList extends Component {
 CategoriesList.propTypes = {
     getCategories: PropTypes.func.isRequired,
     deleteCategory: PropTypes.func.isRequired,
-    headers: PropTypes.array.isRequired,
-    operations: PropTypes.array.isRequired
     categories: PropTypes.object.isRequired
 };
 

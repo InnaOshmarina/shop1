@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
+const queryHelper = require('../../helpers/queryHelper');
 
 // Load Input Validation
 const validateProductInput = require('../../validation/product');
@@ -10,17 +11,26 @@ const Product = require('../../models/Product');
 
 // @route          GET api/products/test
 // @description    Tests products route
-router.get('/test', (req, res) => res.json({ msg: 'Products Works' }));
+router.get('/test', (req, res) => res.json({msg: 'Products Works'}));
 
 // @route          GET api/products
 // @description    Get products
 // @access         Public
-router.get('/', (req, res) => {
-    Product.find()
-        .populate('category')
-        .sort({ date: -1 })
-        .then(products => res.json(products))
-        .catch(err => res.status(404).json({ noProductFound: 'No product found' }));
+router.get('/', async (request, response) => {
+
+    try {
+        const customOptions = {
+            populate: 'category'
+        };
+
+        const products = await queryHelper('Product', request, customOptions);
+        response.status(200).json(products);
+    } catch (err) {
+        response.status(500).json({
+            error: err.message
+        });
+    }
+// queryHelper('Category', req, res)
 });
 
 // @route          GET api/products/:id
@@ -29,17 +39,17 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     Product.findById(req.params.id)
         .then(product => res.json(product))
-        .catch(err => res.status(404).json({ noProductFound: 'No product found with that ID' }));
+        .catch(err => res.status(404).json({noProductFound: 'No product found with that ID'}));
 });
 
 // @route          POST api/products
 // @description    Create product
 // @access         Private
-router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
-    const { errors, isValid } = validateProductInput(req.body);
+router.post('/', passport.authenticate('jwt', {session: false}), (req, res) => {
+    const {errors, isValid} = validateProductInput(req.body);
 
     // Check Validation
-    if(!isValid) {
+    if (!isValid) {
         // If any errors, send 400 with errors object
         return res.status(400).json(errors);
     }
@@ -68,11 +78,11 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
 // @route          POST api/product
 // @description    Edit product
 // @access         Private
-router.post('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
-    const { errors, isValid } = validateProductInput(req.body);
+router.post('/:id', passport.authenticate('jwt', {session: false}), (req, res) => {
+    const {errors, isValid} = validateProductInput(req.body);
 
     // Check Validation
-    if(!isValid) {
+    if (!isValid) {
         // Return any errors with 400 status
         return res.status(400).json(errors);
     }
@@ -80,20 +90,20 @@ router.post('/:id', passport.authenticate('jwt', { session: false }), (req, res)
     // Get fields
     const productFields = {};
     //productFields.user = req.user.id;
-    if(req.user.id) productFields.user = req.user.id;
-    if(req.body.title) productFields.title = req.body.title;
-    if(req.body.description) productFields.description = req.body.description;
-    if(req.body.price) productFields.price = req.body.price;
-    if(req.body.quantityInStock) productFields.quantityInStock = req.body.quantityInStock;
-    if(req.body.category) productFields.category = req.body.category;
+    if (req.user.id) productFields.user = req.user.id;
+    if (req.body.title) productFields.title = req.body.title;
+    if (req.body.description) productFields.description = req.body.description;
+    if (req.body.price) productFields.price = req.body.price;
+    if (req.body.quantityInStock) productFields.quantityInStock = req.body.quantityInStock;
+    if (req.body.category) productFields.category = req.body.category;
 
     Product.findById(req.params.id)
         .then(product => {
             // Update
             Product.findOneAndUpdate(
-                { _id: req.params.id },
-                { $set: productFields },
-                { new: true }
+                {_id: req.params.id},
+                {$set: productFields},
+                {new: true}
             ).then(product => res.json(product));
         });
 });
@@ -101,10 +111,10 @@ router.post('/:id', passport.authenticate('jwt', { session: false }), (req, res)
 // @route          DELETE api/products/:id
 // @description    Delete product
 // @access         Private
-router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.delete('/:id', passport.authenticate('jwt', {session: false}), (req, res) => {
     Product.findById(req.params.id)
-        .then(product => product.remove().then(() => res.json({ success: true })))
-        .catch(err => res.status(404).json({ productNotFound: 'No product found' }));
+        .then(product => product.remove().then(() => res.json({success: true})))
+        .catch(err => res.status(404).json({productNotFound: 'No product found'}));
 });
 
 module.exports = router;

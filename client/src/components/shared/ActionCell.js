@@ -34,14 +34,14 @@ const ActionCell = (props) => {
     }
 
     if(operation.options.type === SORTACTION.action) {
-        answer = <span className="action" onClick={() => operation.options.actionFunction(row._id)}>{iconContent}</span>;
+        answer = <span className="action" onClick={() => operation.options.actionFunction(row)}>{iconContent}</span>;
     }
 
     return answer;
 };
 
 ActionCell.propTypes = {
-    operations: PropTypes.array.isRequired,
+    operation: PropTypes.object.isRequired,
     row: PropTypes.object.isRequired
 };
 

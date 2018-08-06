@@ -6,7 +6,12 @@ import {
 
 const initialState = {
     product: {},
-    products: []
+    products: {
+        docs: [],
+        total: 0,
+        limit: 0,
+        offset: 0
+    }
 };
 
 export default function(state = initialState, action) {

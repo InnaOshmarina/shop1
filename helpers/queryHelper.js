@@ -1,6 +1,5 @@
 async function queryHelper(entityName, req, customOptions = {}) {
 
-
         const CurrentEntity = require(`../models/${entityName}`);
 
         const reqParams = req.query;

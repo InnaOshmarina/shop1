@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { initialState } from '../reducers/categoryReducer';
 import {GET_ERRORS, GET_CATEGORY, GET_CATEGORIES, DELETE_CATEGORY, EDIT_CATEGORY} from './types';
+import { baseURL} from "../constans/GlobalConstans";
 
 // Create Category
 export const addCategory = (categoryData, history) => dispatch => {
   axios
-    .post('/api/categories', categoryData)
+    .post(`${baseURL}/api/categories`, categoryData)
     .then(res => history.push('/categories'))
     .catch(err =>
       dispatch({
@@ -18,7 +19,7 @@ export const addCategory = (categoryData, history) => dispatch => {
 // Get category by id
 export const getCategory = id => dispatch => {
     axios
-        .get(`/api/categories/${id}`)
+        .get(`${baseURL}/api/categories/${id}`)
         .then(res =>
             dispatch({
                 type: GET_CATEGORY,
@@ -37,7 +38,9 @@ export const getCategory = id => dispatch => {
 export const getCategories = (queryParams = {}) => dispatch => {
     axios
         .get('/api/categories', {
-            params: queryParams
+            params: {
+                ...queryParams
+            }
         })
         .then(res => {
                 dispatch({

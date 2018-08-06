@@ -36,7 +36,7 @@ class ProductAdding extends Component {
             this.setState({errors: nextProps.errors});
         }
 
-        if(nextProps.product.product) {
+        if(nextProps.product.product && this.props.match.params.id) {
             this.setState(nextProps.product.product)
         }
     }

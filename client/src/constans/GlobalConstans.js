@@ -10,3 +10,5 @@ export const SORTACTION = {
     pencil: 'pencil',
     trashBin: 'trash bin'
 };
+
+export const baseURL = 'http://localhost:5000';
