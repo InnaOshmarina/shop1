@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import { initialState } from '../reducers/categoryReducer';
 import {GET_ERRORS, GET_CATEGORY, GET_CATEGORIES, DELETE_CATEGORY, EDIT_CATEGORY} from './types';
 
 // Create Category
@@ -34,20 +34,25 @@ export const getCategory = id => dispatch => {
 };
 
 // Get all categories
-export const getCategories = () => dispatch => {
+export const getCategories = (queryParams = {}) => dispatch => {
     axios
-        .get('/api/categories')
-        .then(res =>
-            dispatch({
-                type: GET_CATEGORIES,
-                payload: res.data
-            })
+        .get('/api/categories', {
+            params: queryParams
+        })
+        .then(res => {
+                dispatch({
+                    type: GET_CATEGORIES,
+                    payload: res.data
+                })
+            }
         )
-        .catch(err =>
-            dispatch({
-                type: GET_CATEGORIES,
-                payload: []
-            })
+        .catch(err => {
+                // dispatch({
+                //     type: GET_CATEGORIES,
+                //     payload: initialState
+                // });
+            console.log('error');
+        }
         );
 };
 

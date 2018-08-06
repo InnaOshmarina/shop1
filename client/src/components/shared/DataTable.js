@@ -3,17 +3,32 @@ import PropTypes from 'prop-types';
 import lodash from 'lodash';
 import {TextFormat} from "../../helpers/TableHelper";
 import Actions from "./Actions";
+import Pagination from "./Pagination";
 
 
 const DataTable = (props) => {
-    const data = props.data;
-    const headers = props.headers;
-    const operations = props.operations;
+    const {
+        data,
+        headers,
+        operations,
+        total,
+        limit,
+        getData
+    } = props;
 
     let tableContent;
+    let pagination = null;
+
+    if (limit && total && getData){
+        pagination = (<Pagination
+            total={total}
+            limit={limit}
+            paginateChange={getData}
+        />);
+    }
 
     tableContent = (
-        <table className="table">
+        <div> <table className="table">
             <thead>
             <tr>
                 {
@@ -44,6 +59,8 @@ const DataTable = (props) => {
             }
             </tbody>
         </table>
+            {pagination}
+        </div>
     );
 
     return (

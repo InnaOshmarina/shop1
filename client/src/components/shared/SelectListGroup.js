@@ -4,6 +4,8 @@ import classnames from 'classnames';
 
 const SelectListGroup = ({
     name,
+    valueLabel,
+    valueItem,
     value,
     error,
     info,
@@ -11,8 +13,8 @@ const SelectListGroup = ({
     options
 }) => {
     const selectOptions = options.map((option, optionIndex) => (
-        <option key={optionIndex} value={option._id}>
-            {option.title}
+        <option key={optionIndex} value={option[valueItem]}>
+            {option[valueLabel]}
         </option>
     ));
     return (
@@ -32,6 +34,10 @@ const SelectListGroup = ({
             {error && <div className="invalid-feedback">{error}</div>}
         </div>
     );
+};
+SelectListGroup.defaultProps = {
+    valueLabel: 'title',
+    valueItem:'_id'
 };
 
 SelectListGroup.propTypes = {

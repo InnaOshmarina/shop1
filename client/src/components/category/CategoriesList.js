@@ -73,7 +73,10 @@ class CategoriesList extends Component {
                     <button type="button" className="btn btn-success">Add Category</button>
                 </Link>
                 <DataTable
-                    data={categories}
+                    getData={this.props.getCategories}
+                    data={categories.docs}
+                    total={categories.total}
+                    limit={categories.limit}
                     headers={headers}
                     operations={operations}
                 />
@@ -85,9 +88,9 @@ class CategoriesList extends Component {
 CategoriesList.propTypes = {
     getCategories: PropTypes.func.isRequired,
     deleteCategory: PropTypes.func.isRequired,
-    categories: PropTypes.array.isRequired,
     headers: PropTypes.array.isRequired,
     operations: PropTypes.array.isRequired
+    categories: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
