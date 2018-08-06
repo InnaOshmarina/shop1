@@ -78,30 +78,35 @@ class Pagination extends Component {
             </li>
         );
 
+        let content = null;
+        if (allPages > 1) {
+            content = (
+                <div>
+                    <nav aria-label="...">
+                        <ul className="pagination">
+                            {prevButton}
+                            {
+                                listPages.map((item) => {
+                                    return (
+                                        <li key={item} onClick={(event) => this.handlePaginationChange(event, item)}
+                                            className={classnames('page-item', {
+                                                'active': this.state.currentPage === item
+                                            })}
+                                        >
+                                            <a className="page-link" href="#">{item}</a>
+                                        </li>
+                                    );
+                                })
+                            }
+                            {nextButton}
+                        </ul>
+                    </nav>
+                </div>
+            );
+        }
 
-        return (
-            <div>
-                <nav aria-label="...">
-                    <ul className="pagination">
-                        {prevButton}
-                        {
-                            listPages.map((item) => {
-                                return (
-                                    <li key={item} onClick={(event) => this.handlePaginationChange(event, item)}
-                                        className={classnames('page-item', {
-                                            'active': this.state.currentPage === item
-                                        })}
-                                    >
-                                        <a className="page-link" href="#">{item}</a>
-                                    </li>
-                                );
-                            })
-                        }
-                        {nextButton}
-                    </ul>
-                </nav>
-            </div>
-        );
+
+        return content;
     }
 }
 
