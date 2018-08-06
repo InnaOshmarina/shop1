@@ -18,14 +18,14 @@ class CategoriesList extends Component {
             {
                 name: 'title',
                 options: {
-                    headerName: 'Name of category',
+                    headerName: 'Name',
                     type: TEXTFORMAT.string
                 }
             },
             {
                 name: 'description',
                 options: {
-                    headerName: 'Brief description',
+                    headerName: 'Description',
                     type: TEXTFORMAT.string
                 }
             },
@@ -84,7 +84,10 @@ class CategoriesList extends Component {
 
 CategoriesList.propTypes = {
     getCategories: PropTypes.func.isRequired,
-    categories: PropTypes.array.isRequired
+    deleteCategory: PropTypes.func.isRequired,
+    categories: PropTypes.array.isRequired,
+    headers: PropTypes.array.isRequired,
+    operations: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({

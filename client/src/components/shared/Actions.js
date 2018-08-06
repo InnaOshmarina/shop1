@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../css/ProtectedLayout.css';
+import PropTypes from 'prop-types';
 import ActionCell from "./ActionCell";
 
 const Actions = (props) => {
@@ -19,4 +19,10 @@ const Actions = (props) => {
 
     return tdContent;
 };
+
+Actions.propTypes = {
+    operations: PropTypes.array.isRequired,
+    row: PropTypes.object.isRequired
+};
+
 export default Actions;

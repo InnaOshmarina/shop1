@@ -11,14 +11,14 @@ const Checkout = require('../../models/Checkout');
 // Product model
 const User = require('../../models/User');
 
-// @route          GET api/checkout/test
+// @route          GET api/orders/test
 // @description    Tests checkout route
 router.get('/test', (req, res) => res.json({ msg: 'Checkout Works' }));
 
 const logIn = passport.authenticate('jwt', { session: false });
 
 
-// @route          POST api/checkout
+// @route          POST api/orders
 // @description    Add checkout
 // @access         Public and private
 router.post('/', logIn, (req, res) => {
@@ -46,7 +46,7 @@ router.post('/', logIn, (req, res) => {
 
 });
 
-// @route          GET api/checkout
+// @route          GET api/orders
 // @description    Get checkout
 // @access         Public
 router.get('/', (req, res) => {
@@ -56,7 +56,7 @@ router.get('/', (req, res) => {
         .catch(err => res.status(404).json({ noCheckoutFound: 'No checkout found' }));
 });
 
-// @route          GET api/checkout/:id
+// @route          GET api/orders/:id
 // @description    Get checkout by id
 // @access         Public
 router.get('/:id', (req, res) => {

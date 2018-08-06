@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import lodash from 'lodash';
 import {TextFormat} from "../../helpers/TableHelper";
 import Actions from "./Actions";
@@ -51,4 +52,11 @@ const DataTable = (props) => {
         </div>
     );
 };
+
+DataTable.propTypes = {
+    data: PropTypes.array.isRequired,
+    headers: PropTypes.array.isRequired,
+    operations: PropTypes.array.isRequired
+};
+
 export default DataTable;

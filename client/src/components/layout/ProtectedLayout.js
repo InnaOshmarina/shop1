@@ -23,7 +23,7 @@ class ProtectedLayout extends Component {
                                     <Link className="list-group-item list-group-item-action" to="/dashboard">Dashboard</Link>
                                     <Link className="list-group-item list-group-item-action" to="/categories">Product categories</Link>
                                     <Link className="list-group-item list-group-item-action" to="/products">Products</Link>
-                                    <Link className="list-group-item list-group-item-action" to="/checkout">Orders</Link>
+                                    <Link className="list-group-item list-group-item-action" to="/orders">Orders</Link>
                                 </div>
                             </div>
                             <div className="col-md-9">
@@ -35,7 +35,7 @@ class ProtectedLayout extends Component {
                                 <Route exact path="/products" component={ProductsList} />
                                 <Route exact path="/product-adding" component={ProductAdding} />
                                 <Route exact path="/products/edit/:id" component={ProductAdding} />
-                                <Route exact path="/checkout" component={OrdersList} />
+                                <Route exact path="/orders" component={OrdersList} />
                             </div>
                         </div>
                     </div>

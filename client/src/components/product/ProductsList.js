@@ -13,27 +13,27 @@ class ProductsList extends Component {
 
     render() {
         const { products } = this.props;
-        console.log(this.props);
+        //console.log(this.props);
 
         const headers = [
             {
                 name: 'title',
                 options: {
-                    headerName: 'Name of product',
+                    headerName: 'Name',
                     type: TEXTFORMAT.string
                 }
             },
             {
                 name: 'category.title',
                 options: {
-                    headerName: 'category',
+                    headerName: 'Category',
                     type: TEXTFORMAT.string
                 }
             },
             {
                 name: 'description',
                 options: {
-                    headerName: 'Brief description',
+                    headerName: 'Description',
                     type: TEXTFORMAT.string
                 }
             },
@@ -47,7 +47,7 @@ class ProductsList extends Component {
             {
                 name: 'quantityInStock',
                 options: {
-                    headerName: 'Quantity In Stock',
+                    headerName: 'In stock',
                     type: TEXTFORMAT.number
                 }
             },
@@ -106,7 +106,10 @@ class ProductsList extends Component {
 
 ProductsList.propTypes = {
     getProducts: PropTypes.func.isRequired,
-    products: PropTypes.array.isRequired
+    deleteProduct: PropTypes.func.isRequired,
+    products: PropTypes.array.isRequired,
+    headers: PropTypes.array.isRequired,
+    operations: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({

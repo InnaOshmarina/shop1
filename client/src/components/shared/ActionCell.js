@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import {SORTACTION} from "../../constans/GlobalConstans";
 import {getLinkTemplate} from "../../helpers/GlobalHelper";
@@ -38,4 +39,10 @@ const ActionCell = (props) => {
 
     return answer;
 };
+
+ActionCell.propTypes = {
+    operations: PropTypes.array.isRequired,
+    row: PropTypes.object.isRequired
+};
+
 export default ActionCell;
