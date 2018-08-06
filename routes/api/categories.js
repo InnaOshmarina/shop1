@@ -19,8 +19,12 @@ router.get('/test', (req, res) => res.json({ msg: 'Categories Works' }));
 router.get('/', async (request, response) => {
 
     try {
-        const categories = await queryHelper('Category', request);
-        response.json(categories);
+        const customOptions = {
+            populate: 'user'
+        };
+
+        const categories = await queryHelper('Category', request, customOptions);
+        response.status(200).json(categories);
     } catch (err) {
         response.status(500).json({
             error: err.message

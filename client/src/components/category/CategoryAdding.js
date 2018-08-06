@@ -22,7 +22,6 @@ class CategoryAdding extends Component {
         if(this.props.match.params.id) {
             this.props.getCategory(this.props.match.params.id);
         }
-
     }
 
     componentWillReceiveProps(nextProps) {
@@ -57,12 +56,19 @@ class CategoryAdding extends Component {
     render() {
         const { errors } = this.state;
 
+        let title;
+        if(this.props.match.params.id) {
+            title = "Editing Of Category Of Product";
+        } else {
+            title = "Add New Category Of Product";
+        }
+
         return (
             <div className="category-adding">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-8 m-auto">
-                            <h4 className="text-center">Add New Category Of Product</h4>
+                            <h4 className="text-center mb-4">{title}</h4>
                             <form onSubmit={this.onSubmit}>
                                 <TextFieldGroup
                                     placeholder="Title Of Category"
@@ -100,7 +106,12 @@ const mapStateToProps = state => ({
     errors: state.errors
 });
 
-export default connect(mapStateToProps, { addCategory, getCategory, editCategory })(
-    withRouter(CategoryAdding)
-);
+// Here are actions
+const mapDispatchToProps = {
+    addCategory,
+    getCategory,
+    editCategory
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CategoryAdding));
 

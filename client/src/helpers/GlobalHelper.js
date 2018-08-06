@@ -12,6 +12,5 @@ export const getLinkTemplate = (maskLink, row) => {
 
     });
 
-
     return newString;
-}
+};

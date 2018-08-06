@@ -8,9 +8,14 @@ module.exports = function validateProductInput(data) {
     data.description = !isEmpty(data.description) ? data.description : '';
     data.price = !isEmpty(data.price) ? data.price : '';
     data.quantityInStock = !isEmpty(data.quantityInStock) ? data.quantityInStock : '';
+    data.category = !isEmpty(data.category) ? data.category : '';
 
     if(Validator.isEmpty(data.title)) {
         errors.title = 'Title field is required';
+    }
+
+    if(Validator.isEmpty(data.category)) {
+        errors.category = 'Category field is required';
     }
 
     if(!Validator.isLength(data.description, { min: 10, max: 500 })) {

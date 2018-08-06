@@ -17,6 +17,7 @@ router.get('/test', (req, res) => res.json({ msg: 'Products Works' }));
 // @access         Public
 router.get('/', (req, res) => {
     Product.find()
+        .populate('category')
         .sort({ date: -1 })
         .then(products => res.json(products))
         .catch(err => res.status(404).json({ noProductFound: 'No product found' }));
@@ -48,7 +49,8 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
         description: req.body.description,
         price: req.body.price,
         quantityInStock: req.body.quantityInStock,
-        user: req.user.id
+        user: req.user.id,
+        category: req.body.category
     });
 
     // !!!!  ВОТ ТАК ДЕЛАТЬ НЕ НУЖНО !!!!!
@@ -83,6 +85,7 @@ router.post('/:id', passport.authenticate('jwt', { session: false }), (req, res)
     if(req.body.description) productFields.description = req.body.description;
     if(req.body.price) productFields.price = req.body.price;
     if(req.body.quantityInStock) productFields.quantityInStock = req.body.quantityInStock;
+    if(req.body.category) productFields.category = req.body.category;
 
     Product.findById(req.params.id)
         .then(product => {
@@ -90,7 +93,7 @@ router.post('/:id', passport.authenticate('jwt', { session: false }), (req, res)
             Product.findOneAndUpdate(
                 { _id: req.params.id },
                 { $set: productFields },
-                { new: true}
+                { new: true }
             ).then(product => res.json(product));
         });
 });

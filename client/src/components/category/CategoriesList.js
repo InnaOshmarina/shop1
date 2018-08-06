@@ -14,7 +14,6 @@ class CategoriesList extends Component {
     render() {
         const { categories } = this.props;
 
-        // const headers = ['title', 'description', 'date' ];
         const headers = [
             {
                 name: 'title',
@@ -39,14 +38,13 @@ class CategoriesList extends Component {
             }
         ];
 
-
         const operations = [
             {
                 name: 'detail view',
                 options: {
                     icon: SORTACTION.eye,
                     type: SORTACTION.link,
-                    linkTemplate: ''
+                    linkTemplate: 'categories/detail/:_id'
                 }
             },
             {
@@ -75,7 +73,10 @@ class CategoriesList extends Component {
                     <button type="button" className="btn btn-success">Add Category</button>
                 </Link>
                 <DataTable
+                    getData={this.props.getCategories}
                     data={categories.docs}
+                    total={categories.total}
+                    limit={categories.limit}
                     headers={headers}
                     operations={operations}
                 />
@@ -90,7 +91,7 @@ CategoriesList.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    categories: state.category.categories
+    categories: state.category.categories,
 });
 
 export default connect(mapStateToProps, { getCategories, deleteCategory })(CategoriesList);

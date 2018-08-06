@@ -34,9 +34,11 @@ export const getCategory = id => dispatch => {
 };
 
 // Get all categories
-export const getCategories = () => dispatch => {
+export const getCategories = (queryParams = {}) => dispatch => {
     axios
-        .get('/api/categories')
+        .get('/api/categories', {
+            params: queryParams
+        })
         .then(res => {
                 dispatch({
                     type: GET_CATEGORIES,
@@ -75,9 +77,9 @@ export const deleteCategory = id => dispatch => {
 };
 
 // Edit Category
-export const editCategory = (id, category, history) => dispatch => {
+export const editCategory = (id, categoryData, history) => dispatch => {
         axios
-            .post(`/api/categories/${id}`, category)
+            .post(`/api/categories/${id}`, categoryData)
             .then(res =>
                 dispatch({
                     type: EDIT_CATEGORY,

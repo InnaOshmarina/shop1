@@ -1,4 +1,4 @@
-async function queryHelper(entityName, req, res) {
+async function queryHelper(entityName, req, customOptions = {}) {
 
 
         const CurrentEntity = require(`../models/${entityName}`);
@@ -7,13 +7,12 @@ async function queryHelper(entityName, req, res) {
 
         const query   = {};
         const options = {
+            ...customOptions,
             sort:     { date: -1 }
         };
 
-        if (reqParams.offset && reqParams.limit) {
-            const offset = parseInt(reqParams.offset);
-            const limit = parseInt(reqParams.limit);
-            options.offset = offset * limit;
+        if (reqParams.offset) {
+            options.offset = parseInt(reqParams.offset);
         }
 
         if (reqParams.limit) {
