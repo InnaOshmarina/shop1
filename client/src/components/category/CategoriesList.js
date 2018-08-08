@@ -5,14 +5,13 @@ import { connect } from 'react-redux';
 import { getCategories, deleteCategory } from '../../actions/categoryActions';
 import DataTable from '../shared/DataTable';
 import {SORTACTION, TEXTFORMAT} from "../../constans/GlobalConstans";
+import Filter from "../../decorators/Filter";
+import compose from "redux/src/compose";
 
 class CategoriesList extends Component {
-    componentDidMount() {
-        this.props.getCategories();
-    }
 
     render() {
-        const { categories } = this.props;
+        const { categories, limit, total, offset } = this.props;
 
         const headers = [
             {
@@ -73,10 +72,14 @@ class CategoriesList extends Component {
                     <button type="button" className="btn btn-success">Add Category</button>
                 </Link>
                 <DataTable
-                    getData={this.props.getCategories}
+                    getData={this.props.getData}
+                    currentFilter={this.props.currentFilter}
+                    handleFilterChange={this.props.handleFilterChange}
+                    handleChangeSort={this.props.handleChangeSort}
                     data={categories.docs}
-                    total={categories.total}
-                    limit={categories.limit}
+                    total={total}
+                    offset={offset}
+                    limit={limit}
                     headers={headers}
                     operations={operations}
                 />
@@ -86,13 +89,26 @@ class CategoriesList extends Component {
 }
 
 CategoriesList.propTypes = {
-    getCategories: PropTypes.func.isRequired,
+    getData: PropTypes.func.isRequired,
     deleteCategory: PropTypes.func.isRequired,
     categories: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-    categories: state.category.categories
+    categories: state.category.categories,
+    limit: state.category.categories.limit,
+    offset: state.category.categories.offset,
+    total: state.category.categories.total
 });
 
-export default connect(mapStateToProps, { getCategories, deleteCategory })(CategoriesList);
+const mapDispatchToProps = {
+    getData: getCategories,
+    deleteCategory
+};
+
+const defaultFilter = {};
+
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    (component) => Filter(component, defaultFilter)
+)(CategoriesList);
