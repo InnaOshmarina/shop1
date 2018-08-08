@@ -8,40 +8,12 @@ import Actions from "./Actions";
 import Pagination from "./Pagination";
 
 import './DataTable.css';
+import SortIcon from "./SortIcon";
 
 
 class DataTable extends Component {
 
     // Todo Refactoring (add HOC for sorting)
-
-    state = {
-        sort: { date: -1 }
-    };
-
-    getArrowSort = (headerName) => {
-        let answer = null;
-        if(this.state.sort[headerName]) {
-            answer = <i className="arrow arrow-down"/>;
-
-            if(this.state.sort[headerName] === 1) {
-                answer =  <i className="arrow arrow-up"/>;
-            }
-        }
-
-        return answer;
-    }
-
-    handleChangeSort = (headerItem) => {
-        let sort = {};
-        if (this.state.sort[headerItem]) {
-            sort[headerItem] = this.state.sort[headerItem] * -1;
-        } else {
-            sort[headerItem] = -1;
-        }
-        this.setState({ sort}, () => {});
-        this.props.getData({sort: sort});
-
-    };
 
     render() {
         const {
@@ -50,18 +22,20 @@ class DataTable extends Component {
             operations,
             total,
             limit,
-            getData
+            handleFilterChange,
+            currentFilter
         } = this.props;
 
         let tableContent;
         let pagination = null;
 
-        if (limit && total && getData){
+        if (limit && total && handleFilterChange){
             pagination = (
                 <Pagination
                     total={total}
                     limit={limit}
-                    paginateChange={getData}
+                    page={currentFilter.page}
+                    paginateChange={handleFilterChange}
                 />
             );
         }
@@ -73,9 +47,9 @@ class DataTable extends Component {
                     {
                         headers.map((headerItem, index) => {
                             return <th key={index}
-                                       onClick={(event) => this.handleChangeSort(headerItem.name)}
+                                       onClick={(event) => this.props.handleChangeSort(headerItem.name)}
                                     >
-                                    {this.getArrowSort(headerItem.name)}
+                                <SortIcon headerName={headerItem.name} sort={currentFilter.sort}/>
                                     {headerItem.options.headerName}
                                 </th>
                         })
@@ -91,7 +65,6 @@ class DataTable extends Component {
                                 {
                                     headers.map((headerItem, headerItemIndex) => (
                                         <td key={headerItemIndex}>
-                                            {/*{TextFormat(dataItem[headerItem.name], headerItem.options.type)}*/}
                                             {TextFormat(lodash.get(dataItem, headerItem.name), headerItem.options.type)}
                                         </td>
                                     ))

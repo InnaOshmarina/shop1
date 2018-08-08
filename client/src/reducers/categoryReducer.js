@@ -22,7 +22,6 @@ export default function(state = initialState, action) {
         category: action.payload
       };
     case GET_CATEGORIES:
-      console.log(action.payload);
       return {
         ...state,
         categories: action.payload
