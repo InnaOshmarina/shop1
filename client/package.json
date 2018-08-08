@@ -10,6 +10,7 @@
     "moment": "^2.22.2",
     "npm": "^6.2.0",
     "react": "^16.4.1",
+    "react-compose": "^2.0.0",
     "react-dom": "^16.4.1",
     "react-moment": "^0.7.9",
     "react-redux": "^5.0.7",
