@@ -2,17 +2,17 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import compose from "redux/src/compose";
+
 import { getProducts, deleteProduct } from '../../actions/productActions';
 import DataTable from '../shared/DataTable';
 import {SORTACTION, TEXTFORMAT} from "../../constans/GlobalConstans";
+import Filter from "../../decorators/Filter";
 
 class ProductsList extends Component {
-    componentDidMount() {
-        this.props.getProducts();
-    }
 
     render() {
-        const { products } = this.props;
+        const { products, limit, total, offset } = this.props;
         //console.log(this.props);
 
         const headers = [
@@ -30,13 +30,13 @@ class ProductsList extends Component {
                     type: TEXTFORMAT.string
                 }
             },
-            {
-                name: 'description',
-                options: {
-                    headerName: 'Description',
-                    type: TEXTFORMAT.string
-                }
-            },
+            // {
+            //     name: 'description',
+            //     options: {
+            //         headerName: 'Description',
+            //         type: TEXTFORMAT.string
+            //     }
+            // },
             {
                 name: 'price',
                 options: {
@@ -95,10 +95,14 @@ class ProductsList extends Component {
                     <button type="button" className="btn btn-success">Add Product</button>
                 </Link>
                 <DataTable
-                    getData={this.props.getProducts}
+                    getData={this.props.getData}
+                    currentFilter={this.props.currentFilter}
+                    handleFilterChange={this.props.handleFilterChange}
+                    handleChangeSort={this.props.handleChangeSort}
                     data={products.docs}
-                    total={products.total}
-                    limit={products.limit}
+                    total={total}
+                    offset={offset}
+                    limit={limit}
                     headers={headers}
                     operations={operations}
                 />
@@ -114,7 +118,20 @@ ProductsList.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    products: state.product.products
+    products: state.product.products,
+    limit: state.product.products.limit,
+    offset: state.product.products.offset,
+    total: state.product.products.total
 });
 
-export default connect(mapStateToProps, { getProducts, deleteProduct })(ProductsList);
+const mapDispatchToProps = {
+    getData: getProducts,
+    deleteProduct
+};
+
+const defaultFilter = {};
+
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    (component) => Filter(component, defaultFilter)
+)(ProductsList);

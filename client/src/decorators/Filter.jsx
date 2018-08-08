@@ -40,7 +40,7 @@ export default function Filter(WrappedComponent, defaultFilter = {}) {
         handleFilterChange = (data) => {
             let newData = data;
 
-            this.setState({...this.state, currentFilter: {...this.state.currentFilter, ...newData}}, () => {
+            this.setState({ currentFilter: {...this.state.currentFilter, ...newData}}, () => {
                 this.props.getData(this.state.currentFilter);
             });
         };

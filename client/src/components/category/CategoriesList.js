@@ -2,11 +2,13 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import compose from "redux/src/compose";
+
 import { getCategories, deleteCategory } from '../../actions/categoryActions';
 import DataTable from '../shared/DataTable';
 import {SORTACTION, TEXTFORMAT} from "../../constans/GlobalConstans";
 import Filter from "../../decorators/Filter";
-import compose from "redux/src/compose";
+
 
 class CategoriesList extends Component {
 

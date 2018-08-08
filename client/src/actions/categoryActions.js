@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { initialState } from '../reducers/categoryReducer';
 import {GET_ERRORS, GET_CATEGORY, GET_CATEGORIES, DELETE_CATEGORY, EDIT_CATEGORY} from './types';
 import { baseURL} from "../constans/GlobalConstans";
 
@@ -37,7 +36,7 @@ export const getCategory = id => dispatch => {
 // Get all categories
 export const getCategories = (queryParams = {}) => dispatch => {
     axios
-        .get(`${baseURL}//api/categories`, {
+        .get(`${baseURL}/api/categories`, {
             params: {
                 ...queryParams
             }
