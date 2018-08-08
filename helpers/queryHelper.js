@@ -1,3 +1,4 @@
+
 async function queryHelper(entityName, req, customOptions = {}, customQuery={}) {
 
         const CurrentEntity = require(`../models/${entityName}`);
@@ -13,7 +14,7 @@ async function queryHelper(entityName, req, customOptions = {}, customQuery={}) 
         };
 
         if (!reqParams.sort) {
-            options.sort =  { date: -1 }
+            options.sort = { date: -1 }
         } else {
             options.sort = JSON.parse(reqParams.sort)
         }

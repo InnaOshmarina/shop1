@@ -67,7 +67,7 @@ class Pagination extends Component {
         const listPages = Pagination.getRangeArray(this.state.currentPage, allPages);
 
         const prevButton = this.state.currentPage === 1 ? null :
-            ( <li className="page-item "   onClick={(event) => this.handlePaginationChange(event, this.state.currentPage - 1)}>
+            ( <li className="page-item" onClick={(event) => this.handlePaginationChange(event, this.state.currentPage - 1)}>
                 <a className="page-link" href="#" tabIndex="-1">Prev</a>
             </li>
          );

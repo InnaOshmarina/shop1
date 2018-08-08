@@ -133,7 +133,8 @@ class ProductAdding extends Component {
 
 ProductAdding.propTypes = {
     product: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired
+    errors: PropTypes.object.isRequired,
+    categories: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({

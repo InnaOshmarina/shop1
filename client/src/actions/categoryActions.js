@@ -37,7 +37,7 @@ export const getCategory = id => dispatch => {
 // Get all categories
 export const getCategories = (queryParams = {}) => dispatch => {
     axios
-        .get('/api/categories', {
+        .get(`${baseURL}//api/categories`, {
             params: {
                 ...queryParams
             }
@@ -63,7 +63,7 @@ export const getCategories = (queryParams = {}) => dispatch => {
 export const deleteCategory = id => dispatch => {
     if (window.confirm('Are you sure? This can NOT be undone!')) {
         axios
-            .delete(`/api/categories/${id}`)
+            .delete(`${baseURL}/api/categories/${id}`)
             .then(res =>
                 dispatch({
                     type: DELETE_CATEGORY,
@@ -82,7 +82,7 @@ export const deleteCategory = id => dispatch => {
 // Edit Category
 export const editCategory = (id, categoryData, history) => dispatch => {
         axios
-            .post(`/api/categories/${id}`, categoryData)
+            .post(`${baseURL}/api/categories/${id}`, categoryData)
             .then(res =>
                 dispatch({
                     type: EDIT_CATEGORY,

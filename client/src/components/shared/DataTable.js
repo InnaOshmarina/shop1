@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import lodash from 'lodash';
 
-
 import {TextFormat} from "../../helpers/TableHelper";
 import Actions from "./Actions";
 import Pagination from "./Pagination";
@@ -29,7 +28,7 @@ class DataTable extends Component {
         }
 
         return answer;
-    }
+    };
 
     handleChangeSort = (headerItem) => {
         let sort = {};
@@ -38,8 +37,8 @@ class DataTable extends Component {
         } else {
             sort[headerItem] = -1;
         }
-        this.setState({ sort}, () => {});
-        this.props.getData({sort: sort});
+        this.setState({ sort }, () => {});
+        this.props.getData({ sort: sort });
 
     };
 
@@ -67,42 +66,43 @@ class DataTable extends Component {
         }
 
         tableContent = (
-            <div className="dataTable"> <table className="table">
-                <thead>
-                <tr>
-                    {
-                        headers.map((headerItem, index) => {
-                            return <th key={index}
-                                       onClick={(event) => this.handleChangeSort(headerItem.name)}
-                                    >
-                                    {this.getArrowSort(headerItem.name)}
-                                    {headerItem.options.headerName}
-                                </th>
-                        })
-                    }
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                {
-                    data.map((dataItem, dataItemIndex) => {
-                        return (
-                            <tr key={dataItemIndex}>
-                                {
-                                    headers.map((headerItem, headerItemIndex) => (
-                                        <td key={headerItemIndex}>
-                                            {/*{TextFormat(dataItem[headerItem.name], headerItem.options.type)}*/}
-                                            {TextFormat(lodash.get(dataItem, headerItem.name), headerItem.options.type)}
-                                        </td>
-                                    ))
-                                }
-                                <Actions operations={operations} row={dataItem}/>
-                            </tr>
-                        );
-                    })
-                }
-                </tbody>
-            </table>
+            <div className="dataTable">
+                <table className="table">
+                    <thead>
+                        <tr>
+                            {
+                                headers.map((headerItem, index) => {
+                                    return <th key={index}
+                                               onClick={(event) => this.handleChangeSort(headerItem.name)}
+                                            >
+                                            {this.getArrowSort(headerItem.name)}
+                                            {headerItem.options.headerName}
+                                        </th>
+                                })
+                            }
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            data.map((dataItem, dataItemIndex) => {
+                                return (
+                                    <tr key={dataItemIndex}>
+                                        {
+                                            headers.map((headerItem, headerItemIndex) => (
+                                                <td key={headerItemIndex}>
+                                                    {/*{TextFormat(dataItem[headerItem.name], headerItem.options.type)}*/}
+                                                    {TextFormat(lodash.get(dataItem, headerItem.name), headerItem.options.type)}
+                                                </td>
+                                            ))
+                                        }
+                                        <Actions operations={operations} row={dataItem}/>
+                                    </tr>
+                                );
+                            })
+                        }
+                    </tbody>
+                </table>
                 {pagination}
             </div>
         );
