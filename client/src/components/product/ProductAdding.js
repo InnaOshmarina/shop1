@@ -7,6 +7,7 @@ import TextAreaFieldGroup from "../shared/TextAreaFieldGroup";
 import {addProduct, getProduct, editProduct } from '../../actions/productActions';
 import {getCategories} from "../../actions/categoryActions";
 import SelectListGroup from "../shared/SelectListGroup";
+// import TextAreaDraft from "../shared/TextAreaDraft";
 
 class ProductAdding extends Component {
     constructor(props) {
@@ -105,6 +106,12 @@ class ProductAdding extends Component {
                                     error={errors.description}
                                     info="Description of product must be between 10 and 500 characters"
                                 />
+                                {/*<TextAreaDraft*/}
+                                    {/*placeholder="Description Of Product"*/}
+                                    {/*name="description"*/}
+                                    {/*value={this.state.description}*/}
+                                    {/*onChange={this.onChange}*/}
+                                {/*/>*/}
                                 <TextFieldGroup
                                     placeholder="Price Of Product"
                                     name="price"

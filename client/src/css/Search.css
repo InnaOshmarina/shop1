@@ -1,0 +1,30 @@
+button.search {
+    background-color: rgb(203, 221, 212);
+    padding-left: 0;
+    border: none;
+    cursor: pointer;
+}
+button.search:focus {
+     box-shadow: none;
+ }
+button.search:hover svg.fa-search:first-child {
+     color: #5b5c5e;
+ }
+
+
+button#search.search:active {
+    background-color: rgb(203, 221, 212);
+    color: #5b5c5e;
+    box-shadow: none;
+    border: 0.0625rem solid #000;
+}
+
+svg.fa-search {
+    color: rgba(112, 109, 109, 0.979);
+    font-weight: 100;
+}
+
+
+.form-sep {
+    margin: 0.5rem auto;
+}

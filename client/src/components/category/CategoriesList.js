@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import compose from "redux/src/compose";
 
-import { getCategories, deleteCategory } from '../../actions/categoryActions';
+import { getCategories, deleteCategory, getCategory } from '../../actions/categoryActions';
 import DataTable from '../shared/DataTable';
 import {SORTACTION, TEXTFORMAT} from "../../constans/GlobalConstans";
 import Filter from "../../decorators/Filter";
+import Search from "../shared/Search";
 
 
 class CategoriesList extends Component {
@@ -73,6 +74,9 @@ class CategoriesList extends Component {
                 <Link to="/category-adding">
                     <button type="button" className="btn btn-success">Add Category</button>
                 </Link>
+                <Search
+                    handleFilterChange={this.props.handleFilterChange}
+                />
                 <DataTable
                     getData={this.props.getData}
                     currentFilter={this.props.currentFilter}

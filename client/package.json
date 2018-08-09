@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
+    "draft-js": "^0.10.5",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.10",
     "moment": "^2.22.2",
@@ -12,6 +13,7 @@
     "react": "^16.4.1",
     "react-compose": "^2.0.0",
     "react-dom": "^16.4.1",
+    "react-draft-wysiwyg": "^1.12.13",
     "react-moment": "^0.7.9",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",

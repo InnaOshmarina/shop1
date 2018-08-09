@@ -12,7 +12,6 @@ import SortIcon from "./SortIcon";
 
 class DataTable extends Component {
 
-    // Todo Refactoring (add HOC for sorting)
 
     render() {
         const {
@@ -40,41 +39,43 @@ class DataTable extends Component {
         }
 
         tableContent = (
-            <div className="dataTable"> <table className="table">
-                <thead>
-                <tr>
-                    {
-                        headers.map((headerItem, index) => {
-                            return <th key={index}
-                                       onClick={(event) => this.props.handleChangeSort(headerItem.name)}
-                                    >
-                                <SortIcon headerName={headerItem.name} sort={currentFilter.sort}/>
-                                    {headerItem.options.headerName}
-                                </th>
-                        })
-                    }
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                {
-                    data.map((dataItem, dataItemIndex) => {
-                        return (
-                            <tr key={dataItemIndex}>
-                                {
-                                    headers.map((headerItem, headerItemIndex) => (
-                                        <td key={headerItemIndex}>
-                                            {TextFormat(lodash.get(dataItem, headerItem.name), headerItem.options.type)}
-                                        </td>
-                                    ))
-                                }
-                                <Actions operations={operations} row={dataItem}/>
-                            </tr>
-                        );
-                    })
-                }
-                </tbody>
-            </table>
+            <div className="dataTable">
+                <table className="table">
+                    <thead>
+                        <tr>
+                            {
+                                headers.map((headerItem, index) => {
+                                    return <th
+                                                key={index}
+                                                onClick={(event) => this.props.handleChangeSort(headerItem.name)}
+                                            >
+                                                <SortIcon headerName={headerItem.name} sort={currentFilter.sort}/>
+                                                {headerItem.options.headerName}
+                                        </th>
+                                })
+                            }
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            data.map((dataItem, dataItemIndex) => {
+                                return (
+                                    <tr key={dataItemIndex}>
+                                        {
+                                            headers.map((headerItem, headerItemIndex) => (
+                                                <td key={headerItemIndex}>
+                                                    {TextFormat(lodash.get(dataItem, headerItem.name), headerItem.options.type)}
+                                                </td>
+                                            ))
+                                        }
+                                        <Actions operations={operations} row={dataItem}/>
+                                    </tr>
+                                );
+                            })
+                        }
+                    </tbody>
+                </table>
                 {pagination}
             </div>
         );
