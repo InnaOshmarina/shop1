@@ -13,6 +13,10 @@ async function queryHelper(entityName, req, customOptions = {}, customQuery={}) 
             ...customOptions
         };
 
+        if (reqParams.search) {
+            query.title = new RegExp(reqParams.search, 'i');
+        }
+
         if (!reqParams.sort) {
             options.sort = { date: -1 }
         } else {
@@ -29,6 +33,6 @@ async function queryHelper(entityName, req, customOptions = {}, customQuery={}) 
 
         return CurrentEntity.paginate(query, options);
 
-};
+}
 
 module.exports = queryHelper;
