@@ -4,11 +4,16 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import compose from "redux/src/compose";
 
-import { getCategories, deleteCategory, getCategory } from '../../actions/categoryActions';
+import { getCategories, deleteCategory} from '../../actions/categoryActions';
 import DataTable from '../shared/DataTable';
 import {SORTACTION, TEXTFORMAT} from "../../constans/GlobalConstans";
 import Filter from "../../decorators/Filter";
 import Search from "../shared/Search";
+import {
+    getCategoriesSelector,
+    getCategoriesLimitSelector,
+    getCategoriesOffsetSelector, getCategoriesTotalSelector
+} from "../../selectors/categorySelectors";
 
 
 class CategoriesList extends Component {
@@ -101,10 +106,10 @@ CategoriesList.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    categories: state.category.categories,
-    limit: state.category.categories.limit,
-    offset: state.category.categories.offset,
-    total: state.category.categories.total
+    categories: getCategoriesSelector(state),
+    limit: getCategoriesLimitSelector(state),
+    offset: getCategoriesOffsetSelector(state),
+    total: getCategoriesTotalSelector(state)
 });
 
 const mapDispatchToProps = {
