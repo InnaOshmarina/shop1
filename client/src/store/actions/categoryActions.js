@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {GET_ERRORS, GET_CATEGORY, GET_CATEGORIES, DELETE_CATEGORY, EDIT_CATEGORY} from './types';
-import { baseURL} from "../constans/GlobalConstans";
+import { baseURL} from "../../constans/GlobalConstans";
 
 // Create Category
 export const addCategory = (categoryData, history) => dispatch => {

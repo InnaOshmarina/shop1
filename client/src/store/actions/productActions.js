@@ -8,7 +8,7 @@ import {
     EDIT_PRODUCT
 } from './types';
 
-import { baseURL} from "../constans/GlobalConstans";
+import { baseURL} from "../../constans/GlobalConstans";
 
 // Create Product
 export const addProduct = (productData, history) => dispatch => {

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import compose from "redux/src/compose";
 
-import { getCategories, deleteCategory} from '../../actions/categoryActions';
+import { getCategories, deleteCategory} from '../../store/actions/categoryActions';
 import DataTable from '../shared/DataTable';
 import {SORTACTION, TEXTFORMAT} from "../../constans/GlobalConstans";
 import Filter from "../../decorators/Filter";
@@ -13,7 +13,7 @@ import {
     getCategoriesSelector,
     getCategoriesLimitSelector,
     getCategoriesOffsetSelector, getCategoriesTotalSelector
-} from "../../selectors/categorySelectors";
+} from "../../store/selectors/categorySelectors";
 
 
 class CategoriesList extends Component {

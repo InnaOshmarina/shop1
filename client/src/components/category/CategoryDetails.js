@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getCategory } from '../../actions/categoryActions';
+import { getCategory } from '../../store/actions/categoryActions';
 import {TEXTFORMAT} from "../../constans/GlobalConstans";
 import DataTableDetails from "../shared/DataTableDetails";
 
