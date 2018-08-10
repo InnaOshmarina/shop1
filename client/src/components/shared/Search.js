@@ -30,22 +30,21 @@ class Search extends Component {
 
         let content;
         content = (
-            <div>
+            <div className="search">
                 <form className="form-inline" onSubmit={this.onSubmit}>
-                    <div className="form-sep">
-                        <input
-                            className="mr-sm-2 form-control"
-                            type="text"
-                            placeholder="Введите название"
-                            name="search"
-                            value={this.state.search}
-                            onChange={this.onChange}
-                        />
+                    <i className="fas fa-search"/>
+                    <input
+                        className="mx-2 form-control"
+                        type="text"
+                        placeholder="Введите название"
+                        name="search"
+                        value={this.state.search}
+                        onChange={this.onChange}
+                    />
 
-                        <button className="search btn-secondary" type="submit" id="search">
-                            <i className="fas fa-search"/>
-                        </button>
-                    </div>
+                    <button className="search btn btn-secondary" type="submit" id="search">
+                        Search
+                    </button>
                 </form>
             </div>
         );

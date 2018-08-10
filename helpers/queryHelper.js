@@ -1,4 +1,3 @@
-
 async function queryHelper(entityName, req, customOptions = {}, customQuery={}) {
 
         const CurrentEntity = require(`../models/${entityName}`);

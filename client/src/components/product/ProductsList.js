@@ -8,6 +8,7 @@ import { getProducts, deleteProduct } from '../../actions/productActions';
 import DataTable from '../shared/DataTable';
 import {SORTACTION, TEXTFORMAT} from "../../constans/GlobalConstans";
 import Filter from "../../decorators/Filter";
+import Search from "../shared/Search";
 
 class ProductsList extends Component {
 
@@ -94,6 +95,9 @@ class ProductsList extends Component {
                 <Link to="/product-adding">
                     <button type="button" className="btn btn-success">Add Product</button>
                 </Link>
+                <Search
+                    handleFilterChange={this.props.handleFilterChange}
+                />
                 <DataTable
                     getData={this.props.getData}
                     currentFilter={this.props.currentFilter}

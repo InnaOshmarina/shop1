@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Dashboard from "../dashboard/Dashboard";
 import CategoriesList from '../category/CategoriesList';
 import ProductsList from '../product/ProductsList';
@@ -10,20 +10,52 @@ import CategoryDetails from '../category/CategoryDetails';
 import ProductAdding from "../product/ProductAdding";
 import '../../css/ProtectedLayout.css';
 
+const style =
+    {
+        backgroundColor: 'rgb(49, 48, 49)',
+        borderRadius: '0.625rem',
+        border: 'none'
+    };
+
+const navigations = [
+    {
+        title: 'Dashboard',
+        to: '/dashboard'
+    },
+    {
+        title: 'Product categories',
+        to: '/categories'
+    },
+    {
+        title: 'Products',
+        to: '/products'
+    },
+    {
+        title: 'Orders',
+        to: '/orders'
+    }
+];
 
 class ProtectedLayout extends Component {
     render() {
         return (
+
             <Router>
                 <div className="dashboard">
                     <div className="container-fluid content">
                         <div className="row">
                             <div className="col-md-3">
                                 <div className="list-group">
-                                    <Link className="list-group-item list-group-item-action" to="/dashboard">Dashboard</Link>
-                                    <Link className="list-group-item list-group-item-action" to="/categories">Product categories</Link>
-                                    <Link className="list-group-item list-group-item-action" to="/products">Products</Link>
-                                    <Link className="list-group-item list-group-item-action" to="/orders">Orders</Link>
+                                    {
+                                        navigations.map(navigation => (
+                                            <NavLink
+                                                to={navigation.to}
+                                                activeStyle={style}
+                                                className="list-group-item list-group-item-action">
+                                                    {navigation.title}
+                                            </NavLink>
+                                        ))
+                                    }
                                 </div>
                             </div>
                             <div className="col-md-9">

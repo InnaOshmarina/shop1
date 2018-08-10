@@ -40,7 +40,7 @@ class DataTable extends Component {
 
         tableContent = (
             <div className="dataTable">
-                <table className="table">
+                <table className="table table-striped table-bordered">
                     <thead>
                         <tr>
                             {
