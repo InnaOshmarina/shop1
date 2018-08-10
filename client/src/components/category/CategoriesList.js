@@ -29,13 +29,6 @@ class CategoriesList extends Component {
                     type: TEXTFORMAT.string
                 }
             },
-            // {
-            //     name: 'description',
-            //     options: {
-            //         headerName: 'Description',
-            //         type: TEXTFORMAT.string
-            //     }
-            // },
             {
                 name: 'date',
                 options: {
@@ -76,7 +69,7 @@ class CategoriesList extends Component {
 
         return (
             <div>
-                <Link to="/category-adding">
+                <Link to="/categories/add">
                     <button type="button" className="btn btn-success">Add Category</button>
                 </Link>
                 <Search

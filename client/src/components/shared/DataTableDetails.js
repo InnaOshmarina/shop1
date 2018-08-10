@@ -24,27 +24,15 @@ class DataTableDetails extends Component {
 
         tableContent = (
                 <table className="table table-bordered">
-                    <thead>
-                        <tr>
-                            {
-                                headers.map((headerItem, index) => {
-                                    return <th key={index}>
-                                               {headerItem.options.headerName}
-                                           </th>
-                                })
-                            }
-                        </tr>
-                    </thead>
                     <tbody>
-                        <tr>
                             {
                                 headers.map((headerItem, index) => (
-                                    <td key={index}>
-                                        {TextFormat(lodash.get(currentItem, headerItem.name), headerItem.options.type)}
-                                    </td>
+                                    <tr key={index}>
+                                        <th>{headerItem.options.headerName}</th>
+                                        <td>{TextFormat(lodash.get(currentItem, headerItem.name), headerItem.options.type)}</td>
+                                    </tr>
                                 ))
                             }
-                        </tr>
                     </tbody>
                 </table>
         );

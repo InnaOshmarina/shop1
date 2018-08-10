@@ -47,8 +47,9 @@ class ProtectedLayout extends Component {
                             <div className="col-md-3">
                                 <div className="list-group">
                                     {
-                                        navigations.map(navigation => (
+                                        navigations.map((navigation, index) => (
                                             <NavLink
+                                                key={index}
                                                 to={navigation.to}
                                                 activeStyle={style}
                                                 className="list-group-item list-group-item-action">
@@ -61,11 +62,11 @@ class ProtectedLayout extends Component {
                             <div className="col-md-9">
                                 <Route exact path="/dashboard" component={Dashboard} />
                                 <Route exact path="/categories" component={CategoriesList} />
-                                <Route exact path="/category-adding" component={CategoryAdding} />
+                                <Route exact path="/categories/add" component={CategoryAdding} />
                                 <Route exact path="/categories/edit/:id" component={CategoryAdding} />
                                 <Route exact path="/categories/detail/:id" component={CategoryDetails} />
                                 <Route exact path="/products" component={ProductsList} />
-                                <Route exact path="/product-adding" component={ProductAdding} />
+                                <Route exact path="/products/add" component={ProductAdding} />
                                 <Route exact path="/products/edit/:id" component={ProductAdding} />
                                 <Route exact path="/orders" component={OrdersList} />
                             </div>

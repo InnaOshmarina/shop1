@@ -31,13 +31,6 @@ class ProductsList extends Component {
                     type: TEXTFORMAT.string
                 }
             },
-            // {
-            //     name: 'description',
-            //     options: {
-            //         headerName: 'Description',
-            //         type: TEXTFORMAT.string
-            //     }
-            // },
             {
                 name: 'price',
                 options: {
@@ -92,7 +85,7 @@ class ProductsList extends Component {
 
         return (
             <div>
-                <Link to="/product-adding">
+                <Link to="/products/add">
                     <button type="button" className="btn btn-success">Add Product</button>
                 </Link>
                 <Search
