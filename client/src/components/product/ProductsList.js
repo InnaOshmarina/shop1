@@ -9,6 +9,13 @@ import DataTable from '../shared/DataTable';
 import {SORTACTION, TEXTFORMAT} from "../../constans/GlobalConstans";
 import Filter from "../../decorators/Filter";
 import Search from "../shared/Search";
+import {
+    getProductsSelector,
+    getProductsLimitSelector,
+    getProductsOffsetSelector,
+    getProductsTotalSelector
+} from "../../store/selectors/productSelectors";
+
 
 class ProductsList extends Component {
 
@@ -115,11 +122,11 @@ ProductsList.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    products: state.product.products,
-    limit: state.product.products.limit,
-    offset: state.product.products.offset,
-    total: state.product.products.total
-});
+    products: getProductsSelector(state),
+    limit: getProductsLimitSelector(state),
+    offset: getProductsOffsetSelector(state),
+    total: getProductsTotalSelector(state),
+};
 
 const mapDispatchToProps = {
     getData: getProducts,

@@ -12,7 +12,6 @@ import SortIcon from "./SortIcon";
 
 class DataTable extends Component {
 
-
     render() {
         const {
             data,
