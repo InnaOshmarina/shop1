@@ -1,11 +1,13 @@
 import axios from 'axios';
-import { GET_CATEGORY, DELETE_CATEGORY } from './types';
-import { baseURL} from "../../constans/GlobalConstans";
-import {GET_ERRORS} from "../Auth/types";
-import {deleteCategoryCreator, editCategoryCreator, getCategoriesCreator, getCategoryCreator} from "./actionCreators";
+import { GET_CATEGORY } from './types';
+import { baseURL } from "../../constans/GlobalConstans";
+import { GET_ERRORS } from "../Auth/types";
+import { deleteCategoryCreator, editCategoryCreator, getCategoriesCreator, getCategoryCreator } from "./actionCreators";
+import { doneActionSuccess, initAction } from "../Action/actionCreators";
 
 // Create Category
 export const addCategory = (categoryData, history) => dispatch => {
+  dispatch(initAction());
   axios
     .post(`${baseURL}/api/categories`, categoryData)
     .then(() => history.push('/categories'))
@@ -26,14 +28,15 @@ export const getCategory = id => dispatch => {
         )
         .catch(err =>
             dispatch({
-                type: GET_CATEGORY,
-                payload: {}
+                type: GET_ERRORS,
+                payload: err.response.data
             })
         );
 };
 
 // Get all categories
 export const getCategories = (queryParams = {}) => dispatch => {
+    dispatch(initAction(getCategoriesCreator().type));
     axios
         .get(`${baseURL}/api/categories`, {
             params: {
@@ -44,13 +47,14 @@ export const getCategories = (queryParams = {}) => dispatch => {
                 dispatch(getCategoriesCreator(res.data))
             }
         )
-        .catch(err => {
-                // dispatch({
-                //     type: GET_CATEGORIES,
-                //     payload: initialState
-                // });
-            console.log('error');
-        }
+        .then(() => {
+            dispatch(doneActionSuccess(getCategoriesCreator().type));
+        })
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
         );
 };
 
