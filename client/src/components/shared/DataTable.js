@@ -47,9 +47,10 @@ class DataTable extends Component {
                                 headers.map((headerItem, index) => {
                                     return <th
                                                 key={index}
-                                                onClick={(event) => this.props.handleChangeSort(headerItem.name)}
+                                                onClick={(event) => this.props.handleChangeSort(
+                                                    headerItem.options.sotField || headerItem.name)}
                                             >
-                                                <SortIcon headerName={headerItem.name} sort={currentFilter.sort}/>
+                                                <SortIcon headerName={headerItem.options.sotField || headerItem.name} sort={currentFilter.sort}/>
                                                 {headerItem.options.headerName}
                                         </th>
                                 })

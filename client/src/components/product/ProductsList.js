@@ -28,6 +28,7 @@ class ProductsList extends Component {
                 name: 'category.title',
                 options: {
                     headerName: 'Category',
+                    sotField: 'category',
                     type: TEXTFORMAT.string
                 }
             },
