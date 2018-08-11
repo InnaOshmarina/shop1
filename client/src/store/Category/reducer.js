@@ -2,7 +2,7 @@ import {
     GET_CATEGORY,
     GET_CATEGORIES,
     DELETE_CATEGORY
-} from '../actions/types';
+} from './types';
 
 export const initialState = {
   category: {},

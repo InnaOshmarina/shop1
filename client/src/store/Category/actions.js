@@ -1,12 +1,16 @@
 import axios from 'axios';
-import {GET_ERRORS, GET_CATEGORY, GET_CATEGORIES, DELETE_CATEGORY, EDIT_CATEGORY} from './types';
-import { baseURL} from "../../constans/GlobalConstans";
+import { GET_CATEGORY } from './types';
+import { baseURL } from "../../constans/GlobalConstans";
+import { GET_ERRORS } from "../Auth/types";
+import { deleteCategoryCreator, editCategoryCreator, getCategoriesCreator, getCategoryCreator } from "./actionCreators";
+import { doneActionSuccess, initAction } from "../Action/actionCreators";
 
 // Create Category
 export const addCategory = (categoryData, history) => dispatch => {
+  dispatch(initAction());
   axios
     .post(`${baseURL}/api/categories`, categoryData)
-    .then(res => history.push('/categories'))
+    .then(() => history.push('/categories'))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -20,21 +24,19 @@ export const getCategory = id => dispatch => {
     axios
         .get(`${baseURL}/api/categories/${id}`)
         .then(res =>
-            dispatch({
-                type: GET_CATEGORY,
-                payload: res.data
-            })
+            dispatch(getCategoryCreator(res.data))
         )
         .catch(err =>
             dispatch({
-                type: GET_CATEGORY,
-                payload: {}
+                type: GET_ERRORS,
+                payload: err.response.data
             })
         );
 };
 
 // Get all categories
 export const getCategories = (queryParams = {}) => dispatch => {
+    dispatch(initAction(getCategoriesCreator().type));
     axios
         .get(`${baseURL}/api/categories`, {
             params: {
@@ -42,19 +44,17 @@ export const getCategories = (queryParams = {}) => dispatch => {
             }
         })
         .then(res => {
-                dispatch({
-                    type: GET_CATEGORIES,
-                    payload: res.data
-                })
+                dispatch(getCategoriesCreator(res.data))
             }
         )
-        .catch(err => {
-                // dispatch({
-                //     type: GET_CATEGORIES,
-                //     payload: initialState
-                // });
-            console.log('error');
-        }
+        .then(() => {
+            dispatch(doneActionSuccess(getCategoriesCreator().type));
+        })
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
         );
 };
 
@@ -63,11 +63,8 @@ export const deleteCategory = id => dispatch => {
     if (window.confirm('Are you sure? This can NOT be undone!')) {
         axios
             .delete(`${baseURL}/api/categories/${id}`)
-            .then(res =>
-                dispatch({
-                    type: DELETE_CATEGORY,
-                    payload: id
-                })
+            .then(() =>
+                dispatch(deleteCategoryCreator(id))
             )
             .catch(err =>
                 dispatch({
@@ -82,13 +79,10 @@ export const deleteCategory = id => dispatch => {
 export const editCategory = (id, categoryData, history) => dispatch => {
         axios
             .post(`${baseURL}/api/categories/${id}`, categoryData)
-            .then(res =>
-                dispatch({
-                    type: EDIT_CATEGORY,
-                    payload: id
-                })
+            .then(() =>
+                dispatch(editCategoryCreator())
             )
-            .then(res => history.push('/categories'))
+            .then(() => history.push('/categories'))
             .catch(err =>
                 dispatch({
                     type: GET_ERRORS,

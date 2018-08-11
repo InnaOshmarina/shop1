@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import TextFieldGroup from '../shared/TextFieldGroup';
 import TextAreaFieldGroup from "../shared/TextAreaFieldGroup";
-import {addCategory, getCategory, editCategory} from '../../store/actions/categoryActions';
+import {addCategory, getCategory, editCategory} from '../../store/Category/actions';
 
 class CategoryAdding extends Component {
     constructor(props) {

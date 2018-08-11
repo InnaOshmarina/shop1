@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-import { initialState } from '../reducers/categoryReducer';
+import { initialState } from './reducer';
 
 export const getCategoryState = (state) => state.category || initialState;
 
@@ -12,21 +12,21 @@ export const getCategoriesSelector = createSelector(
 );
 
 export const getCategoriesLimitSelector = createSelector(
-    getCategoryState,
+    getCategoriesSelector,
     (state) => {
         return state.limit;
     }
 );
 
 export const getCategoriesOffsetSelector = createSelector(
-    getCategoryState,
+    getCategoriesSelector,
     (state) => {
         return state.offset;
     }
 );
 
 export const getCategoriesTotalSelector = createSelector(
-    getCategoryState,
+    getCategoriesSelector,
     (state) => {
         return state.total;
     }

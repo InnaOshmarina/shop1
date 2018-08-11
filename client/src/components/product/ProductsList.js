@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import compose from "redux/src/compose";
 
-import { getProducts, deleteProduct } from '../../store/actions/productActions';
+import { getProducts, deleteProduct } from '../../store/Product/actions';
 import DataTable from '../shared/DataTable';
 import {SORTACTION, TEXTFORMAT} from "../../constans/GlobalConstans";
 import Filter from "../../decorators/Filter";
@@ -35,6 +35,7 @@ class ProductsList extends Component {
                 name: 'category.title',
                 options: {
                     headerName: 'Category',
+                    sotField: 'category',
                     type: TEXTFORMAT.string
                 }
             },

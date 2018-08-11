@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
-import { setCurrentUser, logoutUser } from './store/actions/authActions';
+import { setCurrentUser, logoutUser } from './store/Auth/actions';
 import { Provider } from 'react-redux';
-import store from './store';
+import store from './store/store';
 
 import PrivateRoute from './components/shared/PrivateRoute';
 

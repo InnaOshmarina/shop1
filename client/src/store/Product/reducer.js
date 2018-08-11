@@ -2,7 +2,7 @@ import {
     GET_PRODUCT,
     GET_PRODUCTS,
     DELETE_PRODUCT
-} from '../actions/types';
+} from './types';
 
 export const initialState = {
     product: {},
