@@ -38,47 +38,20 @@ export const getProduct = id => dispatch => {
         );
 };
 
-
-                  // НЕ УДАЛЯТЬ!!! ЭТО НУЖНО !!!
 // Get all products
-// export const getProducts = (queryParams = {}) => async dispatch => {
-//     try {
-//         const products = await axios.get(`${baseURL}/api/products`, {params: {...queryParams}});
-//
-//         dispatch({
-//             type: GET_PRODUCTS,
-//             payload: products.data
-//         });
-//     } catch(err) {
-//         dispatch({
-//             type: GET_ERRORS,
-//             payload: err.response.data
-//         })
-//     }
-// };
+export const getProducts = (queryParams = {}) => async dispatch => {
+    try {
+        dispatch(initAction(getProductsCreator().type));
+        const products = await axios.get(`${baseURL}/api/products`, {params: {...queryParams}});
 
-// Get all products
-export const getProducts = (queryParams = {}) => dispatch => {
-    dispatch(initAction(getProductsCreator().type));
-    axios
-        .get(`${baseURL}/api/products`, {
-            params: {
-                ...queryParams
-            }
+        dispatch(getProductsCreator(products.data));
+        dispatch(doneActionSuccess(getProductsCreator().type));
+    } catch(err) {
+        dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
         })
-        .then(res => {
-                dispatch(getProductsCreator(res.data))
-            }
-        )
-        .then(() => {
-            dispatch(doneActionSuccess(getProductsCreator().type));
-        })
-        .catch(err =>
-            dispatch({
-                type: GET_ERRORS,
-                payload: err.response.data
-            })
-        );
+    }
 };
 
 // Delete Product
