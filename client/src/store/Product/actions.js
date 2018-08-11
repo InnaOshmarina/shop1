@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 import {
-    GET_ERRORS,
     GET_PRODUCT,
     GET_PRODUCTS,
     DELETE_PRODUCT,
@@ -9,6 +8,7 @@ import {
 } from './types';
 
 import { baseURL} from "../../constans/GlobalConstans";
+import {GET_ERRORS} from "../Auth/types";
 
 // Create Product
 export const addProduct = (productData, history) => dispatch => {

@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import TextFieldGroup from '../shared/TextFieldGroup';
 import TextAreaFieldGroup from "../shared/TextAreaFieldGroup";
-import {addProduct, getProduct, editProduct } from '../../store/actions/productActions';
-import {getCategories} from "../../store/actions/categoryActions";
+import {addProduct, getProduct, editProduct } from '../../store/Product/actions';
+import {getCategories} from "../../store/Category/actions";
 import SelectListGroup from "../shared/SelectListGroup";
 // import TextAreaDraft from "../shared/TextAreaDraft";
 
