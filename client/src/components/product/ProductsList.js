@@ -14,7 +14,7 @@ import {
     getProductsLimitSelector,
     getProductsOffsetSelector,
     getProductsTotalSelector
-} from "../../store/selectors/productSelectors";
+} from "../../store/Product/selectors";
 
 
 class ProductsList extends Component {
@@ -127,7 +127,7 @@ const mapStateToProps = state => ({
     limit: getProductsLimitSelector(state),
     offset: getProductsOffsetSelector(state),
     total: getProductsTotalSelector(state),
-};
+});
 
 const mapDispatchToProps = {
     getData: getProducts,

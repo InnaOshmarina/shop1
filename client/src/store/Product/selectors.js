@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-import { initialState } from '../reducers/productReducer';
+import { initialState } from './reducer';
 
 export const getProductState = state => state.product || initialState;
 
@@ -10,16 +10,16 @@ export const getProductsSelector = createSelector(
 );
 
 export const getProductsLimitSelector = createSelector(
-    getProductState,
+    getProductsSelector,
     state => state.limit
 );
 
 export const getProductsOffsetSelector = createSelector(
-    getProductState,
+    getProductsSelector,
     state => state.offset
 );
 
 export const getProductsTotalSelector = createSelector(
-    getProductState,
+    getProductsSelector,
     state => state.total
 );

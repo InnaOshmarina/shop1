@@ -1,20 +1,16 @@
 import axios from 'axios';
-
-import {
-    GET_PRODUCT,
-    GET_PRODUCTS,
-    DELETE_PRODUCT,
-    EDIT_PRODUCT
-} from './types';
-
+import { GET_PRODUCT } from './types';
 import { baseURL} from "../../constans/GlobalConstans";
 import {GET_ERRORS} from "../Auth/types";
+import { deleteProductCreator, editProductCreator, getProductsCreator, getProductCreator } from "./actionCreators";
+import { doneActionSuccess, initAction } from "../Action/actionCreators";
 
 // Create Product
 export const addProduct = (productData, history) => dispatch => {
+    dispatch(initAction());
     axios
         .post(`${baseURL}/api/products`, productData)
-        .then(res => history.push('/products'))
+        .then(() => history.push('/products'))
         .catch(err =>
             dispatch({
                 type: GET_ERRORS,
@@ -28,34 +24,61 @@ export const getProduct = id => dispatch => {
     axios
         .get(`${baseURL}/api/products/${id}`)
         .then(res =>
-            dispatch({
-                type: GET_PRODUCT,
-                payload: res.data
-            })
+            dispatch(getProductCreator(res.data))
         )
         .catch(err =>
-            dispatch({
-                type: GET_PRODUCT,
-                payload: {}
-            })
+                dispatch({
+                    type: GET_ERRORS,
+                    payload: err.response.data
+                })
+            // dispatch({
+            //     type: GET_PRODUCT,
+            //     payload: {}
+            // })
         );
 };
 
-// Get all products
-export const getProducts = (queryParams = {}) => async dispatch => {
-    try {
-        const products = await axios.get(`${baseURL}/api/products`, {params: {...queryParams}});
 
-        dispatch({
-            type: GET_PRODUCTS,
-            payload: products.data
-        });
-    } catch(err) {
-        dispatch({
-            type: GET_ERRORS,
-            payload: err.response.data
+                  // НЕ УДАЛЯТЬ!!! ЭТО НУЖНО !!!
+// Get all products
+// export const getProducts = (queryParams = {}) => async dispatch => {
+//     try {
+//         const products = await axios.get(`${baseURL}/api/products`, {params: {...queryParams}});
+//
+//         dispatch({
+//             type: GET_PRODUCTS,
+//             payload: products.data
+//         });
+//     } catch(err) {
+//         dispatch({
+//             type: GET_ERRORS,
+//             payload: err.response.data
+//         })
+//     }
+// };
+
+// Get all products
+export const getProducts = (queryParams = {}) => dispatch => {
+    dispatch(initAction(getProductsCreator().type));
+    axios
+        .get(`${baseURL}/api/products`, {
+            params: {
+                ...queryParams
+            }
         })
-    }
+        .then(res => {
+                dispatch(getProductsCreator(res.data))
+            }
+        )
+        .then(() => {
+            dispatch(doneActionSuccess(getProductsCreator().type));
+        })
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        );
 };
 
 // Delete Product
@@ -63,18 +86,14 @@ export const deleteProduct = id => dispatch => {
     if (window.confirm('Are you sure? This can NOT be undone!')) {
         axios
             .delete(`${baseURL}/api/products/${id}`)
-            .then(res =>
-                dispatch({
-                    type: DELETE_PRODUCT,
-                    payload: id
-                })
+            .then(() =>
+                dispatch(deleteProductCreator(id))
             )
             .catch(err => {
-                console.log(err.response);
-                // TODO refactoring after adding axiosClient
-                return dispatch({
+                dispatch({
                     type: GET_ERRORS,
-                    payload: {}
+                    payload: err.response.data
+                    // payload: {}
                 })
                 }
             );
@@ -85,13 +104,10 @@ export const deleteProduct = id => dispatch => {
 export const editProduct = (id, productData, history) => dispatch => {
     axios
         .post(`${baseURL}/api/products/${id}`, productData)
-        .then(res =>
-            dispatch({
-                type: EDIT_PRODUCT,
-                payload: id
-            })
+        .then(() =>
+            dispatch(editProductCreator())
         )
-        .then(res => history.push('/products'))
+        .then(() => history.push('/products'))
         .catch(err =>
             dispatch({
                 type: GET_ERRORS,
