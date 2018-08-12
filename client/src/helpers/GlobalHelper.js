@@ -14,3 +14,14 @@ export const getLinkTemplate = (maskLink, row) => {
 
     return newString;
 };
+
+export const getBrowserLang = () => {
+    let lang = null;
+    const browserLang = navigator.language;
+
+    if (browserLang.length > 0) {
+        lang = browserLang.split('-')[0];
+    }
+
+    return lang;
+};
