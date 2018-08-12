@@ -19,7 +19,7 @@ module.exports = function validateProductInput(data) {
     }
 
     if(!Validator.isLength(data.description, { min: 10, max: 500 })) {
-        errors.description = 'Description of product must be between 10 and 500 characters';
+        errors.description = 'Description of product must be 10 characters or more';
     }
 
     if(Validator.isEmpty(data.description)) {

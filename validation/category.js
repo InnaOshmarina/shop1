@@ -11,8 +11,8 @@ module.exports = function validateCategoryInput(data) {
         errors.title = 'Title field is required';
     }
 
-    if(!Validator.isLength(data.description, { min: 10, max: 1000 })) {
-        errors.description = 'Description of category must be between 10 and 1000 characters';
+    if(!Validator.isLength(data.description, { min: 10 })) {
+        errors.description = 'Description of category must be between 10 characters or more';
     }
 
     if(Validator.isEmpty(data.description)) {

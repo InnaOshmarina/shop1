@@ -26,10 +26,14 @@ export default function(state = initialState, action) {
         ...state,
         categories: action.payload
       };
-    case DELETE_CATEGORY:
+      case DELETE_CATEGORY:
+        console.log(state.categories);
       return {
           ...state,
-          categories: state.categories.filter(category => category._id !== action.payload)
+          categories: {
+              ...state.categories,
+              docs: state.categories.docs.filter(category => category._id !== action.payload)
+          }
       };
     default:
       return state;

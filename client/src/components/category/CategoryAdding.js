@@ -84,7 +84,7 @@ class CategoryAdding extends Component {
                                     value={this.state.description}
                                     onChange={this.onChange}
                                     error={errors.description}
-                                    info="Description of category must be between 10 and 1000 characters"
+                                    info="Description of category must be between 10 characters or more"
                                 />
 
                                 <input type="submit" value="Submit" className="btn btn-info btn-block mt-4" />
