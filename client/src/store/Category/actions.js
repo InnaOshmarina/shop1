@@ -1,84 +1,61 @@
-import axios from 'axios';
 import apiHelper from '../../helpers/apiHelper';
 import { baseURL } from "../../constans/GlobalConstans";
 import { GET_ERRORS } from "../Auth/types";
-import { deleteCategoryCreator, editCategoryCreator, getCategoriesCreator, getCategoryCreator } from "./actionCreators";
+import { deleteCategoryCreator, editCategoryCreator, getCategoriesCreator, addCategoryCreator, getCategoryCreator } from "./actionCreators";
 import { doneActionSuccess, initAction } from "../Action/actionCreators";
 import {API_CATEGORIES_URL} from "../../helpers/apiHelper";
-import {getProductsCreator} from "../Product/actionCreators";
 
 // Create Category
-export const addCategory = (categoryData, history) => dispatch => {
-  dispatch(initAction());
-    apiHelper.doRequest(`${baseURL}/api/categories`, 'post', categoryData)
-    .then(() => history.push('/categories'))
-    .catch(err => {
-        console.log(err);
-            dispatch({
-                type: GET_ERRORS,
-                payload: err.response.data
-            });
+export const addCategory = (categoryData, history) => async dispatch => {
+    try {
+        dispatch(initAction(addCategoryCreator().type));
+        await apiHelper.doRequest(`${baseURL}/api/categories`, 'post', categoryData);
+        dispatch(doneActionSuccess(addCategoryCreator().type));
+        history.push('/categories');
+    } catch(err) {
+        dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        })
     }
-    );
-};
-
-// Get category by id
-export const getCategory = id => dispatch => {
-    apiHelper.doRequest(`${API_CATEGORIES_URL}/${id}`, 'get')
-        .then(res =>
-            dispatch(getCategoryCreator(res.data))
-        )
-        .catch(err =>
-            dispatch({
-                type: GET_ERRORS,
-                payload: err.response.data
-            })
-        );
 };
 
 // Get all categories
-export const getCategories = (queryParams = {}) => dispatch => {
-    console.log(queryParams);
-    dispatch(initAction(getCategoriesCreator().type));
-    apiHelper
-        .doRequest(
-            `${API_CATEGORIES_URL}`,
-            'get',
-            {
-                params: queryParams
-            })
-        .then(res => {
-                dispatch(getCategoriesCreator(res.data))
-            }
-        )
-        .then(() => {
-            dispatch(doneActionSuccess(getCategoriesCreator().type));
+export const getCategories = (queryParams = {}) => async dispatch => {
+    try {
+        dispatch(initAction(getCategoriesCreator().type));
+        const categories = await apiHelper
+            .doRequest(
+                `${API_CATEGORIES_URL}`,
+                'get',
+                {
+                    params: queryParams
+                });
+
+        dispatch(getCategoriesCreator(categories.data));
+        dispatch(doneActionSuccess(getCategoriesCreator().type));
+    } catch(err) {
+        dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
         })
-        .catch(err =>
-            dispatch({
-                type: GET_ERRORS,
-                payload: err.response.data
-            })
-        );
+    }
 };
 
-// export const getFunds = async (firmId: any, filter: any): Promise<any> => {
-//     const response = await ApiHelper.doRequest(
-//         `${API_ERM_ENTITIES}/relationships/`,
-//         'get',
-//         {
-//             params: {
-//                 entity_id: firmId,
-//                 end_type: 'firm',
-//                 start_type: 'fund',
-//                 relationship_type: 'is_advised_by',
-//                 ...filter,
-//             }
-//         }
-//     );
-//
-//     return Promise.resolve(response);
-// };
+// Get category by id
+export const getCategory = id => async dispatch => {
+    try {
+        dispatch(initAction(getCategoryCreator().type));
+        const category = await apiHelper.doRequest(`${API_CATEGORIES_URL}/${id}`, 'get');
+        dispatch(getCategoryCreator(category.data));
+        dispatch(doneActionSuccess(initAction(getCategoryCreator().type)));
+    } catch(err) {
+        dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        })
+    }
+};
 
 // Delete Category
 export const deleteCategory = id => async dispatch => {
@@ -87,7 +64,7 @@ export const deleteCategory = id => async dispatch => {
             dispatch(initAction(deleteCategoryCreator().type));
 
             await apiHelper.doRequest(`${API_CATEGORIES_URL}/${id}`, 'delete');
-
+            dispatch(deleteCategoryCreator(id));
             dispatch(doneActionSuccess(deleteCategoryCreator().type));
         } catch(err) {
             dispatch({
@@ -99,18 +76,21 @@ export const deleteCategory = id => async dispatch => {
 };
 
 // Edit Category
-export const editCategory = (id, categoryData, history) => dispatch => {
-    apiHelper.doRequest(`${API_CATEGORIES_URL}/${id}`, 'post', categoryData)
-            .then(() =>
-                dispatch(editCategoryCreator())
-            )
-            .then(() => history.push('/categories'))
-            .catch(err =>
-                dispatch({
-                    type: GET_ERRORS,
-                    payload: err.response.data
-                })
-            );
+export const editCategory = (id, categoryData, history) => async dispatch => {
+    try {
+        dispatch(initAction(deleteCategoryCreator().type));
+
+        await apiHelper.doRequest(`${API_CATEGORIES_URL}/${id}`, 'post', categoryData);
+
+        dispatch(editCategoryCreator(id));
+        dispatch(doneActionSuccess(deleteCategoryCreator().type));
+        history.push('/categories');
+    } catch(err) {
+        dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        })
+    }
 };
 
 

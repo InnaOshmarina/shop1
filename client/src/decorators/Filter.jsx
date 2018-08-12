@@ -30,7 +30,7 @@ export default function Filter(WrappedComponent, defaultFilter = {}) {
                 sort[headerItem] = this.state.currentFilter.sort[headerItem] * -1;
             }
 
-            this.setState({ currentFilter: {...this.state.currentFilter, sort, page: 1 }}, () => {
+            this.setState({ currentFilter: {...this.state.currentFilter, sort, page: 1, offset: 0 }}, () => {
                 this.props.getData(this.state.currentFilter);
             });
         };
