@@ -104,7 +104,7 @@ class ProductAdding extends Component {
                                     value={this.state.description}
                                     onChange={this.onChange}
                                     error={errors.description}
-                                    info="Description of product must be between 10 and 500 characters"
+                                    info="Description of product must be 10 characters or more"
                                 />
                                 {/*<TextAreaDraft*/}
                                     {/*placeholder="Description Of Product"*/}

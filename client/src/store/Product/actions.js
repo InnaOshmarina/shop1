@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_PRODUCT } from './types';
+import {GET_PRODUCT, GET_PRODUCTS} from './types';
 import { baseURL} from "../../constans/GlobalConstans";
 import {GET_ERRORS} from "../Auth/types";
 import { deleteProductCreator, editProductCreator, getProductsCreator, getProductCreator } from "./actionCreators";
@@ -19,25 +19,6 @@ export const addProduct = (productData, history) => dispatch => {
         );
 };
 
-// Get product by id
-export const getProduct = id => dispatch => {
-    axios
-        .get(`${baseURL}/api/products/${id}`)
-        .then(res =>
-            dispatch(getProductCreator(res.data))
-        )
-        .catch(err =>
-                dispatch({
-                    type: GET_ERRORS,
-                    payload: err.response.data
-                })
-            // dispatch({
-            //     type: GET_PRODUCT,
-            //     payload: {}
-            // })
-        );
-};
-
 // Get all products
 export const getProducts = (queryParams = {}) => async dispatch => {
     try {
@@ -48,8 +29,26 @@ export const getProducts = (queryParams = {}) => async dispatch => {
         dispatch(doneActionSuccess(getProductsCreator().type));
     } catch(err) {
         dispatch({
-            type: GET_ERRORS,
-            payload: err.response.data
+            // type: GET_ERRORS,
+            type: GET_PRODUCTS,
+            //payload: err.response.data
+            payload: {}
+        })
+    }
+};
+
+// Get product by id
+export const getProduct = id => async dispatch => {
+    try {
+        const product = await axios.get(`${baseURL}/api/products/${id}`);
+        dispatch(getProductCreator(product.data))
+
+    } catch(err) {
+        dispatch({
+            //type: GET_ERRORS,
+            type: GET_PRODUCT,
+            // payload: err.response.data
+            payload: {}
         })
     }
 };
@@ -66,7 +65,7 @@ export const deleteProduct = id => dispatch => {
                 dispatch({
                     type: GET_ERRORS,
                     payload: err.response.data
-                    // payload: {}
+                    //payload: {}
                 })
                 }
             );
