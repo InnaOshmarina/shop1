@@ -68,7 +68,7 @@ class ProductsList extends Component {
                 options: {
                     icon: SORTACTION.eye,
                     type: SORTACTION.link,
-                    linkTemplate: ''
+                    linkTemplate: 'products/detail/:_id'
                 }
             },
             {
@@ -117,7 +117,7 @@ class ProductsList extends Component {
 }
 
 ProductsList.propTypes = {
-    getProducts: PropTypes.func.isRequired,
+    getData: PropTypes.func.isRequired,
     deleteProduct: PropTypes.func.isRequired,
     products: PropTypes.object.isRequired
 };

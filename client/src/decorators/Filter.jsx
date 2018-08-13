@@ -1,5 +1,10 @@
 import * as React from 'react';
 
+const defaultFilterAfterSorting = {
+    page: 1,
+    offset: 0
+};
+
 export default function Filter(WrappedComponent, defaultFilter = {}) {
 
     return class extends React.PureComponent {
@@ -30,13 +35,14 @@ export default function Filter(WrappedComponent, defaultFilter = {}) {
                 sort[headerItem] = this.state.currentFilter.sort[headerItem] * -1;
             }
 
-            this.setState({ currentFilter: {...this.state.currentFilter, sort, page: 1, offset: 0 }}, () => {
+            this.setState({ currentFilter: {...this.state.currentFilter, sort, ...defaultFilterAfterSorting }}, () => {
                 this.props.getData(this.state.currentFilter);
             });
         };
 
         handleFilterChange = (data) => {
-            let newData = data;
+            let newData;
+            newData = data;
 
             this.setState({ currentFilter: {...this.state.currentFilter, ...newData}}, () => {
                 this.props.getData(this.state.currentFilter);

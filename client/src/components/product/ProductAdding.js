@@ -10,6 +10,11 @@ import SelectListGroup from "../shared/SelectListGroup";
 // import TextAreaDraft from "../shared/TextAreaDraft";
 
 class ProductAdding extends Component {
+
+    static defaultProps = {
+        errors: {}
+    };
+
     constructor(props) {
         super(props);
         this.state = {
