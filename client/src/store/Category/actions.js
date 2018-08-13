@@ -1,15 +1,17 @@
 import apiHelper from '../../helpers/apiHelper';
-import { baseURL } from "../../constans/GlobalConstans";
 import { GET_ERRORS } from "../Auth/types";
 import { deleteCategoryCreator, editCategoryCreator, getCategoriesCreator, addCategoryCreator, getCategoryCreator } from "./actionCreators";
 import { doneActionSuccess, initAction } from "../Action/actionCreators";
 import {API_CATEGORIES_URL} from "../../helpers/apiHelper";
+import {addCategoryApi, getCategoriesApi, getCategoryApi} from "../../api/categories";
 
 // Create Category
 export const addCategory = (categoryData, history) => async dispatch => {
     try {
         dispatch(initAction(addCategoryCreator().type));
-        await apiHelper.doRequest(`${baseURL}/api/categories`, 'post', categoryData);
+
+        await addCategoryApi(categoryData);
+
         dispatch(doneActionSuccess(addCategoryCreator().type));
         history.push('/categories');
     } catch(err) {
@@ -24,13 +26,8 @@ export const addCategory = (categoryData, history) => async dispatch => {
 export const getCategories = (queryParams = {}) => async dispatch => {
     try {
         dispatch(initAction(getCategoriesCreator().type));
-        const categories = await apiHelper
-            .doRequest(
-                `${API_CATEGORIES_URL}`,
-                'get',
-                {
-                    params: queryParams
-                });
+
+        const categories = await getCategoriesApi(queryParams);
 
         dispatch(getCategoriesCreator(categories.data));
         dispatch(doneActionSuccess(getCategoriesCreator().type));
@@ -46,7 +43,9 @@ export const getCategories = (queryParams = {}) => async dispatch => {
 export const getCategory = id => async dispatch => {
     try {
         dispatch(initAction(getCategoryCreator().type));
-        const category = await apiHelper.doRequest(`${API_CATEGORIES_URL}/${id}`, 'get');
+
+        const category = await getCategoryApi(id);
+
         dispatch(getCategoryCreator(category.data));
         dispatch(doneActionSuccess(initAction(getCategoryCreator().type)));
     } catch(err) {
