@@ -7,6 +7,11 @@ import TextAreaFieldGroup from "../shared/TextAreaFieldGroup";
 import {addCategory, getCategory, editCategory} from '../../store/Category/actions';
 
 class CategoryAdding extends Component {
+
+    static defaultProps = {
+        errors: {}
+    };
+
     constructor(props) {
         super(props);
         this.state = {

@@ -15,13 +15,14 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import ProtectedLayout from './components/layout/ProtectedLayout';
 import './css/App.css';
+import {TOKEN_NAME_IN_STORE} from "./constans/GlobalConstans";
 
 // Check for token
-if (localStorage.jwtToken) {
+if (localStorage[TOKEN_NAME_IN_STORE]) {
     // Set auth token header auth
-    setAuthToken(localStorage.jwtToken);
+    setAuthToken(localStorage[TOKEN_NAME_IN_STORE]);
     // Decode token and get user info and exp
-    const decoded = jwt_decode(localStorage.jwtToken);
+    const decoded = jwt_decode(localStorage[TOKEN_NAME_IN_STORE]);
     // Set user and isAuthenticated
     store.dispatch(setCurrentUser(decoded));
 

@@ -1,3 +1,6 @@
+export const TOKEN_NAME_IN_STORE = 'jwtToken';
+export const LANGUAGE_NAME = 'Language';
+
 export const TEXTFORMAT = {
     date: 'date',
     string: 'string',

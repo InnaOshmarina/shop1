@@ -50,13 +50,13 @@ class Pagination extends Component {
 
         const prevButton = this.props.page === 1 ? null :
             ( <li className="page-item "   onClick={(event) => this.handlePaginationChange(event, this.props.page - 1)}>
-                <a className="page-link" href="#" tabIndex="-1">Prev</a>
+                <a className="page-link" href="" tabIndex="-1">Prev</a>
             </li>
          );
 
         const nextButton = this.props.page === allPages ? null :(
             <li className="page-item " onClick={(event) => this.handlePaginationChange(event, this.props.page + 1)}>
-                <a className="page-link" href="#" tabIndex="-1">Next</a>
+                <a className="page-link" href="" tabIndex="-1">Next</a>
             </li>
         );
 
@@ -75,7 +75,7 @@ class Pagination extends Component {
                                                 'active': this.props.page === item
                                             })}
                                         >
-                                            <a className="page-link" href="#">{item}</a>
+                                            <a className="page-link" href="">{item}</a>
                                         </li>
                                     );
                                 })

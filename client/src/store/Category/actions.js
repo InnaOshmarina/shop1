@@ -1,17 +1,17 @@
-import axios from 'axios';
-import { GET_CATEGORY } from './types';
-import { GET_CATEGORIES } from './types';
+import apiHelper from '../../helpers/apiHelper';
 import { baseURL } from "../../constans/GlobalConstans";
 import { GET_ERRORS } from "../Auth/types";
-import { deleteCategoryCreator, editCategoryCreator, getCategoriesCreator, getCategoryCreator } from "./actionCreators";
+import { deleteCategoryCreator, editCategoryCreator, getCategoriesCreator, addCategoryCreator, getCategoryCreator } from "./actionCreators";
 import { doneActionSuccess, initAction } from "../Action/actionCreators";
+import {API_CATEGORIES_URL} from "../../helpers/apiHelper";
 
 // Create Category
 export const addCategory = (categoryData, history) => async dispatch => {
     try {
-        dispatch(initAction());
-        await axios.post(`${baseURL}/api/categories`, categoryData);
-        history.push('/categories')
+        dispatch(initAction(addCategoryCreator().type));
+        await apiHelper.doRequest(`${baseURL}/api/categories`, 'post', categoryData);
+        dispatch(doneActionSuccess(addCategoryCreator().type));
+        history.push('/categories');
     } catch(err) {
         dispatch({
             type: GET_ERRORS,
@@ -24,16 +24,20 @@ export const addCategory = (categoryData, history) => async dispatch => {
 export const getCategories = (queryParams = {}) => async dispatch => {
     try {
         dispatch(initAction(getCategoriesCreator().type));
-        const categories = await axios.get(`${baseURL}/api/categories`, {params: {...queryParams}});
+        const categories = await apiHelper
+            .doRequest(
+                `${API_CATEGORIES_URL}`,
+                'get',
+                {
+                    params: queryParams
+                });
 
         dispatch(getCategoriesCreator(categories.data));
         dispatch(doneActionSuccess(getCategoriesCreator().type));
     } catch(err) {
         dispatch({
-            // type: GET_ERRORS,
-            type: GET_CATEGORIES,
-            //payload: err.response.data
-            payload: {}
+            type: GET_ERRORS,
+            payload: err.response.data
         })
     }
 };
@@ -41,25 +45,27 @@ export const getCategories = (queryParams = {}) => async dispatch => {
 // Get category by id
 export const getCategory = id => async dispatch => {
     try {
-        const category = await axios.get(`${baseURL}/api/categories/${id}`);
-        dispatch(getCategoryCreator(category.data))
+        dispatch(initAction(getCategoryCreator().type));
+        const category = await apiHelper.doRequest(`${API_CATEGORIES_URL}/${id}`, 'get');
+        dispatch(getCategoryCreator(category.data));
+        dispatch(doneActionSuccess(initAction(getCategoryCreator().type)));
     } catch(err) {
         dispatch({
-            // type: GET_ERRORS,
-            type: GET_CATEGORY,
-            // payload: err.response.data
-            payload: {}
+            type: GET_ERRORS,
+            payload: err.response.data
         })
     }
 };
 
 // Delete Category
-export const deleteCategory = (id, history) => async dispatch => {
+export const deleteCategory = id => async dispatch => {
     if (window.confirm('Are you sure? This can NOT be undone!')) {
         try {
-            await axios.delete(`${baseURL}/api/categories/${id}`);
+            dispatch(initAction(deleteCategoryCreator().type));
+
+            await apiHelper.doRequest(`${API_CATEGORIES_URL}/${id}`, 'delete');
             dispatch(deleteCategoryCreator(id));
-            history.push('/categories');
+            dispatch(doneActionSuccess(deleteCategoryCreator().type));
         } catch(err) {
             dispatch({
                 type: GET_ERRORS,
@@ -71,16 +77,20 @@ export const deleteCategory = (id, history) => async dispatch => {
 
 // Edit Category
 export const editCategory = (id, categoryData, history) => async dispatch => {
-        try {
-            await axios.post(`${baseURL}/api/categories/${id}`, categoryData);
-            dispatch(editCategoryCreator());
-            history.push('/categories')
-        } catch(err) {
-            dispatch({
-                type: GET_ERRORS,
-                payload: err.response.data
-            })
-        }
+    try {
+        dispatch(initAction(deleteCategoryCreator().type));
+
+        await apiHelper.doRequest(`${API_CATEGORIES_URL}/${id}`, 'post', categoryData);
+
+        dispatch(editCategoryCreator(id));
+        dispatch(doneActionSuccess(deleteCategoryCreator().type));
+        history.push('/categories');
+    } catch(err) {
+        dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        })
+    }
 };
 
 

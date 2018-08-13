@@ -117,7 +117,7 @@ class ProductsList extends Component {
 }
 
 ProductsList.propTypes = {
-    getProducts: PropTypes.func.isRequired,
+    getData: PropTypes.func.isRequired,
     deleteProduct: PropTypes.func.isRequired,
     products: PropTypes.object.isRequired
 };

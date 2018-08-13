@@ -22,6 +22,8 @@ const ActionCell = (props) => {
         case SORTACTION.trashBin:
             currentIcon = "far fa-trash-alt";
             break;
+        default:
+            currentIcon = "";
     }
 
     const iconContent = (

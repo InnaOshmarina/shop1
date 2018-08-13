@@ -1,9 +1,13 @@
-import {DELETE_CATEGORY, EDIT_CATEGORY, GET_CATEGORIES, GET_CATEGORY} from "./types";
+import { ADD_CATEGORY, DELETE_CATEGORY, EDIT_CATEGORY, GET_CATEGORIES, GET_CATEGORY } from "./types";
 
 export const getCategoryCreator = (categoriesData) => ({
     type: GET_CATEGORY,
     payload: categoriesData
 
+});
+
+export const addCategoryCreator = () => ({
+    type: ADD_CATEGORY,
 });
 
 export const getCategoriesCreator = (categoriesData) => ({
