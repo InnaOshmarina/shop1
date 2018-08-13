@@ -63,27 +63,24 @@ export const deleteCategory = (id, history) => async dispatch => {
         } catch(err) {
             dispatch({
                 type: GET_ERRORS,
-                payload: {}
-                //payload: err.response.data
+                payload: err.response.data
             })
         }
     }
 };
 
 // Edit Category
-export const editCategory = (id, categoryData, history) => dispatch => {
-        axios
-            .post(`${baseURL}/api/categories/${id}`, categoryData)
-            .then(() =>
-                dispatch(editCategoryCreator())
-            )
-            .then(() => history.push('/categories'))
-            .catch(err =>
-                dispatch({
-                    type: GET_ERRORS,
-                    payload: err.response.data
-                })
-            );
+export const editCategory = (id, categoryData, history) => async dispatch => {
+        try {
+            await axios.post(`${baseURL}/api/categories/${id}`, categoryData);
+            dispatch(editCategoryCreator());
+            history.push('/categories')
+        } catch(err) {
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        }
 };
 
 

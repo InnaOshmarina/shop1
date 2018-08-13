@@ -8,7 +8,9 @@ import OrdersList from '../order/OrdersList';
 import CategoryAdding from '../category/CategoryAdding';
 import CategoryDetails from '../category/CategoryDetails';
 import ProductAdding from "../product/ProductAdding";
+import ProductDetails from "../product/ProductDetails";
 import '../../css/ProtectedLayout.css';
+
 
 const style =
     {
@@ -68,6 +70,7 @@ class ProtectedLayout extends Component {
                                 <Route exact path="/products" component={ProductsList} />
                                 <Route exact path="/products/add" component={ProductAdding} />
                                 <Route exact path="/products/edit/:id" component={ProductAdding} />
+                                <Route exact path="/products/detail/:id" component={ProductDetails} />
                                 <Route exact path="/orders" component={OrdersList} />
                             </div>
                         </div>

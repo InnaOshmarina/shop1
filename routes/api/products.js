@@ -37,9 +37,10 @@ router.get('/', async (request, response) => {
 // @description    Get product by id
 // @access         Public
 router.get('/:id', (req, res) => {
-    Product.findById(req.params.id)
-        .then(product => res.json(product))
-        .catch(err => res.status(404).json({noProductFound: 'No product found with that ID'}));
+   Product.findById(req.params.id)
+       .populate('category')
+       .then(product => res.json(product))
+       .catch(err => res.status(404).json({noProductFound: 'No product found with that ID'}));
 });
 
 // @route          POST api/products

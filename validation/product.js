@@ -18,7 +18,7 @@ module.exports = function validateProductInput(data) {
         errors.category = 'Category field is required';
     }
 
-    if(!Validator.isLength(data.description, { min: 10, max: 500 })) {
+    if(!Validator.isLength(data.description, { min: 10 })) {
         errors.description = 'Description of product must be 10 characters or more';
     }
 

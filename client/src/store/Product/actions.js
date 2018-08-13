@@ -54,21 +54,17 @@ export const getProduct = id => async dispatch => {
 };
 
 // Delete Product
-export const deleteProduct = id => dispatch => {
+export const deleteProduct = id => async dispatch => {
     if (window.confirm('Are you sure? This can NOT be undone!')) {
-        axios
-            .delete(`${baseURL}/api/products/${id}`)
-            .then(() =>
-                dispatch(deleteProductCreator(id))
-            )
-            .catch(err => {
+        try {
+            await axios.delete(`${baseURL}/api/products/${id}`);
+            dispatch(deleteProductCreator(id))
+        } catch(err) {
                 dispatch({
                     type: GET_ERRORS,
                     payload: err.response.data
-                    //payload: {}
                 })
-                }
-            );
+        }
     }
 };
 

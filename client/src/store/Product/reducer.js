@@ -19,6 +19,7 @@ export default function(state = initialState, action) {
         case GET_PRODUCT:
             return {
                 ...state,
+                // product: action.payload
                 product: action.payload
             };
         case GET_PRODUCTS:
@@ -29,7 +30,10 @@ export default function(state = initialState, action) {
         case DELETE_PRODUCT:
             return {
                 ...state,
-                products: state.products.filter(product => product._id !== action.payload)
+                products: {
+                    ...state.products,
+                    docs: state.products.docs.filter(product => product._id !== action.payload)
+                }
             };
         default:
             return state;

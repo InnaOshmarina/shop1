@@ -68,7 +68,7 @@ class ProductsList extends Component {
                 options: {
                     icon: SORTACTION.eye,
                     type: SORTACTION.link,
-                    linkTemplate: ''
+                    linkTemplate: 'products/detail/:_id'
                 }
             },
             {
