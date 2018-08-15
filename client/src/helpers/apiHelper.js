@@ -4,6 +4,7 @@ import { getBrowserLang } from './GlobalHelper';
 
 export const BASE_API_URL = `http://localhost:5000/api`;
 export const API_CATEGORIES_URL = `${BASE_API_URL}/categories`;
+export const API_PRODUCTS_URL = `${BASE_API_URL}/products`;
 
 const axiosClient = axios.create({
     baseURL: BASE_API_URL

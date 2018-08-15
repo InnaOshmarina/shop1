@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../store/Auth/actions';
 
@@ -12,6 +13,18 @@ class Navbar extends Component {
 
   render() {
       const { isAuthenticated, user } = this.props.auth;
+
+      let layout = classNames({
+          'container-fluid': isAuthenticated,
+          'container': !isAuthenticated
+      });
+
+      let productCatalog = (
+          <Link className="nav-link" to="/product-catalog">
+              {' '}
+              Product catalog
+          </Link>
+      );
 
       const authLinks = (
           <ul className="navbar-nav ml-auto">
@@ -51,7 +64,7 @@ class Navbar extends Component {
 
     return (
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
-        <div className="container">
+        <div className={layout}>
           <Link className="navbar-brand" to="/">
             Shop1
           </Link>
@@ -67,13 +80,10 @@ class Navbar extends Component {
           <div className="collapse navbar-collapse" id="mobile-nav">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
-                <Link className="nav-link" to="/categories">
-                  {' '}
-                    Product catalog
-                </Link>
+                  { !isAuthenticated ? productCatalog : null }
               </li>
             </ul>
-            {isAuthenticated ? authLinks : guestLinks}
+            { isAuthenticated ? authLinks : guestLinks }
           </div>
         </div>
       </nav>

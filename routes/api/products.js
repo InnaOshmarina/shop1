@@ -80,13 +80,14 @@ router.post('/', passport.authenticate('jwt', {session: false}), (req, res) => {
 // @description    Edit product
 // @access         Private
 router.post('/:id', passport.authenticate('jwt', {session: false}), (req, res) => {
-    const {errors, isValid} = validateProductInput(req.body);
+
+    //const {errors, isValid} = validateProductInput(req.body);
 
     // Check Validation
-    if (!isValid) {
+    //if (!isValid) {
         // Return any errors with 400 status
-        return res.status(400).json(errors);
-    }
+        //return res.status(400).json(errors);
+    //}
 
     // Get fields
     const productFields = {};

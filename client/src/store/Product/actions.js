@@ -1,38 +1,39 @@
-import axios from 'axios';
-import {GET_PRODUCT, GET_PRODUCTS} from './types';
-import { baseURL} from "../../constans/GlobalConstans";
+import apiHelper, {API_PRODUCTS_URL} from "../../helpers/apiHelper";
 import {GET_ERRORS} from "../Auth/types";
-import { deleteProductCreator, editProductCreator, getProductsCreator, getProductCreator } from "./actionCreators";
+import { deleteProductCreator, editProductCreator, getProductsCreator, addProductCreator, getProductCreator } from "./actionCreators";
 import { doneActionSuccess, initAction } from "../Action/actionCreators";
+import {addProductApi, getProductsApi, getProductApi, deleteProductApi, editProductApi} from "../../api/products";
+
 
 // Create Product
-export const addProduct = (productData, history) => dispatch => {
-    dispatch(initAction());
-    axios
-        .post(`${baseURL}/api/products`, productData)
-        .then(() => history.push('/products'))
-        .catch(err =>
-            dispatch({
-                type: GET_ERRORS,
-                payload: err.response.data
-            })
-        );
+export const addProduct = (productData, history) => async dispatch => {
+    try {
+        dispatch(initAction(addProductCreator().type));
+
+        await addProductApi(productData);
+
+        dispatch(doneActionSuccess(addProductCreator().type));
+        history.push('/products');
+    } catch(err) {
+        dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        })
+    }
 };
 
 // Get all products
 export const getProducts = (queryParams = {}) => async dispatch => {
     try {
         dispatch(initAction(getProductsCreator().type));
-        const products = await axios.get(`${baseURL}/api/products`, {params: {...queryParams}});
+        const products = await getProductsApi(queryParams);
 
         dispatch(getProductsCreator(products.data));
         dispatch(doneActionSuccess(getProductsCreator().type));
     } catch(err) {
         dispatch({
-            // type: GET_ERRORS,
-            type: GET_PRODUCTS,
-            //payload: err.response.data
-            payload: {}
+            type: GET_ERRORS,
+            payload: err.response.data
         })
     }
 };
@@ -40,15 +41,17 @@ export const getProducts = (queryParams = {}) => async dispatch => {
 // Get product by id
 export const getProduct = id => async dispatch => {
     try {
-        const product = await axios.get(`${baseURL}/api/products/${id}`);
-        dispatch(getProductCreator(product.data))
+        dispatch(initAction(getProductCreator().type));
+
+        const product = await getProductApi(id);
+
+        dispatch(getProductCreator(product.data));
+        dispatch(doneActionSuccess(initAction(getProductCreator().type)));
 
     } catch(err) {
         dispatch({
-            //type: GET_ERRORS,
-            type: GET_PRODUCT,
-            // payload: err.response.data
-            payload: {}
+            type: GET_ERRORS,
+            payload: err.response.data
         })
     }
 };
@@ -57,30 +60,36 @@ export const getProduct = id => async dispatch => {
 export const deleteProduct = id => async dispatch => {
     if (window.confirm('Are you sure? This can NOT be undone!')) {
         try {
-            await axios.delete(`${baseURL}/api/products/${id}`);
-            dispatch(deleteProductCreator(id))
+            dispatch(initAction(deleteProductCreator().type));
+
+            await deleteProductApi(id);
+
+            dispatch(deleteProductCreator(id));
+            dispatch(doneActionSuccess(deleteProductCreator().type));
         } catch(err) {
-                dispatch({
-                    type: GET_ERRORS,
-                    payload: err.response.data
-                })
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
         }
     }
 };
 
 // Edit Product
-export const editProduct = (id, productData, history) => dispatch => {
-    axios
-        .post(`${baseURL}/api/products/${id}`, productData)
-        .then(() =>
-            dispatch(editProductCreator())
-        )
-        .then(() => history.push('/products'))
-        .catch(err =>
-            dispatch({
-                type: GET_ERRORS,
-                payload: err.response.data
-            })
-        );
+export const editProduct = (id, productData, history) => async dispatch => {
+    try {
+        dispatch(initAction(editProductCreator().type));
+
+        await editProductApi(id, productData);
+
+        dispatch(editProductCreator(id));
+        dispatch(doneActionSuccess(editProductCreator().type));
+        history.push('/products');
+    } catch(err) {
+        dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        })
+    }
 };
 

@@ -1,9 +1,7 @@
-import apiHelper from '../../helpers/apiHelper';
 import { GET_ERRORS } from "../Auth/types";
 import { deleteCategoryCreator, editCategoryCreator, getCategoriesCreator, addCategoryCreator, getCategoryCreator } from "./actionCreators";
 import { doneActionSuccess, initAction } from "../Action/actionCreators";
-import {API_CATEGORIES_URL} from "../../helpers/apiHelper";
-import {addCategoryApi, getCategoriesApi, getCategoryApi} from "../../api/categories";
+import {addCategoryApi, getCategoriesApi, getCategoryApi, deleteCategoryApi, editCategoryApi} from "../../api/categories";
 
 // Create Category
 export const addCategory = (categoryData, history) => async dispatch => {
@@ -62,7 +60,7 @@ export const deleteCategory = id => async dispatch => {
         try {
             dispatch(initAction(deleteCategoryCreator().type));
 
-            await apiHelper.doRequest(`${API_CATEGORIES_URL}/${id}`, 'delete');
+            await deleteCategoryApi(id);
             dispatch(deleteCategoryCreator(id));
             dispatch(doneActionSuccess(deleteCategoryCreator().type));
         } catch(err) {
@@ -77,12 +75,12 @@ export const deleteCategory = id => async dispatch => {
 // Edit Category
 export const editCategory = (id, categoryData, history) => async dispatch => {
     try {
-        dispatch(initAction(deleteCategoryCreator().type));
+        dispatch(initAction(editCategoryCreator().type));
 
-        await apiHelper.doRequest(`${API_CATEGORIES_URL}/${id}`, 'post', categoryData);
+        await editCategoryApi(id, categoryData);
 
         dispatch(editCategoryCreator(id));
-        dispatch(doneActionSuccess(deleteCategoryCreator().type));
+        dispatch(doneActionSuccess(editCategoryCreator().type));
         history.push('/categories');
     } catch(err) {
         dispatch({

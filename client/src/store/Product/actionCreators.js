@@ -1,9 +1,13 @@
-import {DELETE_PRODUCT, EDIT_PRODUCT, GET_PRODUCTS, GET_PRODUCT} from "./types";
+import { ADD_PRODUCT, DELETE_PRODUCT, EDIT_PRODUCT, GET_PRODUCTS, GET_PRODUCT} from "./types";
 
 export const getProductCreator = (productData) => ({
     type: GET_PRODUCT,
     payload: productData
 
+});
+
+export const addProductCreator = () => ({
+    type: ADD_PRODUCT,
 });
 
 export const getProductsCreator = (productsData) => ({

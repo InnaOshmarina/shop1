@@ -33,11 +33,11 @@ export const loginUser = userData => dispatch => {
             // Set current user
             dispatch(setCurrentUser(decoded));
         })
-        .catch(err =>
-            dispatch({
-                type: GET_ERRORS,
-                payload: err.response.data
-            }));
+        // .catch(err =>
+        //     dispatch({
+        //         type: GET_ERRORS,
+        //         payload: err.response.data
+        //     }));
 };
 
 // Set logged in user (Устанавливаем вошедшего пользователя)
