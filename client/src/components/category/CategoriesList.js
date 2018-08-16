@@ -1,19 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import compose from "redux/src/compose";
 
-import { getCategories, deleteCategory} from '../../store/Category/actions';
 import DataTable from '../shared/DataTable';
 import {SORTACTION, TEXTFORMAT} from "../../constans/GlobalConstans";
-import Filter from "../../decorators/Filter";
+
 import Search from "../shared/Search";
-import {
-    getCategoriesSelector,
-    getCategoriesLimitSelector,
-    getCategoriesOffsetSelector, getCategoriesTotalSelector
-} from "../../store/Category/selectors";
 
 
 class CategoriesList extends Component {
@@ -98,21 +90,4 @@ CategoriesList.propTypes = {
     categories: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({
-    categories: getCategoriesSelector(state),
-    limit: getCategoriesLimitSelector(state),
-    offset: getCategoriesOffsetSelector(state),
-    total: getCategoriesTotalSelector(state)
-});
-
-const mapDispatchToProps = {
-    getData: getCategories,
-    deleteCategory
-};
-
-const defaultFilter = {};
-
-export default compose(
-    connect(mapStateToProps, mapDispatchToProps),
-    (component) => Filter(component, defaultFilter)
-)(CategoriesList);
+export default CategoriesList;
