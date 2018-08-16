@@ -19,11 +19,13 @@ class Navbar extends Component {
           'container': !isAuthenticated
       });
 
-      let productCatalog = (
-          <Link className="nav-link" to="/product-catalog">
-              {' '}
-              Product catalog
-          </Link>
+      const productCatalog = (
+          <li className="nav-item">
+              <Link className="nav-link" to="/product-catalog">
+                  {' '}
+                  Product catalog
+              </Link>
+          </li>
       );
 
       const authLinks = (
@@ -79,9 +81,7 @@ class Navbar extends Component {
 
           <div className="collapse navbar-collapse" id="mobile-nav">
             <ul className="navbar-nav mr-auto">
-              <li className="nav-item">
-                  { !isAuthenticated ? productCatalog : null }
-              </li>
+                { !isAuthenticated ? productCatalog : null }
             </ul>
             { isAuthenticated ? authLinks : guestLinks }
           </div>

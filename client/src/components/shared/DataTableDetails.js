@@ -4,7 +4,6 @@ import lodash from 'lodash';
 
 import {TextFormat} from "../../helpers/TableHelper";
 
-
 class DataTableDetails extends Component {
 
     render() {

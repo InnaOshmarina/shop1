@@ -15,13 +15,14 @@ div.caption-category {
 .list-group a:hover {
     color: #000;
     background-color: rgb(228, 236, 248);
+    cursor: pointer;
 }
 
-/*.list-group a.active {*/
-    /*color: #000;*/
-    /*background-color: rgb(203, 221, 212);*/
-    /*border-bottom-color: rgb(203, 221, 212);*/
-/*}*/
+.list-group a.active {
+    color: #000;
+    background-color: rgb(203, 221, 212);
+    border-bottom-color: rgb(203, 221, 212);
+}
 a.list-group-item {
     border-width: 0 0 0.062125rem 0;
 }

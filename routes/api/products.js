@@ -23,6 +23,10 @@ router.get('/', async (request, response) => {
             populate: 'category'
         };
 
+        if(request.query.category) {
+            customOptions.category = request.query.category;
+        }
+
         const products = await queryHelper('Product', request, customOptions);
         response.status(200).json(products);
     } catch (err) {

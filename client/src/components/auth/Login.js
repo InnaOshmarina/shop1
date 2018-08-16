@@ -33,6 +33,12 @@ class Login extends Component {
         }
     }
 
+    // componentWillReceiveProps(nextProps) {
+    //     if (nextProps.errors) {
+    //         this.setState({errors: nextProps.errors});
+    //     }
+    // }
+
     onChange(e) {
         this.setState({ [e.target.name]: e.target.value })
     }
@@ -88,7 +94,7 @@ class Login extends Component {
 Login.propTypes = {
     loginUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired
+    // errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({

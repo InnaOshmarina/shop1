@@ -1,74 +1,82 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { BrowserRouter as Router, Route, } from 'react-router-dom';
-import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
-import {
-    getCategoriesSelector
-} from "../../store/Category/selectors";
-
-import '../../css/ProductCatalog.css';
-import {getCategories} from "../../store/Category/actions";
+import { getCategoriesSelector } from "../../store/Category/selectors";
+import { getCategories } from "../../store/Category/actions";
+import {getProductsSelector} from "../../store/Product/selectors";
+import { getProducts } from "../../store/Product/actions";
 import SpecificProducts from "../product/SpecificProducts";
+import '../../css/ProductCatalog.css';
 
-const style1 = {
-    color: '#000',
-    backgroundColor: 'rgb(203, 221, 212)',
-    borderBottomColor: 'rgb(203, 221, 212)'
-};
+
+// const style = {
+//     color: '#000',
+//     backgroundColor: 'rgb(203, 221, 212)',
+//     borderBottomColor: 'rgb(203, 221, 212)'
+// };
 
 class ProductCatalog extends Component {
 
-    render() {
-        const { categories } = this.props;
+    componentDidMount() {
+        this.props.getCategories();
+    }
 
-        let ListCategories = (
-            categories.docs.map((category, index) => {
-                return (
-                    <div className="list-group" key={index}>
-                        <NavLink
-                                 to="/specific-products"
-                                 activeStyle={style1}
-                                 className="list-group-item list-group-item-action">
-                            {category.title}
-                        </NavLink>
-                    </div>
-                )
-            })
+    handleClick = (event, id) => {
+        event.preventDefault();
+        this.props.getProducts({category: id});
+        // this.props.getProducts();
+        console.log(id);
+    };
+
+    render() {
+
+        const { categories, products } = this.props;
+
+        let listCategories = (
+            categories.docs.map((category, index) => (
+                <a
+                    key={index}
+                    // href={`/${category._id}`}
+                    onClick={(event) => this.handleClick(event, category._id)}
+                    className="list-group-item list-group-item-action">
+                    {category.title}
+                </a>
+            ))
         );
+
         return (
-            <Router>
-                <div className="product-catalog">
-                    <div className="container-fluid">
-                        <div className="row">
-                            <div className="col-md-3">
-                                <div className="caption-category">Select the desired product category:</div>
-                                {ListCategories}
-                            </div>
-                            <div className="col-md-9">
-                                <Route exact path="/specific-products" component={SpecificProducts} />
-                            </div>
-                        </div>
+            <div className="row">
+                <div className="col-md-3">
+                    <div className="caption-category">Select the desired product category:</div>
+                    <div className="list-group">
+                        {listCategories}
                     </div>
                 </div>
-            </Router>
+                <div className="col-md-9">
+                    <SpecificProducts products={products}/>
+                </div>
+            </div>
+
         );
     }
 }
 
 ProductCatalog.propTypes = {
-    getData: PropTypes.func.isRequired,
+    getCategories: PropTypes.func.isRequired,
+    getProducts: PropTypes.func.isRequired,
     categories: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-    categories: getCategoriesSelector(state)
+    categories: getCategoriesSelector(state),
+    products: getProductsSelector(state)
 });
 
 const mapDispatchToProps = {
-    getData: getCategories
+    getCategories,
+    getProducts
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductCatalog);

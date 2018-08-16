@@ -32,7 +32,7 @@ export const getCategories = (queryParams = {}) => async dispatch => {
     } catch(err) {
         dispatch({
             type: GET_ERRORS,
-            payload: err.response.data
+            payload: {}
         })
     }
 };

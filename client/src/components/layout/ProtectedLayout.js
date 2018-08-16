@@ -10,8 +10,6 @@ import CategoryDetails from '../category/CategoryDetails';
 import ProductAdding from "../product/ProductAdding";
 import ProductDetails from "../product/ProductDetails";
 import '../../css/ProtectedLayout.css';
-import ProductCatalog from "./ProductCatalog";
-
 
 const style =
     {
@@ -34,19 +32,17 @@ const navigations = [
         to: '/products'
     },
     {
-        title: 'Product catalog',
-        to: '/product-catalog'
-    },
-    {
         title: 'Orders',
         to: '/orders'
     }
 ];
 
 class ProtectedLayout extends Component {
-    render() {
-        return (
 
+    render() {
+        // const condition = (this.props.match.path === '/product-catalog');
+
+        return (
             <Router>
                 <div className="dashboard">
                     <div className="container-fluid content">
@@ -60,7 +56,7 @@ class ProtectedLayout extends Component {
                                                 to={navigation.to}
                                                 activeStyle={style}
                                                 className="list-group-item list-group-item-action">
-                                                    {navigation.title}
+                                                {navigation.title}
                                             </NavLink>
                                         ))
                                     }
@@ -77,7 +73,6 @@ class ProtectedLayout extends Component {
                                 <Route exact path="/products/edit/:id" component={ProductAdding} />
                                 <Route exact path="/products/detail/:id" component={ProductDetails} />
                                 <Route exact path="/orders" component={OrdersList} />
-                                <Route exact path="/product-catalog" component={ProductCatalog} />
                             </div>
                         </div>
                     </div>
