@@ -19,15 +19,18 @@ import '../../css/ProductCatalog.css';
 
 class ProductCatalog extends Component {
 
+    state = {
+        active: ''
+    };
+
     componentDidMount() {
         this.props.getCategories();
     }
 
     handleClick = (event, id) => {
         event.preventDefault();
+        this.setState({active: id});
         this.props.getProducts({category: id});
-        // this.props.getProducts();
-        console.log(id);
     };
 
     render() {
@@ -35,15 +38,22 @@ class ProductCatalog extends Component {
         const { categories, products } = this.props;
 
         let listCategories = (
-            categories.docs.map((category, index) => (
-                <a
-                    key={index}
-                    // href={`/${category._id}`}
-                    onClick={(event) => this.handleClick(event, category._id)}
-                    className="list-group-item list-group-item-action">
-                    {category.title}
-                </a>
-            ))
+            categories.docs.map((category, index) => {
+                let active = '';
+
+                if(category._id === this.state.active) {
+                    active = 'active-category';
+                }
+
+                return (
+                    <a
+                        key={index}
+                        // href={`/${category._id}`}
+                        onClick={(event) => this.handleClick(event, category._id)}
+                        className={`list-group-item list-group-item-action ${active}`}>
+                        {category.title}
+                    </a>
+            )})
         );
 
         return (

@@ -18,7 +18,7 @@ div.caption-category {
     cursor: pointer;
 }
 
-.list-group a.active {
+.list-group a.active-category {
     color: #000;
     background-color: rgb(203, 221, 212);
     border-bottom-color: rgb(203, 221, 212);
