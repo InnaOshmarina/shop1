@@ -4,12 +4,11 @@ import { connect } from 'react-redux';
 
 import { getCategoriesSelector } from "../../store/Category/selectors";
 import { getCategories } from "../../store/Category/actions";
-import {getProductsSelector} from "../../store/Product/selectors";
 import { getProducts } from "../../store/Product/actions";
 import SpecificProducts from "../product/SpecificProducts";
+
 import '../../css/ProductCatalog.css';
-import compose from "redux/src/compose";
-import Filter from "../../decorators/Filter";
+
 
 class ProductCatalog extends Component {
 
@@ -24,6 +23,7 @@ class ProductCatalog extends Component {
     handleClick = (event, id) => {
         event.preventDefault();
         this.setState({active: id});
+
         this.props.getProducts({category: id});
         console.log(id);
     };
