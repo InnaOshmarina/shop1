@@ -3,8 +3,16 @@
     background-color: lightgrey;
 }
 
+.form-inline {
+    padding-left: 1rem;
+}
+
+i.fa-search {
+    font-size: 1rem;
+}
+
 button.search {
-    /*background-color: rgb(203, 221, 212);*/
+    background-color: lightgreen;
     cursor: pointer;
     color: #000;
 }
@@ -23,12 +31,3 @@ button.search {
     /*border: 0.0625rem solid #000;*/
 /*}*/
 
-/*svg.fa-search {*/
-    /*color: rgba(112, 109, 109, 0.979);*/
-    /*font-weight: 100;*/
-/*}*/
-
-
-.form-inline {
-    padding-left: 1rem;
-}

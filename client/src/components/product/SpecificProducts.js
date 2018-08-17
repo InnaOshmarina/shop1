@@ -1,24 +1,23 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from "react-redux";
+import compose from "redux/src/compose";
+
+import {getProducts} from "../../store/Product/actions";
+import {getProductsSelector} from "../../store/Product/selectors";
+
+import Search from "../shared/Search";
+import Filter from "../../decorators/Filter";
+
 import '../../css/SpecificProducts.css';
 
 
 class SpecificProducts extends Component {
-    // componentDidMount() {
-    //     console.log('Hey');
-    // }
-    // componentDidMount() {
-    //     this.props.getProducts(this.props.match.params.id);
-        // if(this.props.match.params.id) {
-        //     this.props.getCategory(this.props.match.params.id);
-        // }
-    //}
 
-    // componentWillReceiveProps(nextProps) {
-    //     if(nextProps.product.product && this.props.match.params.id) {
-    //         this.setState(nextProps.product.product)
-    //     }
-    // }
+    componentDidMount() {
+        console.log('Hey!!!!!!!!!!!!!');
+    }
+
     render() {
         const { products } = this.props;
 
@@ -45,6 +44,7 @@ class SpecificProducts extends Component {
         );
         return (
             <div className="container">
+                <Search handleFilterChange={this.props.handleFilterChange} />
                 {content}
             </div>
         );
@@ -52,7 +52,20 @@ class SpecificProducts extends Component {
 }
 
 SpecificProducts.propTypes = {
+    getData: PropTypes.func.isRequired,
     products: PropTypes.object.isRequired
 };
+const mapStateToProps = state => ({
+    products: getProductsSelector(state),
 
-export default SpecificProducts;
+});
+const mapDispatchToProps = {
+    getData: getProducts
+};
+
+const defaultFilter = {};
+
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    (component) => Filter(component, defaultFilter)
+)(SpecificProducts);

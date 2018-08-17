@@ -42,7 +42,7 @@ class Search extends Component {
                         onChange={this.onChange}
                     />
 
-                    <button className="search btn btn-secondary" type="submit" id="search">
+                    <button className="search btn btn-success" type="submit" id="search">
                         Search
                     </button>
                 </form>

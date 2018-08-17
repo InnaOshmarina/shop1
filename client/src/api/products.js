@@ -1,11 +1,7 @@
 import apiHelper, {API_PRODUCTS_URL} from "../helpers/apiHelper";
 
 export const getProductsApi = async (queryParams) => {
-    return await apiHelper
-        .doRequest(`${API_PRODUCTS_URL}`, 'get',
-            {
-                params: queryParams
-            });
+    return await apiHelper.doRequest(`${API_PRODUCTS_URL}`, 'get', { params: queryParams });
 };
 
 export const addProductApi = async (productData) => {

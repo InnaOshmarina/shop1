@@ -34,6 +34,7 @@ export const getProducts = (queryParams = {}) => async dispatch => {
         dispatch({
             type: GET_ERRORS,
             payload: err.response.data
+            // payload: {}
         })
     }
 };

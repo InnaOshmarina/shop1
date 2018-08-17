@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
 
 import { getCategoriesSelector } from "../../store/Category/selectors";
 import { getCategories } from "../../store/Category/actions";
@@ -9,13 +8,8 @@ import {getProductsSelector} from "../../store/Product/selectors";
 import { getProducts } from "../../store/Product/actions";
 import SpecificProducts from "../product/SpecificProducts";
 import '../../css/ProductCatalog.css';
-
-
-// const style = {
-//     color: '#000',
-//     backgroundColor: 'rgb(203, 221, 212)',
-//     borderBottomColor: 'rgb(203, 221, 212)'
-// };
+import compose from "redux/src/compose";
+import Filter from "../../decorators/Filter";
 
 class ProductCatalog extends Component {
 
@@ -26,13 +20,12 @@ class ProductCatalog extends Component {
     handleClick = (event, id) => {
         event.preventDefault();
         this.props.getProducts({category: id});
-        // this.props.getProducts();
         console.log(id);
     };
 
     render() {
 
-        const { categories, products } = this.props;
+        const { categories } = this.props;
 
         let listCategories = (
             categories.docs.map((category, index) => (
@@ -55,7 +48,7 @@ class ProductCatalog extends Component {
                     </div>
                 </div>
                 <div className="col-md-9">
-                    <SpecificProducts products={products}/>
+                    <SpecificProducts />
                 </div>
             </div>
 
@@ -70,8 +63,7 @@ ProductCatalog.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    categories: getCategoriesSelector(state),
-    products: getProductsSelector(state)
+    categories: getCategoriesSelector(state)
 });
 
 const mapDispatchToProps = {
@@ -80,3 +72,4 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductCatalog);
+
