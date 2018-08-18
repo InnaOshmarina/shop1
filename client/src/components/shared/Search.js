@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import '../../css/Search.css';
+import NavLink from "react-router-dom/es/NavLink";
 
 
 class Search extends Component {
@@ -42,9 +43,11 @@ class Search extends Component {
                         onChange={this.onChange}
                     />
 
-                    <button className="search btn btn-success" type="submit" id="search">
+                    {/*<NavLink>*/}
+                        <button className="search btn btn-success" type="submit" id="search">
                         Search
                     </button>
+                    {/*</NavLink>*/}
                 </form>
             </div>
         );

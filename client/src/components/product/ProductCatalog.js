@@ -1,11 +1,17 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import compose from "redux/src/compose";
 
-import { getCategoriesSelector } from "../../store/Category/selectors";
 import { getCategories } from "../../store/Category/actions";
+import { getCategoriesSelector } from "../../store/Category/selectors";
+
 import { getProducts } from "../../store/Product/actions";
-import SpecificProducts from "../product/SpecificProducts";
+import {getProductsSelector} from "../../store/Product/selectors";
+
+import Search from "../shared/Search";
+import Filter from "../../decorators/Filter";
+import SpecificProducts from "./SpecificProducts";
 
 import '../../css/ProductCatalog.css';
 
@@ -24,13 +30,13 @@ class ProductCatalog extends Component {
         event.preventDefault();
         this.setState({active: id});
 
-        this.props.getProducts({category: id});
+        this.props.getData({category: id});
         console.log(id);
     };
 
     render() {
 
-        const { categories } = this.props;
+        const { categories, products } = this.props;
 
         let listCategories = (
             categories.docs.map((category, index) => {
@@ -39,7 +45,6 @@ class ProductCatalog extends Component {
                 if(category._id === this.state.active) {
                     active = 'active-category';
                 }
-
                 return (
                     <a
                         key={index}
@@ -48,7 +53,8 @@ class ProductCatalog extends Component {
                         className={`list-group-item list-group-item-action ${active}`}>
                         {category.title}
                     </a>
-            )})
+                )
+            })
         );
 
         return (
@@ -60,27 +66,33 @@ class ProductCatalog extends Component {
                     </div>
                 </div>
                 <div className="col-md-9">
-                    <SpecificProducts />
+                    <Search handleFilterChange={this.props.handleFilterChange} />
+                    <SpecificProducts products={products} />
                 </div>
             </div>
-
         );
     }
 }
 
 ProductCatalog.propTypes = {
     getCategories: PropTypes.func.isRequired,
-    getProducts: PropTypes.func.isRequired,
+    getData: PropTypes.func.isRequired,
     categories: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-    categories: getCategoriesSelector(state)
+    categories: getCategoriesSelector(state),
+    products: getProductsSelector(state)
 });
 
 const mapDispatchToProps = {
     getCategories,
-    getProducts
+    getData: getProducts
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductCatalog);
+const defaultFilter = {};
+
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    (component) => Filter(component, defaultFilter)
+)(ProductCatalog);

@@ -1,20 +1,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import compose from "redux/src/compose";
 
-import { getProducts, deleteProduct } from '../../store/Product/actions';
 import DataTable from '../shared/DataTable';
 import {SORTACTION, TEXTFORMAT} from "../../constans/GlobalConstans";
-import Filter from "../../decorators/Filter";
 import Search from "../shared/Search";
-import {
-    getProductsSelector,
-    getProductsLimitSelector,
-    getProductsOffsetSelector,
-    getProductsTotalSelector
-} from "../../store/Product/selectors";
 
 
 class ProductsList extends Component {
@@ -122,21 +112,4 @@ ProductsList.propTypes = {
     products: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({
-    products: getProductsSelector(state),
-    limit: getProductsLimitSelector(state),
-    offset: getProductsOffsetSelector(state),
-    total: getProductsTotalSelector(state),
-});
-
-const mapDispatchToProps = {
-    getData: getProducts,
-    deleteProduct
-};
-
-const defaultFilter = {};
-
-export default compose(
-    connect(mapStateToProps, mapDispatchToProps),
-    (component) => Filter(component, defaultFilter)
-)(ProductsList);
+export default ProductsList;

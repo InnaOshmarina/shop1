@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import Dashboard from "../dashboard/Dashboard";
 import CategoriesList from '../../containers/category/CategoryList';
-import ProductsList from '../product/ProductsList';
+import ProductsList from '../../containers/product/ProductList';
 import OrdersList from '../order/OrdersList';
 import CategoryAdding from '../category/CategoryAdding';
 import CategoryDetails from '../category/CategoryDetails';

@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 import DataTable from '../shared/DataTable';
 import {SORTACTION, TEXTFORMAT} from "../../constans/GlobalConstans";
-
 import Search from "../shared/Search";
 
 

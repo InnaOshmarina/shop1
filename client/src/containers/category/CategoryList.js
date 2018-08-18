@@ -2,7 +2,8 @@ import {deleteCategory, getCategories} from "../../store/Category/actions";
 import {
     getCategoriesLimitSelector,
     getCategoriesOffsetSelector,
-    getCategoriesSelector, getCategoriesTotalSelector
+    getCategoriesSelector,
+    getCategoriesTotalSelector
 } from "../../store/Category/selectors";
 import Filter from "../../decorators/Filter";
 import {connect} from "react-redux";

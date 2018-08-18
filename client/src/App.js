@@ -16,7 +16,7 @@ import Login from './components/auth/Login';
 import ProtectedLayout from './components/layout/ProtectedLayout';
 import './css/App.css';
 import {TOKEN_NAME_IN_STORE} from "./constans/GlobalConstans";
-import ProductCatalog from "./components/layout/ProductCatalog";
+import ProductCatalog from "./components/product/ProductCatalog";
 
 // Check for token
 if (localStorage[TOKEN_NAME_IN_STORE]) {
@@ -54,7 +54,7 @@ class App extends Component {
                     </Switch>
                   </div>
                     <Switch>
-                        <PrivateRoute path="/dashboard" component={ProtectedLayout} />
+                        <PrivateRoute path="/" component={ProtectedLayout} />
                     </Switch>
                   <Footer />
                 </div>
