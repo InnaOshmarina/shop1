@@ -19,6 +19,7 @@ import Filter from "../../decorators/Filter";
 import SpecificProducts from "./SpecificProducts";
 import '../../css/ProductCatalog.css';
 import Pagination from "../shared/Pagination";
+import NotFound from "../shared/NotFound";
 
 class ProductCatalog extends Component {
 
@@ -73,6 +74,7 @@ class ProductCatalog extends Component {
                 <div className="col-md-9">
                     <Search handleFilterChange={handleFilterChange} />
                     <SpecificProducts products={products} />
+                    <NotFound products={products} />
                     <Pagination
                         total={total}
                         limit={limit}

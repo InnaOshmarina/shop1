@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import '../../css/Search.css';
-import NavLink from "react-router-dom/es/NavLink";
 
 
 class Search extends Component {
