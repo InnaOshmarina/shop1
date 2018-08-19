@@ -43,6 +43,8 @@ class ProductCatalog extends Component {
 
         const { categories, products, total, limit, currentFilter, handleFilterChange } = this.props;
 
+        const message = 'Products in this category will be available soon.';
+
         let listCategories = (
             categories.docs.map((category, index) => {
                 let active = '';
@@ -74,7 +76,7 @@ class ProductCatalog extends Component {
                 <div className="col-md-9">
                     <Search handleFilterChange={handleFilterChange} />
                     <SpecificProducts products={products} />
-                    <NotFound products={products} />
+                    <NotFound data={products.docs} message={message}/>
                     <Pagination
                         total={total}
                         limit={limit}
