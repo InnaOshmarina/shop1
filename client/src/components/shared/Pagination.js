@@ -43,7 +43,12 @@ class Pagination extends Component {
 
     render() {
 
-        const { total, limit } = this.props;
+        const { total, limit, paginateChange } = this.props;
+
+        if(limit === undefined || total === undefined || paginateChange === undefined) {
+            return null;
+        }
+
         const allPages = Math.ceil(total/limit);
 
         const listPages = Pagination.getRangeArray(this.props.page, allPages);

@@ -24,18 +24,6 @@ class DataTable extends Component {
         } = this.props;
 
         let tableContent;
-        let pagination = null;
-
-        if (limit && total && handleFilterChange){
-            pagination = (
-                <Pagination
-                    total={total}
-                    limit={limit}
-                    page={currentFilter.page}
-                    paginateChange={handleFilterChange}
-                />
-            );
-        }
 
         tableContent = (
             <div className="dataTable">
@@ -76,7 +64,12 @@ class DataTable extends Component {
                         }
                     </tbody>
                 </table>
-                {pagination}
+                <Pagination
+                    total={total}
+                    limit={limit}
+                    page={currentFilter.page}
+                    paginateChange={handleFilterChange}
+                />
             </div>
         );
 
