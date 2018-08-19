@@ -36,14 +36,12 @@ class ProductCatalog extends Component {
         this.setState({active: id});
 
         this.props.handleFilterChange({category: id, offset: 0, page: 1});
-        console.log(id);
+        // console.log(id);
     };
 
     render() {
 
         const { categories, products, total, limit, currentFilter, handleFilterChange } = this.props;
-
-        const message = 'Products in this category will be available soon.';
 
         let listCategories = (
             categories.docs.map((category, index) => {
@@ -64,6 +62,13 @@ class ProductCatalog extends Component {
             })
         );
 
+        let searching = null;
+        if(products.docs.length > 0) {
+            searching = <Search handleFilterChange={handleFilterChange} />
+        }
+
+        const message = 'Products in this category will be available soon.';
+
         return (
             <div className="row product-catalog">
                    <div className="col-md-3">
@@ -74,7 +79,7 @@ class ProductCatalog extends Component {
                    </div>
 
                 <div className="col-md-9">
-                    <Search handleFilterChange={handleFilterChange} />
+                    {searching}
                     <SpecificProducts products={products} />
                     <NotFound data={products.docs} message={message}/>
                     <Pagination

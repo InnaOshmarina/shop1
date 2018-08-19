@@ -3,15 +3,17 @@ import PropTypes from 'prop-types';
 import '../../css/NotFound.css';
 
 const NotFound = ({data, message}) => {
-    let content = (
+    let content = null;
+
+    if(data.length <= 0) {
+        content = (
             <div className="mt-5 alert alert-info" role="alert">
                 <p className="not-found">{message}</p>
             </div>
         );
+    }
 
-    return (
-        (data.length <= 0) ? content : null
-    );
+    return content;
 };
 
 NotFound.propTypes = {
