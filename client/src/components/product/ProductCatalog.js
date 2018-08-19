@@ -7,12 +7,18 @@ import { getCategories } from "../../store/Category/actions";
 import { getCategoriesSelector } from "../../store/Category/selectors";
 
 import { getProducts } from "../../store/Product/actions";
-import {getProductsSelector} from "../../store/Product/selectors";
+import {
+    getProductsLimitSelector,
+    getProductsOffsetSelector,
+    getProductsSelector,
+    getProductsTotalSelector
+} from "../../store/Product/selectors";
 
 import Search from "../shared/Search";
 import Filter from "../../decorators/Filter";
 import SpecificProducts from "./SpecificProducts";
 import '../../css/ProductCatalog.css';
+import Pagination from "../shared/Pagination";
 
 class ProductCatalog extends Component {
 
@@ -28,13 +34,13 @@ class ProductCatalog extends Component {
         event.preventDefault();
         this.setState({active: id});
 
-        this.props.getData({category: id});
+        this.props.handleFilterChange({category: id, offset: 0, page: 1});
         console.log(id);
     };
 
     render() {
 
-        const { categories, products } = this.props;
+        const { categories, products, total, limit, currentFilter, handleFilterChange } = this.props;
 
         let listCategories = (
             categories.docs.map((category, index) => {
@@ -65,8 +71,14 @@ class ProductCatalog extends Component {
                    </div>
 
                 <div className="col-md-9">
-                    <Search handleFilterChange={this.props.handleFilterChange} />
+                    <Search handleFilterChange={handleFilterChange} />
                     <SpecificProducts products={products} />
+                    <Pagination
+                        total={total}
+                        limit={limit}
+                        page={currentFilter.page}
+                        paginateChange={handleFilterChange}
+                    />
                 </div>
             </div>
         );
@@ -81,7 +93,10 @@ ProductCatalog.propTypes = {
 
 const mapStateToProps = state => ({
     categories: getCategoriesSelector(state),
-    products: getProductsSelector(state)
+    products: getProductsSelector(state),
+    limit: getProductsLimitSelector(state),
+    offset: getProductsOffsetSelector(state),
+    total: getProductsTotalSelector(state),
 });
 
 const mapDispatchToProps = {
