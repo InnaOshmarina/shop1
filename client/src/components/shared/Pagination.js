@@ -43,7 +43,7 @@ class Pagination extends Component {
 
     render() {
 
-        const { total, limit, paginateChange } = this.props;
+        const { total, limit, page, paginateChange } = this.props;
 
         if(limit === undefined || total === undefined || paginateChange === undefined) {
             return null;

@@ -36,7 +36,6 @@ class ProductCatalog extends Component {
         this.setState({active: id});
 
         this.props.handleFilterChange({category: id, offset: 0, page: 1});
-        console.log(id);
     };
 
     render() {
