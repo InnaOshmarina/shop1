@@ -5,6 +5,8 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../store/Auth/actions';
 
+import '../../css/Navbar.css';
+
 class Navbar extends Component {
     onLogoutClick(e) {
         e.preventDefault();

@@ -1,6 +1,8 @@
+div#specific-products {
+    border-bottom: 0.0625rem rgb(228, 228, 228) solid;
+}
 
-div .row {
-    border-bottom: 0.08rem grey solid;
+.specific-products {
     font-size: 0.75rem;
 }
 
@@ -15,7 +17,7 @@ div .row span {
     font-size: 1rem;
     font-weight: 600;
 }
-div .row .btn span {
+.btn-warning.btn-sm span {
       font-size: 0.75rem;
       font-weight: 400;
 }

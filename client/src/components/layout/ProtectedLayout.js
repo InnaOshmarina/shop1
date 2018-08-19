@@ -47,7 +47,7 @@ class ProtectedLayout extends Component {
                 <div className="dashboard">
                     <div className="container-fluid content">
                         <div className="row">
-                            <div className="col-md-3">
+                            <div className="col-md-3 ina">
                                 <div className="list-group">
                                     {
                                         navigations.map((navigation, index) => (

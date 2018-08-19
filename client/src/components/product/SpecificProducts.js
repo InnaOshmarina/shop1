@@ -16,10 +16,9 @@ class SpecificProducts extends Component {
             products.docs.map((product, index) => {
                 return (
                     <div id="specific-products" className="row mt-4" key={index}>
-
                         <div className="col-md-9">
-                            <h6>{product.title}</h6>
-                            <p>{product.description}</p>
+                            <h6 style={{fontSize:1+ "rem"}}>{product.title}</h6>
+                            <p className="specific-products">{product.description}</p>
                         </div>
                         <div className="col-md-3 d-flex align-items-end flex-column">
                             <span>{product.price} BYN</span>

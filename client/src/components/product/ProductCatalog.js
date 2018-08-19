@@ -12,9 +12,7 @@ import {getProductsSelector} from "../../store/Product/selectors";
 import Search from "../shared/Search";
 import Filter from "../../decorators/Filter";
 import SpecificProducts from "./SpecificProducts";
-
 import '../../css/ProductCatalog.css';
-
 
 class ProductCatalog extends Component {
 
@@ -50,7 +48,7 @@ class ProductCatalog extends Component {
                         key={index}
                         // href={`/${category._id}`}
                         onClick={(event) => this.handleClick(event, category._id)}
-                        className={`list-group-item list-group-item-action ${active}`}>
+                        className={`list-group-item list-group-item-action category ${active}`}>
                         {category.title}
                     </a>
                 )
@@ -58,13 +56,14 @@ class ProductCatalog extends Component {
         );
 
         return (
-            <div className="row">
-                <div className="col-md-3">
-                    <div className="caption-category">Select the desired product category:</div>
-                    <div className="list-group">
-                        {listCategories}
-                    </div>
-                </div>
+            <div className="row product-catalog">
+                   <div className="col-md-3">
+                       <div className="caption-category">Select the desired product category:</div>
+                       <div className="list-group">
+                           {listCategories}
+                       </div>
+                   </div>
+
                 <div className="col-md-9">
                     <Search handleFilterChange={this.props.handleFilterChange} />
                     <SpecificProducts products={products} />
