@@ -23,9 +23,19 @@ class Navbar extends Component {
 
       const productCatalog = (
           <li className="nav-item">
-              <Link className="nav-link" to="/product-catalog">
+              <Link className="nav-link mr-4" to="/product-catalog">
                   {' '}
                   Product catalog
+              </Link>
+          </li>
+      );
+
+      const checkout = (
+          <li className="nav-item">
+              <Link className="nav-link" to="/checkout">
+                  {' '}
+                    <i className="fas fa-shopping-cart" />
+
               </Link>
           </li>
       );
@@ -84,6 +94,7 @@ class Navbar extends Component {
           <div className="collapse navbar-collapse" id="mobile-nav">
             <ul className="navbar-nav mr-auto">
                 { !isAuthenticated ? productCatalog : null }
+                { !isAuthenticated ? checkout : null }
             </ul>
             { isAuthenticated ? authLinks : guestLinks }
           </div>

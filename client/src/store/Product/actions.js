@@ -1,4 +1,3 @@
-import apiHelper, {API_PRODUCTS_URL} from "../../helpers/apiHelper";
 import {GET_ERRORS} from "../Auth/types";
 import { deleteProductCreator, editProductCreator, getProductsCreator, addProductCreator, getProductCreator } from "./actionCreators";
 import { doneActionSuccess, initAction } from "../Action/actionCreators";
@@ -52,7 +51,8 @@ export const getProduct = id => async dispatch => {
     } catch(err) {
         dispatch({
             type: GET_ERRORS,
-            payload: err.response.data
+            // payload: err.response.data
+            payload: {}
         })
     }
 };

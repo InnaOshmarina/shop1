@@ -17,6 +17,7 @@ import ProtectedLayout from './components/layout/ProtectedLayout';
 import './css/App.css';
 import {TOKEN_NAME_IN_STORE} from "./constans/GlobalConstans";
 import ProductCatalog from "./components/product/ProductCatalog";
+import Checkout from "./containers/basket/Checkout";
 
 // Check for token
 if (localStorage[TOKEN_NAME_IN_STORE]) {
@@ -51,6 +52,9 @@ class App extends Component {
                     <Route exact path="/login" component={Login} />
                     <Switch>
                         <Route path="/product-catalog" component={ProductCatalog} />
+                    </Switch>
+                    <Switch>
+                        <Route path="/checkout" component={Checkout} />
                     </Switch>
                   </div>
                     <Switch>

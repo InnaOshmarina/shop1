@@ -30,3 +30,10 @@
      -o-transform: skew(8deg) rotate(3deg);
      transform: skew(8deg) rotate(3deg);
  }
+
+i.fa-shopping-cart {
+    color: #F3EF7F;
+    font-size: 1.4rem;
+}
+
+

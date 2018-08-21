@@ -62,11 +62,6 @@ class ProductCatalog extends Component {
             })
         );
 
-        let searching = null;
-        if(products.docs.length > 0) {
-            searching = <Search handleFilterChange={handleFilterChange} />
-        }
-
         const message = 'Products in this category will be available soon.';
 
         return (
@@ -79,7 +74,7 @@ class ProductCatalog extends Component {
                    </div>
 
                 <div className="col-md-9">
-                    {searching}
+                    <Search handleFilterChange={handleFilterChange} />
                     <SpecificProducts products={products} />
                     <NotFound data={products.docs} message={message}/>
                     <Pagination

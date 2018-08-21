@@ -42,11 +42,9 @@ class Search extends Component {
                         onChange={this.onChange}
                     />
 
-                    {/*<NavLink>*/}
-                        <button className="search btn btn-success" type="submit" id="search">
+                    <button className="search btn btn-success" type="submit" id="search">
                         Search
                     </button>
-                    {/*</NavLink>*/}
                 </form>
             </div>
         );

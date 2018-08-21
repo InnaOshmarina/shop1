@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 import '../../css/SpecificProducts.css';
+import {connect} from "react-redux";
+import {addToCart} from "../../store/Basket/actions";
+import {getBasketSelector} from "../../store/Basket/selectors";
 
 class SpecificProducts extends Component {
 
@@ -9,6 +12,11 @@ class SpecificProducts extends Component {
         console.log('Hey!!!!!!!!!!!!!');
     }
 
+    addToCart = (event, product) => {
+        event.preventDefault();
+
+        this.props.addToCart(product);
+    };
     render() {
         const { products } = this.props;
 
@@ -24,6 +32,7 @@ class SpecificProducts extends Component {
                                 <span>{product.price} BYN</span>
                                 <button className="btn btn-warning btn-sm mt-auto"
                                         type="button"
+                                        onClick={(event) => this.addToCart(event, product)}
                                 >
                                     <i className="fas fa-cart-arrow-down"/>
                                     <span>&nbsp;&nbsp;В корзину</span>
@@ -46,4 +55,13 @@ SpecificProducts.propTypes = {
     products: PropTypes.object.isRequired
 };
 
-export default SpecificProducts;
+const mapStateToProps = state => ({
+    docs: getBasketSelector(state)
+});
+
+const mapDispatchToProps = {
+   addToCart
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SpecificProducts);
+

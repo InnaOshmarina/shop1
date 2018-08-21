@@ -1,3 +1,8 @@
+import {connect} from "react-redux";
+import compose from "redux/src/compose";
+
+import ProductsList from "../../components/product/ProductsList";
+import Filter from "../../decorators/Filter";
 import {deleteProduct, getProducts} from "../../store/Product/actions";
 import {
     getProductsLimitSelector,
@@ -5,10 +10,6 @@ import {
     getProductsSelector,
     getProductsTotalSelector
 } from "../../store/Product/selectors";
-import Filter from "../../decorators/Filter";
-import {connect} from "react-redux";
-import compose from "redux/src/compose";
-import ProductsList from "../../components/product/ProductsList";
 
 
 const mapStateToProps = state => ({

@@ -19,7 +19,6 @@ export default function(state = initialState, action) {
         case GET_PRODUCT:
             return {
                 ...state,
-                // product: action.payload
                 product: action.payload
             };
         case GET_PRODUCTS:

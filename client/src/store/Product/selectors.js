@@ -9,6 +9,11 @@ export const getProductsSelector = createSelector(
     state => state.products
 );
 
+export const getProductSelector = createSelector(
+    getProductState,
+    state => state.product
+);
+
 export const getProductsLimitSelector = createSelector(
     getProductsSelector,
     state => state.limit
