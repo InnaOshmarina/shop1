@@ -12,7 +12,7 @@ export default function(state = initialState, action) {
 
         case ADD_TO_CART:
             //let record = state.docs.find(doc => doc.item._id === action.payload._id);
-            let record = state.docs.find(doc => doc._id === action.payload._id);
+            let record = state.docs.find(doc => doc.item._id === action.payload._id);
             if(!record) {
                 let newObj = {
                     item: action.payload,
@@ -36,7 +36,7 @@ export default function(state = initialState, action) {
                 });
                 return {
                     ...state,
-                    docs: [...state.docs, newDocs]
+                    docs: [...newDocs]
                 };
             }
 
