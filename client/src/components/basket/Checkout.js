@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 import NotFound from "../shared/NotFound";
+import '../../css/Checkout.css'
 
 
 class Checkout extends Component {
@@ -20,13 +21,14 @@ class Checkout extends Component {
     };
 
     render() {
-        const {docs} = this.props;
+        const {docs, totalQuantities, totalAmount} = this.props;
+
 
         const notEmpty = (
             <div>
                 <table className="table mb-5">
                     <thead>
-                    <tr className="header text-center">
+                    <tr className="table-header text-center">
                         <th style={{width:37+"%"}}>Name of Product</th>
                         <th style={{width:20+"%"}}>Price, BYN</th>
                         <th style={{width:18+"%"}}>Number</th>
@@ -59,7 +61,7 @@ class Checkout extends Component {
                                     </td>
 
 
-                                    <td className="text-center"></td>
+                                    <td className="text-center">{doc.amount}</td>
                                     <td className="text-center">
                                         <button type="button" className="btn remove"
                                                 onClick={(event) => this.deleteFromCart(event, doc.item._id)}>
@@ -70,6 +72,12 @@ class Checkout extends Component {
                             )
                         )
                     }
+                    <tr className="total">
+                        <td colspan="2" className="text-right">Total:</td>
+                        <td className="text-center">{totalQuantities}</td>
+                        <td className="text-center">{totalAmount}</td>
+                        <td></td>
+                    </tr>
                     </tbody>
                 </table>
                 <div className="d-flex justify-content-around">
@@ -89,7 +97,7 @@ class Checkout extends Component {
 
         return (
             <div className="checkout">
-                <h3>Checkout</h3>
+                <h3 className="checkout-header">Checkout</h3>
                 {docs.length > 0 ? notEmpty : empty}
             </div>
         );
@@ -98,7 +106,9 @@ class Checkout extends Component {
 
 Checkout.propTypes = {
     deleteFromCart: PropTypes.func.isRequired,
-    docs: PropTypes.array.isRequired
+    docs: PropTypes.array.isRequired,
+    totalQuantities: PropTypes.string.isRequired,
+    totalAmount: PropTypes.number.isRequired
 };
 
 export default Checkout;

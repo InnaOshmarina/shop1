@@ -8,3 +8,13 @@ export const getBasketSelector = createSelector(
     getBasketState,
     state => state.docs
 );
+
+export const getBasketTotalQuantitiesSelector = createSelector(
+    getBasketState,
+    state => state.totalQuantities
+);
+
+export const getBasketTotalAmountSelector = createSelector(
+    getBasketState,
+    state => state.totalAmount
+);
