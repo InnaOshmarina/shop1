@@ -39,8 +39,8 @@ class Checkout extends Component {
                         docs.map((doc, index) =>
                             (
                                 <tr key={index}>
-                                    <td>{doc.title}</td>
-                                    <td className="text-center">{doc.price}</td>
+                                    <td>{doc.item.title}</td>
+                                    <td className="text-center">{doc.item.price}</td>
 
 
                                     <td className="d-flex flex-row justify-content-center">
@@ -48,7 +48,8 @@ class Checkout extends Component {
                                                 <i className="fas fa-minus quantity"/>
                                         </button>
 
-                                        <input type="number" min="0" className="form-control" />
+                                        <input type="number" min="0" className="form-control"
+                                                value={doc.quantity} />
                                                {/*value={this.state.quantity}*/}
                                                {/*onChange={(event) => this.updateQuantity(event.target.value, doc)}/>*/}
 
@@ -61,7 +62,7 @@ class Checkout extends Component {
                                     <td className="text-center"></td>
                                     <td className="text-center">
                                         <button type="button" className="btn remove"
-                                                onClick={(event) => this.deleteFromCart(event, doc._id)}>
+                                                onClick={(event) => this.deleteFromCart(event, doc.item._id)}>
                                             <i className="far fa-trash-alt removal"/>
                                         </button>
                                     </td>

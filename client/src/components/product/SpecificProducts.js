@@ -7,6 +7,9 @@ import {addToCart} from "../../store/Basket/actions";
 import {getBasketSelector} from "../../store/Basket/selectors";
 
 class SpecificProducts extends Component {
+    // state = {
+    //     quantity: 0
+    // };
 
     componentDidMount() {
         console.log('Hey!!!!!!!!!!!!!');
@@ -16,6 +19,7 @@ class SpecificProducts extends Component {
         event.preventDefault();
 
         this.props.addToCart(product);
+        // this.setState({quantity: 1});
     };
     render() {
         const { products } = this.props;

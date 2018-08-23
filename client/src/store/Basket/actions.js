@@ -1,4 +1,4 @@
-import {GET_ERRORS} from "../Auth/types";
+
 import { addToCartCreator, deleteFromCartCreator } from "./actionCreators";
 import { doneActionSuccess, initAction } from "../Action/actionCreators";
 
