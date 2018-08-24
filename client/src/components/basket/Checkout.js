@@ -4,15 +4,20 @@ import PropTypes from 'prop-types';
 import NotFound from "../shared/NotFound";
 import '../../css/Checkout.css'
 
-
 class Checkout extends Component {
-    // state = {
-    //     quantity: '',
-    // };
-    //
-    // updateQuantity(event, doc) {
-    //     this.setState()
-    // };
+
+    removeFromCart = (event, product, quantity) => {
+        event.preventDefault();
+        if(quantity > 1) {
+            this.props.addToCart(product, - 1);
+        }
+    };
+
+    addToCart = (event, product) => {
+        event.preventDefault();
+
+        this.props.addToCart(product, + 1);
+    };
 
     deleteFromCart = (event, id) => {
         event.preventDefault();
@@ -22,7 +27,6 @@ class Checkout extends Component {
 
     render() {
         const {docs, totalQuantities, totalAmount} = this.props;
-
 
         const notEmpty = (
             <div>
@@ -46,16 +50,16 @@ class Checkout extends Component {
 
 
                                     <td className="d-flex flex-row justify-content-center">
-                                        <button type="button" className="btn quantity less">
+                                        <button type="button" className="btn quantity less"
+                                        onClick={event => this.removeFromCart(event, doc.item, doc.quantity)}>
                                                 <i className="fas fa-minus quantity"/>
                                         </button>
 
                                         <input type="number" min="0" className="form-control"
                                                 value={doc.quantity} />
-                                               {/*value={this.state.quantity}*/}
-                                               {/*onChange={(event) => this.updateQuantity(event.target.value, doc)}/>*/}
 
-                                        <button type="button" className="btn quantity more">
+                                        <button type="button" className="btn quantity more"
+                                                onClick={event => this.addToCart(event, doc.item)}>
                                                 <i className="fas fa-plus quantity"/>
                                         </button>
                                     </td>
@@ -73,7 +77,7 @@ class Checkout extends Component {
                         )
                     }
                     <tr className="total">
-                        <td colspan="2" className="text-right">Total:</td>
+                        <td colSpan="2" className="text-right">Total:</td>
                         <td className="text-center">{totalQuantities}</td>
                         <td className="text-center">{totalAmount}</td>
                         <td></td>
@@ -106,6 +110,7 @@ class Checkout extends Component {
 
 Checkout.propTypes = {
     deleteFromCart: PropTypes.func.isRequired,
+    addToCart: PropTypes.func.isRequired,
     docs: PropTypes.array.isRequired,
     totalQuantities: PropTypes.string.isRequired,
     totalAmount: PropTypes.number.isRequired

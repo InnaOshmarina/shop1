@@ -15,9 +15,9 @@ export default function(state = initialState, action) {
         case ADD_TO_CART:
 
             let newObj = {
-                item: action.payload,
-                quantity: 1,
-                amount: parseFloat(action.payload.price)
+                item: action.payload.product,
+                quantity: action.payload.quantity,
+                amount: parseFloat(action.payload.product.price)
             };
 
             let getQuantities = () => {
@@ -25,39 +25,50 @@ export default function(state = initialState, action) {
                 state.docs.map(doc => (quantities += doc.quantity));
                 return quantities;
             };
+            let number = state.docs.reduce(((sum, doc) => sum + doc.amount), 0);
 
-            let getTotalAmount = () => {
-                let totalamount = newObj.amount;
-                state.docs.map(doc => (totalamount += doc.amount));
-                return totalamount;
-            };
+            // let getTotalAmount = () => {
+            //     let totalamount = newObj.amount;
+            //     state.docs.map(doc => (totalamount += doc.amount));
+            //     return totalamount;
+            // };
 
-            let record = state.docs.find(doc => doc.item._id === action.payload._id);
+            // let getTotalAmount = () => {
+            //     let inna = state.docs.reduce(((sum, doc) => sum + doc.amount), 0);
+            //     return inna;
+            // };
+
+
+            let record = state.docs.find(doc => doc.item._id === action.payload.product._id);
             if(!record) {
+                //console.log(typeof(state.totalQuantities));
                 return {
                     ...state,
                     docs: [...state.docs, newObj],
                     totalQuantities: getQuantities(),
-                    totalAmount: getTotalAmount()
+                    //totalAmount: getTotalAmount()
+                    totalAmount: number
                 };
-            } else {
+            }
+            else {
                 let newDocs = state.docs.map(doc => {
                     let answer = doc;
-                    if (doc.item._id === action.payload._id) {
+                    if (doc.item._id === action.payload.product._id) {
                         answer = {
                             item: doc.item,
-                            quantity: doc.quantity + 1,
-                            amount: parseFloat(doc.item.price) * (doc.quantity + 1)
+                            quantity: doc.quantity + action.payload.quantity,
+                            amount: parseFloat(doc.item.price) * (doc.quantity + action.payload.quantity)
                         }
                     }
-                    console.log(typeof(answer.amount));
+                   // console.log(typeof(answer.amount));
                     return answer;
+
                 });
                 return {
                     ...state,
                     docs: [...newDocs],
                     totalQuantities: getQuantities(),
-                    totalAmount: getTotalAmount()
+                    totalAmount: number
                 };
             }
 

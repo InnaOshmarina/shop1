@@ -1,7 +1,7 @@
 import {connect} from "react-redux";
 
 import Checkout from "../../components/basket/Checkout";
-import {deleteFromCart} from "../../store/Basket/actions";
+import {addToCart, deleteFromCart} from "../../store/Basket/actions";
 import {
     getBasketSelector,
     getBasketTotalQuantitiesSelector,
@@ -15,7 +15,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-    deleteFromCart
+    deleteFromCart,
+    addToCart
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout);

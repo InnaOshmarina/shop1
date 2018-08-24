@@ -12,11 +12,12 @@ class SpecificProducts extends Component {
         console.log('Hey!!!!!!!!!!!!!');
     }
 
-    addToCart = (event, product) => {
+    addToCart = (event, product, quantity) => {
         event.preventDefault();
 
-        this.props.addToCart(product);
+        this.props.addToCart(product, quantity);
     };
+
     render() {
         const { products } = this.props;
 
@@ -32,7 +33,7 @@ class SpecificProducts extends Component {
                                 <span>{product.price} BYN</span>
                                 <button className="btn btn-warning btn-sm mt-auto"
                                         type="button"
-                                        onClick={(event) => this.addToCart(event, product)}
+                                        onClick={event => this.addToCart(event, product, product.quantity)}
                                 >
                                     <i className="fas fa-cart-arrow-down"/>
                                     <span>&nbsp;&nbsp;В корзину</span>

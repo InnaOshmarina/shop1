@@ -4,10 +4,10 @@ import { doneActionSuccess, initAction } from "../Action/actionCreators";
 
 
 // Add product to basket
-export const addToCart = product => dispatch => {
+export const addToCart = (product, quantity) => dispatch => {
     dispatch(initAction(addToCartCreator().type));
 
-    dispatch(addToCartCreator(product));
+    dispatch(addToCartCreator(product, quantity));
 
     dispatch(doneActionSuccess(addToCartCreator().type));
 };
