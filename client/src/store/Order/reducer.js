@@ -17,15 +17,32 @@ export const initialState = {
 
 export default function(state = initialState, action) {
     switch (action.type) {
-        case GET_ORDER:
+        case CHECKOUT:
             return {
                 ...state,
-                order: action.payload
+                orders: {
+                    ...state.orders,
+                    docs: [...state.orders.docs, action.payload]
+                }
             };
+        // case GET_ORDER:
+        //     return {
+        //         ...state,
+        //         order: {
+        //             ...state.order,
+        //             products: [...state.order.products, action.payload]
+        //         }
+        //
+        //     };
         case GET_ORDERS:
             return {
                 ...state,
                 orders: action.payload
+            };
+        case GET_ORDER:
+            return {
+                ...state,
+                order: action.payload
             };
         default:
             return state;

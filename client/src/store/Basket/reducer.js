@@ -41,13 +41,15 @@ export default function(state = initialState, action) {
 
             let record = state.docs.find(doc => doc.item._id === action.payload.product._id);
             if(!record) {
-                //console.log(typeof(state.totalQuantities));
+                // console.log(typeof(action.payload.quantity));
+                // console.log(typeof(state.totalAmount));
+                // console.log(typeof(newObj.amount));
                 return {
                     ...state,
                     docs: [...state.docs, newObj],
                     totalQuantities: getQuantities(),
                     //totalAmount: getTotalAmount()
-                    totalAmount: number
+                    totalAmount: number + parseFloat(action.payload.product.price)
                 };
             }
             else {
@@ -60,7 +62,6 @@ export default function(state = initialState, action) {
                             amount: parseFloat(doc.item.price) * (doc.quantity + action.payload.quantity)
                         }
                     }
-                   // console.log(typeof(answer.amount));
                     return answer;
 
                 });
@@ -68,7 +69,7 @@ export default function(state = initialState, action) {
                     ...state,
                     docs: [...newDocs],
                     totalQuantities: getQuantities(),
-                    totalAmount: number
+                    totalAmount: number + parseFloat(action.payload.product.price)
                 };
             }
 

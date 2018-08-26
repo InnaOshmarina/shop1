@@ -5,24 +5,42 @@ import NotFound from "../shared/NotFound";
 import '../../css/Checkout.css'
 
 class Checkout extends Component {
+    state = {
+        docs: this.props.docs,
+        totalQuantities: this.props.totalQuantities,
+        totalAmount: this.props.totalAmount
+    };
 
     removeFromCart = (event, product, quantity) => {
         event.preventDefault();
         if(quantity > 1) {
-            this.props.addToCart(product, - 1);
+            this.props.addToCart(product,- 1);
         }
     };
 
     addToCart = (event, product) => {
         event.preventDefault();
 
-        this.props.addToCart(product, + 1);
+        this.props.addToCart(product,+ 1);
     };
 
     deleteFromCart = (event, id) => {
         event.preventDefault();
 
         this.props.deleteFromCart(id);
+    };
+
+    checkout = (event) => {
+        event.preventDefault();
+
+        // this.props.checkout(this.props, this.props.history);
+        this.props.checkout(this.state, this.props.history);
+        this.setState({
+            docs: [],
+            totalQuantities: 0,
+            totalAmount: 0
+        });
+        console.log('inna');
     };
 
     render() {
@@ -89,7 +107,8 @@ class Checkout extends Component {
                         Delete order
                     </button>
 
-                    <button type="button" className="btn btn-success">
+                    <button type="button" className="btn btn-success"
+                            onClick={(event) => this.checkout(event)}>
                         Place order
                     </button>
                 </div>
@@ -111,6 +130,7 @@ class Checkout extends Component {
 Checkout.propTypes = {
     deleteFromCart: PropTypes.func.isRequired,
     addToCart: PropTypes.func.isRequired,
+    checkout: PropTypes.func.isRequired,
     docs: PropTypes.array.isRequired,
     totalQuantities: PropTypes.string.isRequired,
     totalAmount: PropTypes.number.isRequired

@@ -9,13 +9,13 @@ import {getBasketSelector} from "../../store/Basket/selectors";
 class SpecificProducts extends Component {
 
     componentDidMount() {
-        console.log('Hey!!!!!!!!!!!!!');
+        console.log('Hey! I am component SpecificProducts.');
     }
 
-    addToCart = (event, product, quantity) => {
+    addToCart = (event, product) => {
         event.preventDefault();
 
-        this.props.addToCart(product, quantity);
+        this.props.addToCart(product);
     };
 
     render() {
@@ -33,7 +33,7 @@ class SpecificProducts extends Component {
                                 <span>{product.price} BYN</span>
                                 <button className="btn btn-warning btn-sm mt-auto"
                                         type="button"
-                                        onClick={event => this.addToCart(event, product, product.quantity)}
+                                        onClick={event => this.addToCart(event, product)}
                                 >
                                     <i className="fas fa-cart-arrow-down"/>
                                     <span>&nbsp;&nbsp;В корзину</span>

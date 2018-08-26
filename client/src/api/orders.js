@@ -1,5 +1,3 @@
-// IN THE FUTURE (HISTORYORDERS)
-
 import apiHelper, {API_ORDERS_URL} from "../helpers/apiHelper";
 
 export const checkoutApi = async (orderData) => {

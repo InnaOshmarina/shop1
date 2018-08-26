@@ -4,11 +4,12 @@ import { NavLink } from 'react-router-dom';
 import Dashboard from "../dashboard/Dashboard";
 import CategoriesList from '../../containers/category/CategoryList';
 import ProductsList from '../../containers/product/ProductList';
-import OrdersList from '../order/OrdersList';
+import OrdersList from '../../containers/order/OrderList';
 import CategoryAdding from '../category/CategoryAdding';
 import CategoryDetails from '../category/CategoryDetails';
 import ProductAdding from "../product/ProductAdding";
 import ProductDetails from "../product/ProductDetails";
+import OrderDetails from "../order/OrderDetails";
 import '../../css/ProtectedLayout.css';
 
 const style =
@@ -73,6 +74,7 @@ class ProtectedLayout extends Component {
                                 <Route exact path="/products/edit/:id" component={ProductAdding} />
                                 <Route exact path="/products/detail/:id" component={ProductDetails} />
                                 <Route exact path="/orders" component={OrdersList} />
+                                <Route exact path="/orders/detail/:id" component={OrderDetails} />
                             </div>
                         </div>
                     </div>
