@@ -11,7 +11,7 @@ class OrderDetails extends Component {
 
     render() {
         const { order } = this.props;
-        //console.log(this.props);
+        console.log(order.products);
 
         // const tableContent = (
         //     <table className="table mb-5">
@@ -25,7 +25,7 @@ class OrderDetails extends Component {
         //         </thead>
         //         <tbody className="productsL">
         //         {
-        //             order.products.forEach((product, index) =>
+        //             order.products.map((product, index) =>
         //                 (
         //                     <tr key={index}>
         //                         <td>{product.item.title}</td>

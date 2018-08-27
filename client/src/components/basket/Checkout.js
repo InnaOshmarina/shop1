@@ -14,14 +14,14 @@ class Checkout extends Component {
     removeFromCart = (event, product, quantity) => {
         event.preventDefault();
         if(quantity > 1) {
-            this.props.addToCart(product,- 1);
+            this.props.addToCart(product, -1);
         }
     };
 
     addToCart = (event, product) => {
         event.preventDefault();
 
-        this.props.addToCart(product,+ 1);
+        this.props.addToCart(product, +1);
     };
 
     deleteFromCart = (event, id) => {

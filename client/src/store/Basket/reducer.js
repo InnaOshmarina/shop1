@@ -33,10 +33,7 @@ export default function(state = initialState, action) {
             //     return totalamount;
             // };
 
-            // let getTotalAmount = () => {
-            //     let inna = state.docs.reduce(((sum, doc) => sum + doc.amount), 0);
-            //     return inna;
-            // };
+            let getTotalAmount = (value, decimals) => Number(Math.round(value+'e'+decimals)+'e-'+decimals);
 
 
             let record = state.docs.find(doc => doc.item._id === action.payload.product._id);
@@ -48,8 +45,7 @@ export default function(state = initialState, action) {
                     ...state,
                     docs: [...state.docs, newObj],
                     totalQuantities: getQuantities(),
-                    //totalAmount: getTotalAmount()
-                    totalAmount: number + parseFloat(action.payload.product.price)
+                    totalAmount: getTotalAmount(number + parseFloat(action.payload.product.price), 2)
                 };
             }
             else {
@@ -69,7 +65,7 @@ export default function(state = initialState, action) {
                     ...state,
                     docs: [...newDocs],
                     totalQuantities: getQuantities(),
-                    totalAmount: number + parseFloat(action.payload.product.price)
+                    totalAmount: getTotalAmount(number + parseFloat(action.payload.product.price), 2)
                 };
             }
 
