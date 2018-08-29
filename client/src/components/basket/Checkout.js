@@ -1,15 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import {NotificationManager} from "react-notifications";
 
 import NotFound from "../shared/NotFound";
 import '../../css/Checkout.css'
 
 class Checkout extends Component {
-    state = {
-        docs: this.props.docs,
-        totalQuantities: this.props.totalQuantities,
-        totalAmount: this.props.totalAmount
-    };
 
     removeFromCart = (event, product, quantity) => {
         event.preventDefault();
@@ -30,17 +26,20 @@ class Checkout extends Component {
         this.props.deleteFromCart(id);
     };
 
+    deleteFormationOrder = (event, allProducts) => {
+        if (window.confirm('Are you sure you want to remove all items from your cart?')) {
+            event.preventDefault();
+            this.props.deleteFormationOrder(allProducts);
+        }
+    };
+
     checkout = (event) => {
         event.preventDefault();
 
-        // this.props.checkout(this.props, this.props.history);
-        this.props.checkout(this.state, this.props.history);
-        this.setState({
-            docs: [],
-            totalQuantities: 0,
-            totalAmount: 0
-        });
-        console.log('inna');
+        NotificationManager.success('Your order is successfully placed!', 'System notification');
+
+        this.props.checkout(this.props, this.props.history);
+        this.props.deleteFormationOrder();
     };
 
     render() {
@@ -103,12 +102,13 @@ class Checkout extends Component {
                     </tbody>
                 </table>
                 <div className="d-flex justify-content-around">
-                    <button type="button" className="btn btn-danger">
+                    <button type="button" className="btn btn-danger"
+                            onClick={event => this.deleteFormationOrder(event, this.props)}>
                         Delete order
                     </button>
 
                     <button type="button" className="btn btn-success"
-                            onClick={(event) => this.checkout(event)}>
+                            onClick={event => this.checkout(event)}>
                         Place order
                     </button>
                 </div>
@@ -128,8 +128,9 @@ class Checkout extends Component {
 }
 
 Checkout.propTypes = {
-    deleteFromCart: PropTypes.func.isRequired,
     addToCart: PropTypes.func.isRequired,
+    deleteFromCart: PropTypes.func.isRequired,
+    deleteFormationOrder: PropTypes.func.isRequired,
     checkout: PropTypes.func.isRequired,
     docs: PropTypes.array.isRequired,
     totalQuantities: PropTypes.string.isRequired,

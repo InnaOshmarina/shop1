@@ -1,6 +1,7 @@
 import {
     ADD_TO_CART,
-    DELETE_FROM_CART
+    DELETE_FROM_CART,
+    DELETE_FORMATION_ORDER
 } from './types';
 
 export const initialState = {
@@ -89,6 +90,14 @@ export default function(state = initialState, action) {
                 docs: [...newDocs],
                 totalQuantities: getQuantitiesAD(),
                 totalAmount: getTotalAmountAD()
+            };
+
+        case DELETE_FORMATION_ORDER:
+            return {
+                ...state,
+                docs: [],
+                totalQuantities: 0,
+                totalAmount: 0
             };
         default:
             return state;

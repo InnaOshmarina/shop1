@@ -1,5 +1,4 @@
-
-import { addToCartCreator, deleteFromCartCreator } from "./actionCreators";
+import { addToCartCreator, deleteFromCartCreator, deleteFormationOrderCreator } from "./actionCreators";
 import { doneActionSuccess, initAction } from "../Action/actionCreators";
 
 
@@ -21,6 +20,15 @@ export const deleteFromCart = id => dispatch => {
 
         dispatch(doneActionSuccess(deleteFromCartCreator().type));
     }
+};
+
+// Delete formation of order
+export const deleteFormationOrder = () => dispatch => {
+    dispatch(initAction(deleteFormationOrderCreator().type));
+
+    dispatch(deleteFormationOrderCreator());
+
+    dispatch(doneActionSuccess(deleteFormationOrderCreator().type));
 };
 
 

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import compose from "redux/src/compose";
@@ -6,7 +7,7 @@ import compose from "redux/src/compose";
 import { getCategories } from "../../store/Category/actions";
 import { getCategoriesSelector } from "../../store/Category/selectors";
 
-import { getProducts } from "../../store/Product/actions";
+import {getProducts} from "../../store/Product/actions";
 import {
     getProductsLimitSelector,
     getProductsOffsetSelector,
@@ -17,9 +18,10 @@ import {
 import Search from "../shared/Search";
 import Filter from "../../decorators/Filter";
 import SpecificProducts from "./SpecificProducts";
-import '../../css/ProductCatalog.css';
 import Pagination from "../shared/Pagination";
 import NotFound from "../shared/NotFound";
+
+import '../../css/ProductCatalog.css';
 
 class ProductCatalog extends Component {
 
@@ -65,26 +67,29 @@ class ProductCatalog extends Component {
         const message = 'Products in this category will be available soon.';
 
         return (
-            <div className="row product-catalog">
-                   <div className="col-md-3">
-                       <div className="caption-category">Select the desired product category:</div>
-                       <div className="list-group">
-                           {listCategories}
-                       </div>
-                   </div>
 
-                <div className="col-md-9">
-                    <Search handleFilterChange={handleFilterChange} />
-                    <SpecificProducts products={products} />
-                    <NotFound data={products.docs} message={message}/>
-                    <Pagination
-                        total={total}
-                        limit={limit}
-                        page={currentFilter.page}
-                        paginateChange={handleFilterChange}
-                    />
+                <div className="row product-catalog">
+                       <div className="col-md-3">
+                           <div className="caption-category">Select the desired product category:</div>
+                           <div className="list-group">
+                               {listCategories}
+                           </div>
+                       </div>
+
+                    <div className="col-md-9">
+
+                        <Search handleFilterChange={handleFilterChange}/>
+                        <SpecificProducts products={products} />
+                        <NotFound data={products.docs} message={message}/>
+                        <Pagination
+                            total={total}
+                            limit={limit}
+                            page={currentFilter.page}
+                            paginateChange={handleFilterChange}
+                        />
+                    </div>
                 </div>
-            </div>
+
         );
     }
 }

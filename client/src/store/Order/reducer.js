@@ -6,7 +6,9 @@ import {
 
 
 export const initialState = {
-    order: {},
+    order: {
+        products: []
+    },
     orders: {
         docs: [],
         total: 0,
@@ -25,15 +27,6 @@ export default function(state = initialState, action) {
                     docs: [...state.orders.docs, action.payload]
                 }
             };
-        // case GET_ORDER:
-        //     return {
-        //         ...state,
-        //         order: {
-        //             ...state.order,
-        //             products: [...state.order.products, action.payload]
-        //         }
-        //
-        //     };
         case GET_ORDERS:
             return {
                 ...state,

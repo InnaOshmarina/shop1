@@ -5,6 +5,7 @@ import setAuthToken from './utils/setAuthToken';
 import { setCurrentUser, logoutUser } from './store/Auth/actions';
 import { Provider } from 'react-redux';
 import store from './store/store';
+import {NotificationContainer} from 'react-notifications';
 
 import PrivateRoute from './components/shared/PrivateRoute';
 
@@ -18,6 +19,7 @@ import './css/App.css';
 import {TOKEN_NAME_IN_STORE} from "./constans/GlobalConstans";
 import ProductCatalog from "./components/product/ProductCatalog";
 import Checkout from "./containers/basket/Checkout";
+import ProductDetails from "./components/product/ProductDetails";
 
 // Check for token
 if (localStorage[TOKEN_NAME_IN_STORE]) {
@@ -48,11 +50,15 @@ class App extends Component {
                   <Navbar />
                   <Route exact path="/" component={Landing} />
                   <div className="container">
+                      <NotificationContainer />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />
                     <Switch>
                         <Route path="/product-catalog" component={ProductCatalog} />
                     </Switch>
+
+                          <Route path="/products/detail/:id" component={ProductDetails}/>
+
                     <Switch>
                         <Route path="/checkout" component={Checkout} />
                     </Switch>

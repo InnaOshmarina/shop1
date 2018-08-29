@@ -5,30 +5,20 @@ import { checkoutApi, getOrdersApi, getOrderApi } from "../../api/orders";
 
 
 // Create Order
-// export const checkout = (orderData, history) => async dispatch => {
-//     try {
-//         dispatch(initAction(checkoutCreator().type));
-//
-//         await checkoutApi(orderData);
-//
-//         dispatch(doneActionSuccess(checkoutCreator().type));
-//         history.push('/product-catalog');
-//     } catch(err) {
-//         dispatch({
-//             type: GET_ERRORS,
-//             payload: err.response.data
-//         })
-//     }
-// };
-
 export const checkout = (orderData, history) => async dispatch => {
-
+    try {
         dispatch(initAction(checkoutCreator().type));
 
         await checkoutApi(orderData);
 
         dispatch(doneActionSuccess(checkoutCreator().type));
         history.push('/product-catalog');
+    } catch(err) {
+        dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        })
+    }
 };
 
 // Get all orders

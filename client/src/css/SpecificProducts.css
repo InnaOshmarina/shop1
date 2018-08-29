@@ -22,8 +22,14 @@ div .row span {
       font-weight: 400;
 }
 
-h6 {
-    font-weight: 600;
+a.specific-product-title {
+    color: rgb(0, 114, 188);
+    font-size: 1rem;
+    text-decoration: underline;
+}
+
+a.specific-product-title:hover {
+    color: #bc1242;
 }
 
 .btn-warning {

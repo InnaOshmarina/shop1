@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-
-import '../../css/SpecificProducts.css';
 import {connect} from "react-redux";
+import {NotificationManager} from "react-notifications";
+import { Link } from 'react-router-dom';
+
 import {addToCart} from "../../store/Basket/actions";
 import {getBasketSelector} from "../../store/Basket/selectors";
+
+import '../../css/SpecificProducts.css';
 
 class SpecificProducts extends Component {
 
@@ -14,7 +17,7 @@ class SpecificProducts extends Component {
 
     addToCart = (event, product) => {
         event.preventDefault();
-
+        NotificationManager.info('The item is added to cart', 'System notification', 2000);
         this.props.addToCart(product);
     };
 
@@ -26,7 +29,12 @@ class SpecificProducts extends Component {
                     return (
                         <div id="specific-products" className="row mt-4" key={index}>
                             <div className="col-md-9">
-                                <h6 style={{fontSize:1+ "rem"}}>{product.title}</h6>
+                                <Link className="specific-product-title"
+                                      to={`/products/detail/${product._id}`}
+                                >
+                                    {product.title}
+                                </Link>
+
                                 <p className="specific-products">{product.description}</p>
                             </div>
                             <div className="col-md-3 d-flex align-items-end flex-column">
@@ -65,4 +73,5 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SpecificProducts);
+
 
