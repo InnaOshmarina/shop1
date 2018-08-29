@@ -1,13 +1,15 @@
 import {
     ADD_TO_CART,
     DELETE_FROM_CART,
-    DELETE_FORMATION_ORDER
+    DELETE_FORMATION_ORDER,
+    IS_SENT_ORDER
 } from './types';
 
 export const initialState = {
     docs: [],
     totalQuantities: 0,
-    totalAmount: 0
+    totalAmount: 0,
+    isSent: false
 };
 
 export default function(state = initialState, action) {
@@ -46,7 +48,8 @@ export default function(state = initialState, action) {
                     ...state,
                     docs: [...state.docs, newObj],
                     totalQuantities: getQuantities(),
-                    totalAmount: getTotalAmount(number + parseFloat(action.payload.product.price), 2)
+                    totalAmount: getTotalAmount(number + parseFloat(action.payload.product.price), 2),
+                    isSent: false
                 };
             }
             else {
@@ -66,7 +69,8 @@ export default function(state = initialState, action) {
                     ...state,
                     docs: [...newDocs],
                     totalQuantities: getQuantities(),
-                    totalAmount: getTotalAmount(number + parseFloat(action.payload.product.price), 2)
+                    totalAmount: getTotalAmount(number + parseFloat(action.payload.product.price), 2),
+                    isSent: false
                 };
             }
 
@@ -89,15 +93,27 @@ export default function(state = initialState, action) {
                 ...state,
                 docs: [...newDocs],
                 totalQuantities: getQuantitiesAD(),
-                totalAmount: getTotalAmountAD()
+                totalAmount: getTotalAmountAD(),
+                isSent: false
             };
 
         case DELETE_FORMATION_ORDER:
             return {
                 ...state,
+                // isSent: false,
                 docs: [],
                 totalQuantities: 0,
-                totalAmount: 0
+                totalAmount: 0,
+                isSent: false
+            };
+
+        case IS_SENT_ORDER:
+            return {
+                ...state,
+                docs: [],
+                totalQuantities: 0,
+                totalAmount: 0,
+                isSent: true
             };
         default:
             return state;

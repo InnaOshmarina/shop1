@@ -1,5 +1,7 @@
 export const ADD_TO_CART = 'ADD_TO_CART';
 export const DELETE_FROM_CART = 'DELETE_FROM_CART';
 export const DELETE_FORMATION_ORDER = 'DELETE_FORMATION_ORDER';
+export const IS_SENT_ORDER = 'IS_SENT_ORDER';
+
 
 

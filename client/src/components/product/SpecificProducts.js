@@ -17,7 +17,7 @@ class SpecificProducts extends Component {
 
     addToCart = (event, product) => {
         event.preventDefault();
-        NotificationManager.info('The item is added to cart', 'System notification', 2000);
+        NotificationManager.info('The item is added to cart', ' ', 2000);
         this.props.addToCart(product);
     };
 

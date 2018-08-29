@@ -12,6 +12,10 @@
     background-color: #C0D9F5;
 }
 
+p.is-sent {
+    font-size: 1.625rem;
+}
+
 .total {
     font-size: 1rem;
     font-weight: 500;

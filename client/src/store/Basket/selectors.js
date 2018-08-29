@@ -18,3 +18,8 @@ export const getBasketTotalAmountSelector = createSelector(
     getBasketState,
     state => state.totalAmount
 );
+
+export const getBasketIsSentSelector = createSelector(
+    getBasketState,
+    state => state.isSent
+);

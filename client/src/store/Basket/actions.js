@@ -1,6 +1,5 @@
-import { addToCartCreator, deleteFromCartCreator, deleteFormationOrderCreator } from "./actionCreators";
+import { addToCartCreator, deleteFromCartCreator, deleteFormationOrderCreator, isSentOrderCreator } from "./actionCreators";
 import { doneActionSuccess, initAction } from "../Action/actionCreators";
-
 
 // Add product to basket
 export const addToCart = (product, quantity) => dispatch => {
@@ -29,6 +28,15 @@ export const deleteFormationOrder = () => dispatch => {
     dispatch(deleteFormationOrderCreator());
 
     dispatch(doneActionSuccess(deleteFormationOrderCreator().type));
+};
+
+
+export const isSentOrder = () => dispatch => {
+    dispatch(initAction(isSentOrderCreator().type));
+
+    dispatch(isSentOrderCreator());
+
+    dispatch(doneActionSuccess(isSentOrderCreator().type));
 };
 
 

@@ -36,16 +36,17 @@ class Checkout extends Component {
     checkout = (event) => {
         event.preventDefault();
 
-        NotificationManager.success('Your order is successfully placed!', 'System notification');
+        NotificationManager.success('Your order is successfully placed!', ' ');
 
-        this.props.checkout(this.props, this.props.history);
-        this.props.deleteFormationOrder();
+        // this.props.checkout(this.props, this.props.history);
+        this.props.checkout(this.props);
+        this.props.isSentOrder();
     };
 
     render() {
-        const {docs, totalQuantities, totalAmount} = this.props;
+        const {docs, totalQuantities, totalAmount, isSent} = this.props;
 
-        const notEmpty = (
+        let content = (
             <div>
                 <table className="table mb-5">
                     <thead>
@@ -115,13 +116,26 @@ class Checkout extends Component {
             </div>
         );
 
-        const message = 'Your basket is empty.\n' + '\n' + 'To place an order, you must select at least one product.';
-        const empty = <NotFound data={docs} message={message}/>;
+        if (isSent) {
+            content = (
+                <p className="py-4 is-sent">
+                    Thank you for your order. Your order will be processed shortly.
+                </p>
+            );
+        }
+
+        const message = (
+            <div>
+                <p>Your basket is empty.</p>
+                <p>To place an order, you must select at least one product.</p>
+            </div>
+        );
+        const emptyBasket = <NotFound data={docs} message={message}/>;
 
         return (
             <div className="checkout">
-                <h3 className="checkout-header">Checkout</h3>
-                {docs.length > 0 ? notEmpty : empty}
+                <h2 className="checkout-header">Checkout</h2>
+                {(docs.length > 0 || isSent) ? content : emptyBasket}
             </div>
         );
     }
@@ -134,7 +148,9 @@ Checkout.propTypes = {
     checkout: PropTypes.func.isRequired,
     docs: PropTypes.array.isRequired,
     totalQuantities: PropTypes.string.isRequired,
-    totalAmount: PropTypes.number.isRequired
+    totalAmount: PropTypes.number.isRequired,
+    isSent: PropTypes.bool.isRequired,
+    isSentOrder: PropTypes.func.isRequired
 };
 
 export default Checkout;

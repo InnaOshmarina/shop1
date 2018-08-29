@@ -10,13 +10,14 @@ import './DataTable.css';
 import SortIcon from "./SortIcon";
 
 
+// Порядковый номер элемента
 const getItemNumber = (currentNumber, currentFilter) => {
     const { offset } = currentFilter;
     let answer = currentNumber + 1;
+
     if(offset !== undefined && offset !== null) {
         answer +=offset;
     }
-
     return answer;
 };
 
@@ -40,7 +41,7 @@ class DataTable extends Component {
                 <table className="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th>Number</th>
+                            <th>N</th>
                             {
                                 headers.map((headerItem, index) => {
                                     return <th
