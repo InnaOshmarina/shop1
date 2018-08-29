@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
-const queryHelper = require('../../helpers/queryHelper');
+const categoryRepository = require('../../repositories/CategoryRepository');
 
 // Load Input Validation
 const validateCategoryInput = require('../../validation/category');
@@ -19,11 +19,7 @@ router.get('/test', (req, res) => res.json({ msg: 'Categories Works' }));
 router.get('/', async (request, response) => {
 
     try {
-        const customOptions = {
-            populate: 'user'
-        };
-
-        const categories = await queryHelper('Category', request, customOptions);
+        const categories = await categoryRepository.getAllCategories(request);
         response.status(200).json(categories);
     } catch (err) {
         response.status(500).json({
@@ -36,10 +32,15 @@ router.get('/', async (request, response) => {
 // @route          GET api/categories/:id
 // @description    Get category by id
 // @access         Public
-router.get('/:id', (req, res) => {
-    Category.findById(req.params.id)
-        .then(category => res.json(category))
-        .catch(err => res.status(404).json({ nocategoryfound: 'No category found with that ID' }));
+router.get('/:id', async (request, response) => {
+    try {
+        const category = await categoryRepository.getCategoryById(request.params.id);
+        response.status(200).json(category);
+    } catch (err) {
+        response.status(404).json({
+            error: err.message
+        });
+    }
 });
 
 // @route          POST api/categories

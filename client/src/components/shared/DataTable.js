@@ -10,6 +10,16 @@ import './DataTable.css';
 import SortIcon from "./SortIcon";
 
 
+const getItemNumber = (currentNumber, currentFilter) => {
+    const { offset } = currentFilter;
+    let answer = currentNumber + 1;
+    if(offset !== undefined && offset !== null) {
+        answer +=offset;
+    }
+
+    return answer;
+};
+
 class DataTable extends Component {
 
     render() {
@@ -30,6 +40,7 @@ class DataTable extends Component {
                 <table className="table table-striped table-bordered">
                     <thead>
                         <tr>
+                            <th>Number</th>
                             {
                                 headers.map((headerItem, index) => {
                                     return <th
@@ -50,6 +61,7 @@ class DataTable extends Component {
                             data.map((dataItem, dataItemIndex) => {
                                 return (
                                     <tr key={dataItemIndex}>
+                                        <td>{getItemNumber(dataItemIndex, currentFilter)}</td>
                                         {
                                             headers.map((headerItem, headerItemIndex) => (
                                                 <td key={headerItemIndex}>

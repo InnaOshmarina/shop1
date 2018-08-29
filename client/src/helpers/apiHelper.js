@@ -25,7 +25,7 @@ axiosClient.interceptors.response.use(
         //   window.location = '/login'
         // }
 
-        return Promise.reject(response);
+        return Promise.reject(ApiHelper.getErrors(response));
     }
 );
 
@@ -119,7 +119,7 @@ class ApiHelper {
 
             return Promise.resolve(data);
         } catch (error) {
-            return Promise.reject([error.message]);
+            return Promise.reject([error]);
         }
     }
 
@@ -139,7 +139,7 @@ class ApiHelper {
         return ApiHelper.getAuthToken() != null;
     };
 
-    static getErrors (data, defaultError = 'Undefined error') {
+    static getErrors ( { data }, defaultError = 'Undefined error') {
         const type = typeof data;
         switch (type) {
             case 'string':
@@ -149,8 +149,8 @@ class ApiHelper {
                     return [data.error];
                 } else if (data.hasOwnProperty('message')) {
                     return [data.message];
-                } else if (data.hasOwnProperty('errors')) {
-                    return data.errors;
+                } else if (data.hasOwnProperty('error')) {
+                    return data.error;
                 }
                 return defaultError;
             default:
