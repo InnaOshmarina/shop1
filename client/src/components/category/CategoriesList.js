@@ -9,54 +9,54 @@ import Search from "../shared/Search";
 
 class CategoriesList extends Component {
 
+    headers = [
+        {
+            name: 'title',
+            options: {
+                headerName: 'Name',
+                type: TEXTFORMAT.string
+            }
+        },
+        {
+            name: 'date',
+            options: {
+                headerName: 'Date of adding',
+                type: TEXTFORMAT.date
+            }
+        }
+    ];
+
+    operations = [
+        {
+            name: 'detail view',
+            options: {
+                icon: SORTACTION.eye,
+                type: SORTACTION.link,
+                linkTemplate: 'categories/detail/:_id'
+            }
+        },
+        {
+            name: 'editing',
+            options: {
+                icon: SORTACTION.pencil,
+                type: SORTACTION.link,
+                linkTemplate: 'categories/edit/:_id'
+            }
+        },
+        {
+            name: 'removal',
+            options: {
+                icon: SORTACTION.trashBin,
+                type: SORTACTION.action,
+                actionFunction: (row) => {
+                    this.props.deleteCategory(row._id);
+                }
+            }
+        }
+    ];
+
     render() {
         const { categories, limit, total, offset } = this.props;
-
-        const headers = [
-            {
-                name: 'title',
-                options: {
-                    headerName: 'Name',
-                    type: TEXTFORMAT.string
-                }
-            },
-            {
-                name: 'date',
-                options: {
-                    headerName: 'Date of adding',
-                    type: TEXTFORMAT.date
-                }
-            }
-        ];
-
-        const operations = [
-            {
-                name: 'detail view',
-                options: {
-                    icon: SORTACTION.eye,
-                    type: SORTACTION.link,
-                    linkTemplate: 'categories/detail/:_id'
-                }
-            },
-            {
-                name: 'editing',
-                options: {
-                    icon: SORTACTION.pencil,
-                    type: SORTACTION.link,
-                    linkTemplate: 'categories/edit/:_id'
-                }
-            },
-            {
-                name: 'removal',
-                options: {
-                    icon: SORTACTION.trashBin,
-                    type: SORTACTION.action,
-                    actionFunction: (row) => {
-                        this.props.deleteCategory(row._id);
-                    }
-                }
-            }
-        ];
 
         return (
             <div>
@@ -75,8 +75,8 @@ class CategoriesList extends Component {
                     total={total}
                     offset={offset}
                     limit={limit}
-                    headers={headers}
-                    operations={operations}
+                    headers={this.headers}
+                    operations={this.operations}
                 />
             </div>
         );
