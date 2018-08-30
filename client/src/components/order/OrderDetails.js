@@ -11,7 +11,7 @@ class OrderDetails extends Component {
 
     render() {
         const { order } = this.props;
-        console.log(order.products);
+        // console.log(order.products);
 
         const tableContent = (
             <table className="table table-bordered  table-hover mb-5">

@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const mongoosePaginate = require('mongoose-paginate');
 
 // Create Schema
-const CheckoutSchema = new Schema({
+const OrderSchema = new Schema({
     // user: {
     //     type: Schema.Types.ObjectId,
     //     ref: 'users'
@@ -26,6 +26,6 @@ const CheckoutSchema = new Schema({
     }
 });
 
-CheckoutSchema.plugin(mongoosePaginate);
+OrderSchema.plugin(mongoosePaginate);
 
-module.exports = Checkout = mongoose.model('checkout', CheckoutSchema);
+module.exports = Order = mongoose.model('order', OrderSchema);

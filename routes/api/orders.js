@@ -6,15 +6,15 @@ const queryHelper = require('../../helpers/queryHelper');
 // Load Input Validation
 //const validateCheckoutInput = require('../../validation/checkout');
 
-// Checkout model
-const Checkout = require('../../models/Checkout');
+// Order model
+const Order = require('../../models/Order');
 
 // Product model
 const User = require('../../models/User');
 
 // @route          GET api/orders/test
-// @description    Tests checkout route
-router.get('/test', (req, res) => res.json({ msg: 'Checkout Works' }));
+// @description    Tests orders route
+router.get('/test', (req, res) => res.json({ msg: 'Orders Works' }));
 
 const logIn = passport.authenticate('jwt', { session: false });
 
@@ -30,14 +30,14 @@ router.post('/', (req, res) => {
     //     // If any errors, send 400 with errors object
     //     return res.status(400).json(errors);
     // }
-    const newOrder = new Checkout({
+    const newOrder = new Order({
         products: req.body.docs,
         totalQuantities: req.body.totalQuantities,
         totalAmount: req.body.totalAmount
     });
 
     // Save
-    newOrder.save().then(checkout => res.json(checkout));
+    newOrder.save().then(order => res.json(order));
 
 });
 
@@ -46,7 +46,7 @@ router.post('/', (req, res) => {
 // @access         Public
 router.get('/', async (request, response) => {
     try {
-        const orders = await queryHelper('Checkout', request);
+        const orders = await queryHelper('Order', request);
         response.status(200).json(orders);
     } catch (err) {
         response.status(500).json({
@@ -59,9 +59,9 @@ router.get('/', async (request, response) => {
 // @description    Get order by id
 // @access         Public
 router.get('/:id', (req, res) => {
-    Checkout.findById(req.params.id)
-        .then(checkout => res.json(checkout))
-        .catch(err => res.status(404).json({ noCheckoutFound: 'No order found with that ID' }));
+    Order.findById(req.params.id)
+        .then(order => res.json(order))
+        .catch(err => res.status(404).json({ noOrderFound: 'No order found with that ID' }));
 });
 
 module.exports = router;
