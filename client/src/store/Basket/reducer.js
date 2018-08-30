@@ -2,7 +2,8 @@ import {
     ADD_TO_CART,
     DELETE_FROM_CART,
     DELETE_FORMATION_ORDER,
-    IS_SENT_ORDER
+    IS_SENT_ORDER,
+    SET_DEFAULT_IS_SENT
 } from './types';
 
 export const initialState = {
@@ -48,8 +49,7 @@ export default function(state = initialState, action) {
                     ...state,
                     docs: [...state.docs, newObj],
                     totalQuantities: getQuantities(),
-                    totalAmount: getTotalAmount(number + parseFloat(action.payload.product.price), 2),
-                    isSent: false
+                    totalAmount: getTotalAmount(number + parseFloat(action.payload.product.price), 2)
                 };
             }
             else {
@@ -69,8 +69,7 @@ export default function(state = initialState, action) {
                     ...state,
                     docs: [...newDocs],
                     totalQuantities: getQuantities(),
-                    totalAmount: getTotalAmount(number + parseFloat(action.payload.product.price), 2),
-                    isSent: false
+                    totalAmount: getTotalAmount(number + parseFloat(action.payload.product.price), 2)
                 };
             }
 
@@ -93,8 +92,7 @@ export default function(state = initialState, action) {
                 ...state,
                 docs: [...newDocs],
                 totalQuantities: getQuantitiesAD(),
-                totalAmount: getTotalAmountAD(),
-                isSent: false
+                totalAmount: getTotalAmountAD()
             };
 
         case DELETE_FORMATION_ORDER:
@@ -103,17 +101,19 @@ export default function(state = initialState, action) {
                 // isSent: false,
                 docs: [],
                 totalQuantities: 0,
-                totalAmount: 0,
-                isSent: false
+                totalAmount: 0
             };
 
         case IS_SENT_ORDER:
             return {
                 ...state,
-                docs: [],
-                totalQuantities: 0,
-                totalAmount: 0,
                 isSent: true
+            };
+
+        case SET_DEFAULT_IS_SENT:
+            return {
+                ...state,
+                isSent: false
             };
         default:
             return state;

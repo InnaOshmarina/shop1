@@ -1,11 +1,16 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {NotificationManager} from "react-notifications";
 
 import NotFound from "../shared/NotFound";
+import {createNotification} from "../../helpers/NotificationsHelper";
+
 import '../../css/Checkout.css'
 
 class Checkout extends Component {
+
+    componentWillUnmount() {
+        this.props.setDefaultIsSent();
+    }
 
     removeFromCart = (event, product, quantity) => {
         event.preventDefault();
@@ -17,7 +22,7 @@ class Checkout extends Component {
     addToCart = (event, product) => {
         event.preventDefault();
 
-        this.props.addToCart(product, +1);
+        this.props.addToCart(product, 1);
     };
 
     deleteFromCart = (event, id) => {
@@ -36,10 +41,11 @@ class Checkout extends Component {
     checkout = (event) => {
         event.preventDefault();
 
-        NotificationManager.success('Your order is successfully placed!', ' ');
+        const message = 'Your order is successfully placed!';
+        createNotification('success', message);
 
-        // this.props.checkout(this.props, this.props.history);
         this.props.checkout(this.props);
+        this.props.deleteFormationOrder(this.props);
         this.props.isSentOrder();
     };
 
@@ -125,11 +131,9 @@ class Checkout extends Component {
         }
 
         const message = (
-            <div>
-                <p>Your basket is empty.</p>
-                <p>To place an order, you must select at least one product.</p>
-            </div>
+            <span>Your basket is empty. To place an order, you must select at least one product.</span>
         );
+
         const emptyBasket = <NotFound data={docs} message={message}/>;
 
         return (

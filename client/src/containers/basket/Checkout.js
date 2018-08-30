@@ -1,7 +1,10 @@
 import {connect} from "react-redux";
 
 import Checkout from "../../components/basket/Checkout";
-import {addToCart, deleteFromCart, deleteFormationOrder, isSentOrder} from "../../store/Basket/actions";
+import {
+    addToCart, deleteFromCart, deleteFormationOrder, isSentOrder,
+    setDefaultIsSent
+} from "../../store/Basket/actions";
 import {checkout} from "../../store/Order/actions";
 import {
     getBasketSelector,
@@ -22,7 +25,8 @@ const mapDispatchToProps = {
     deleteFromCart,
     deleteFormationOrder,
     checkout,
-    isSentOrder
+    isSentOrder,
+    setDefaultIsSent
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout);

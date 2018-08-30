@@ -1,4 +1,4 @@
-import {ADD_TO_CART, DELETE_FROM_CART, DELETE_FORMATION_ORDER, IS_SENT_ORDER} from "./types";
+import {ADD_TO_CART, DELETE_FROM_CART, DELETE_FORMATION_ORDER, IS_SENT_ORDER, SET_DEFAULT_IS_SENT} from "./types";
 
 export const addToCartCreator = (product, quantity = 1) => ({
     type: ADD_TO_CART,
@@ -19,6 +19,10 @@ export const deleteFormationOrderCreator = () => ({
 
 export const isSentOrderCreator = () => ({
     type: IS_SENT_ORDER
+});
+
+export const setDefaultIsSentCreator = () => ({
+    type: SET_DEFAULT_IS_SENT
 });
 
 

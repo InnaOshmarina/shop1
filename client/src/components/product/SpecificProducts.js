@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import {NotificationManager} from "react-notifications";
 import { Link } from 'react-router-dom';
 
 import {addToCart} from "../../store/Basket/actions";
 import {getBasketSelector} from "../../store/Basket/selectors";
 
 import '../../css/SpecificProducts.css';
+import {createNotification} from "../../helpers/NotificationsHelper";
 
 class SpecificProducts extends Component {
 
@@ -17,7 +17,9 @@ class SpecificProducts extends Component {
 
     addToCart = (event, product) => {
         event.preventDefault();
-        NotificationManager.info('The item is added to cart', ' ', 2000);
+
+        const message = 'The item is added to cart';
+        createNotification('info', message);
         this.props.addToCart(product);
     };
 
