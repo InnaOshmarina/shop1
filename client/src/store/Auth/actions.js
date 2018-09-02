@@ -1,6 +1,7 @@
 import axios from 'axios';
 import setAuthToken from '../../utils/setAuthToken';
-import { GET_ERRORS, SET_CURRENT_USER } from "./types";
+import { SET_CURRENT_USER } from "./types";
+import { GET_ERRORS } from "../Error/types";
 import jwt_decode from 'jwt-decode';
 
 import {baseURL, TOKEN_NAME_IN_STORE} from "../../constans/GlobalConstans";
@@ -33,11 +34,11 @@ export const loginUser = userData => dispatch => {
             // Set current user
             dispatch(setCurrentUser(decoded));
         })
-        // .catch(err =>
-        //     dispatch({
-        //         type: GET_ERRORS,
-        //         payload: err.response.data
-        //     }));
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            }));
 };
 
 // Set logged in user (Устанавливаем вошедшего пользователя)

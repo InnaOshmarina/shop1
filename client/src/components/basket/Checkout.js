@@ -5,12 +5,31 @@ import NotFound from "../shared/NotFound";
 import {createNotification} from "../../helpers/NotificationsHelper";
 
 import '../../css/Checkout.css'
+import TextFieldGroup from "../shared/TextFieldGroup";
 
 class Checkout extends Component {
+    // static defaultProps = {
+    //     errors: {}
+    // };
+
+   state = {
+       name: '',
+       email: '',
+       phoneNumber: '',
+       errors: {}
+   };
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.errors) {
+            this.setState({errors: nextProps.errors});
+        }
+    }
 
     componentWillUnmount() {
         this.props.setDefaultIsSent();
     }
+
+    onChange = e => this.setState({ [e.target.name]: e.target.value });
 
     removeFromCart = (event, product, quantity) => {
         event.preventDefault();
@@ -38,19 +57,31 @@ class Checkout extends Component {
         }
     };
 
-    checkout = (event) => {
-        event.preventDefault();
+    confirm = e => {
+        e.preventDefault();
 
-        const message = 'Your order is successfully placed!';
-        createNotification('success', message);
+        const buyerData = {
+            name: this.state.name,
+            email: this.state.email,
+            phoneNumber: this.state.phoneNumber
+        };
+
+        this.props.addInfoBuyer(buyerData);
+        createNotification('success', 'Your contact details are confirmed.');
+    };
+
+    checkout = event => {
+        event.preventDefault();
 
         this.props.checkout(this.props);
         this.props.deleteFormationOrder(this.props);
-        this.props.isSentOrder();
+        //this.props.isSentOrder();
     };
 
     render() {
-        const {docs, totalQuantities, totalAmount, isSent} = this.props;
+        const {docs, totalQuantities, totalAmount, buyer, isSent } = this.props;
+
+        const { errors } = this.state;
 
         let content = (
             <div>
@@ -72,7 +103,6 @@ class Checkout extends Component {
                                     <td>{doc.item.title}</td>
                                     <td className="text-center">{doc.item.price}</td>
 
-
                                     <td className="d-flex flex-row justify-content-center">
                                         <button type="button" className="btn quantity less"
                                         onClick={event => this.removeFromCart(event, doc.item, doc.quantity)}>
@@ -87,7 +117,6 @@ class Checkout extends Component {
                                                 <i className="fas fa-plus quantity"/>
                                         </button>
                                     </td>
-
 
                                     <td className="text-center">{doc.amount}</td>
                                     <td className="text-center">
@@ -108,6 +137,42 @@ class Checkout extends Component {
                     </tr>
                     </tbody>
                 </table>
+
+                <div className="row mb-5">
+                    <div className="col-md-5 m-auto">
+                        <h3>Contact information</h3>
+                        <form onSubmit={this.confirm}>
+                            <TextFieldGroup
+                                placeholder="Name"
+                                name="name"
+                                value={this.state.name}
+                                onChange={this.onChange}
+                                error={errors.name}
+                            />
+                            <TextFieldGroup
+                                placeholder="Email Address"
+                                name="email"
+                                type="email"
+                                value={this.state.email}
+                                onChange={this.onChange}
+                                error={errors.email}
+                            />
+                            <TextFieldGroup
+                                placeholder="Phone number"
+                                name="phoneNumber"
+                                value={this.state.phoneNumber}
+                                onChange={this.onChange}
+                                error={errors.phoneNumber}
+                            />
+                            <input
+                                type="submit"
+                                value="I confirm my contact details"
+                                className="btn btn-info confirmYD"
+                            />
+                        </form>
+                    </div>
+                </div>
+
                 <div className="d-flex justify-content-around">
                     <button type="button" className="btn btn-danger"
                             onClick={event => this.deleteFormationOrder(event, this.props)}>
@@ -153,8 +218,10 @@ Checkout.propTypes = {
     docs: PropTypes.array.isRequired,
     totalQuantities: PropTypes.string.isRequired,
     totalAmount: PropTypes.number.isRequired,
+    // buyer: PropTypes.object.isRequired,
     isSent: PropTypes.bool.isRequired,
-    isSentOrder: PropTypes.func.isRequired
+    isSentOrder: PropTypes.func.isRequired,
+    errors: PropTypes.object.isRequired
 };
 
 export default Checkout;

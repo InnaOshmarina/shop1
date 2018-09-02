@@ -1,4 +1,11 @@
-import {ADD_TO_CART, DELETE_FROM_CART, DELETE_FORMATION_ORDER, IS_SENT_ORDER, SET_DEFAULT_IS_SENT} from "./types";
+import {
+    ADD_TO_CART,
+    DELETE_FROM_CART,
+    DELETE_FORMATION_ORDER,
+    ADD_INFO_BUYER,
+    IS_SENT_ORDER,
+    SET_DEFAULT_IS_SENT
+} from "./types";
 
 export const addToCartCreator = (product, quantity = 1) => ({
     type: ADD_TO_CART,
@@ -15,6 +22,11 @@ export const deleteFromCartCreator = id => ({
 
 export const deleteFormationOrderCreator = () => ({
     type: DELETE_FORMATION_ORDER
+});
+
+export const addInfoBuyerCreator = (buyerData) => ({
+    type: ADD_INFO_BUYER,
+    payload: buyerData
 });
 
 export const isSentOrderCreator = () => ({

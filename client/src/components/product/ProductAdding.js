@@ -11,9 +11,9 @@ import SelectListGroup from "../shared/SelectListGroup";
 
 class ProductAdding extends Component {
 
-    static defaultProps = {
-        errors: {}
-    };
+    // static defaultProps = {
+    //     errors: {}
+    // };
 
     constructor(props) {
         super(props);

@@ -2,6 +2,7 @@ import {
     ADD_TO_CART,
     DELETE_FROM_CART,
     DELETE_FORMATION_ORDER,
+    ADD_INFO_BUYER,
     IS_SENT_ORDER,
     SET_DEFAULT_IS_SENT
 } from './types';
@@ -10,6 +11,7 @@ export const initialState = {
     docs: [],
     totalQuantities: 0,
     totalAmount: 0,
+    buyer: {},
     isSent: false
 };
 
@@ -37,7 +39,7 @@ export default function(state = initialState, action) {
             //     return totalamount;
             // };
 
-            let getTotalAmount = (value, decimals) => Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+            let getTotalAmount = (value, decimals) => Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
 
 
             let record = state.docs.find(doc => doc.item._id === action.payload.product._id);
@@ -98,10 +100,16 @@ export default function(state = initialState, action) {
         case DELETE_FORMATION_ORDER:
             return {
                 ...state,
-                // isSent: false,
                 docs: [],
                 totalQuantities: 0,
-                totalAmount: 0
+                totalAmount: 0,
+                buyer: {}
+            };
+
+        case ADD_INFO_BUYER:
+            return {
+                ...state,
+                buyer: action.payload
             };
 
         case IS_SENT_ORDER:

@@ -10,7 +10,7 @@ import orderReducer from "./Order/reducer";
 export default combineReducers({
     auth: authReducer,
     action: actionsReducer,
-    error: errorReducer,
+    errors: errorReducer,
     category: categoryReducer,
     product: productReducer,
     basket: basketReducer,

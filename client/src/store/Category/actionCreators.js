@@ -6,8 +6,13 @@ export const getCategoryCreator = (categoriesData) => ({
 
 });
 
-export const addCategoryCreator = () => ({
+// export const addCategoryCreator = () => ({
+//     type: ADD_CATEGORY
+// });
+
+export const addCategoryCreator = categoryData => ({
     type: ADD_CATEGORY,
+    payload: categoryData
 });
 
 export const getCategoriesCreator = (categoriesData) => ({

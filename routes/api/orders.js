@@ -4,7 +4,7 @@ const passport = require('passport');
 const queryHelper = require('../../helpers/queryHelper');
 
 // Load Input Validation
-//const validateCheckoutInput = require('../../validation/checkout');
+const validateOrderInput = require('../../validation/order');
 
 // Order model
 const Order = require('../../models/Order');
@@ -16,24 +16,30 @@ const User = require('../../models/User');
 // @description    Tests orders route
 router.get('/test', (req, res) => res.json({ msg: 'Orders Works' }));
 
-const logIn = passport.authenticate('jwt', { session: false });
+// const logIn = passport.authenticate('jwt', { session: false });
 
 
 // @route          POST api/orders
 // @description    Add order
 // @access         Public
 router.post('/', (req, res) => {
-    //const { errors, isValid } = validateCheckoutInput(req.body);
+    const { errors, isValid } = validateOrderInput(req.body);
 
     // Check Validation
-    // if(!isValid) {
-    //     // If any errors, send 400 with errors object
-    //     return res.status(400).json(errors);
-    // }
+    if(!isValid) {
+        //If any errors, send 400 with errors object
+        // const error = {
+        //     success: false,
+        //     errors: {}
+        // };
+        return res.status(400).json(errors);
+        //return res.status(400).json(error.errors);
+    }
     const newOrder = new Order({
         products: req.body.docs,
         totalQuantities: req.body.totalQuantities,
-        totalAmount: req.body.totalAmount
+        totalAmount: req.body.totalAmount,
+        buyer: req.body.buyer
     });
 
     // Save

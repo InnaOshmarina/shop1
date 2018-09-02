@@ -1,7 +1,9 @@
-import {GET_ERRORS} from "../Auth/types";
+import {GET_ERRORS} from "../Error/types";
 import { getOrdersCreator, checkoutCreator, getOrderCreator } from "./actionCreators";
 import { doneActionSuccess, initAction } from "../Action/actionCreators";
 import { checkoutApi, getOrdersApi, getOrderApi } from "../../api/orders";
+import {createNotification} from "../../helpers/NotificationsHelper";
+import {isSentOrder} from "../Basket/actions";
 
 
 // Create Order
@@ -12,11 +14,15 @@ export const checkout = (orderData) => async dispatch => {
         await checkoutApi(orderData);
 
         dispatch(doneActionSuccess(checkoutCreator().type));
-        // history.push('/product-catalog');
-    } catch(err) {
+        createNotification('success', 'Your order is successfully placed!');
+        dispatch(isSentOrder())
+    }
+    catch(err) {
+        createNotification('error', 'The field is blank or filled out incorrectly');
         dispatch({
             type: GET_ERRORS,
-            payload: err.response.data
+            // payload: err.response.data
+            payload: {}
         })
     }
 };
@@ -29,6 +35,7 @@ export const getOrders = (queryParams = {}) => async dispatch => {
 
         dispatch(getOrdersCreator(orders.data));
         dispatch(doneActionSuccess(getOrdersCreator().type));
+
     } catch(err) {
         dispatch({
             type: GET_ERRORS,

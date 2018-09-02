@@ -1,4 +1,4 @@
-import { GET_ERRORS } from "../Auth/types";
+import { GET_ERRORS } from "../Error/types";
 import { deleteCategoryCreator, editCategoryCreator, getCategoriesCreator, addCategoryCreator, getCategoryCreator } from "./actionCreators";
 import { doneActionSuccess, initAction } from "../Action/actionCreators";
 import {addCategoryApi, getCategoriesApi, getCategoryApi, deleteCategoryApi, editCategoryApi} from "../../api/categories";
@@ -12,10 +12,11 @@ export const addCategory = (categoryData, history) => async dispatch => {
 
         dispatch(doneActionSuccess(addCategoryCreator().type));
         history.push('/categories');
-    } catch(err) {
+    }
+    catch(err) {
         dispatch({
             type: GET_ERRORS,
-            payload: err.response.data
+            payload: {}
         })
     }
 };

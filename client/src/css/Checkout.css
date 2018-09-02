@@ -9,7 +9,7 @@
 
 .checkout {
     font-size: 0.875rem;
-    background-color: #C0D9F5;
+    /*background-color: #C0D9F5;*/
 }
 
 p.is-sent {
@@ -19,4 +19,9 @@ p.is-sent {
 .total {
     font-size: 1rem;
     font-weight: 500;
+}
+
+input.confirmYD {
+    display: block;
+    margin: 0 auto;
 }

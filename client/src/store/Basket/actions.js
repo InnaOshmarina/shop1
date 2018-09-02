@@ -3,10 +3,12 @@ import {
     deleteFromCartCreator,
     deleteFormationOrderCreator,
     isSentOrderCreator,
-    setDefaultIsSentCreator
+    setDefaultIsSentCreator,
+    addInfoBuyerCreator
 } from "./actionCreators";
 
 import { doneActionSuccess, initAction } from "../Action/actionCreators";
+import {GET_ERRORS} from "../Error/types";
 
 // Add product to basket
 export const addToCart = (product, quantity) => dispatch => {
@@ -25,6 +27,22 @@ export const deleteFromCart = id => dispatch => {
         dispatch(deleteFromCartCreator(id));
 
         dispatch(doneActionSuccess(deleteFromCartCreator().type));
+    }
+};
+
+// Add info about the buyer
+export const addInfoBuyer = buyerData => async dispatch => {
+    try {
+        dispatch(initAction(addInfoBuyerCreator().type));
+
+        dispatch(addInfoBuyerCreator(buyerData));
+
+        dispatch(doneActionSuccess(addInfoBuyerCreator().type));
+    } catch(err) {
+        dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        })
     }
 };
 

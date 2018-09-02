@@ -19,6 +19,11 @@ export const getBasketTotalAmountSelector = createSelector(
     state => state.totalAmount
 );
 
+export const getBasketInfoBuyerSelector = createSelector(
+    getBasketState,
+    state => state.buyer
+);
+
 export const getBasketIsSentSelector = createSelector(
     getBasketState,
     state => state.isSent

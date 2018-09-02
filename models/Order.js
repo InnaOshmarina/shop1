@@ -4,10 +4,6 @@ const mongoosePaginate = require('mongoose-paginate');
 
 // Create Schema
 const OrderSchema = new Schema({
-    // user: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'users'
-    // },
     products: {
         type: Array,
         required: true
@@ -18,6 +14,10 @@ const OrderSchema = new Schema({
     },
     totalAmount: {
         type: Number,
+        required: true
+    },
+    buyer: {
+        type: Object,
         required: true
     },
     date: {

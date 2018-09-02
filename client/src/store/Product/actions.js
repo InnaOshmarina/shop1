@@ -1,4 +1,4 @@
-import {GET_ERRORS} from "../Auth/types";
+import {GET_ERRORS} from "../Error/types";
 import { deleteProductCreator, editProductCreator, getProductsCreator, addProductCreator, getProductCreator } from "./actionCreators";
 import { doneActionSuccess, initAction } from "../Action/actionCreators";
 import {addProductApi, getProductsApi, getProductApi, deleteProductApi, editProductApi} from "../../api/products";

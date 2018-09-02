@@ -4,10 +4,10 @@ import {
     GET_ORDERS
 } from './types';
 
-
 export const initialState = {
     order: {
-        products: []
+        products: [],
+        buyer: {}
     },
     orders: {
         docs: [],

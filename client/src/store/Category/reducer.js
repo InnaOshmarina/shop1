@@ -1,8 +1,11 @@
 import {
+    ADD_CATEGORY,
     GET_CATEGORY,
     GET_CATEGORIES,
     DELETE_CATEGORY
 } from './types';
+
+import isEmpty from "../../validation/is-empty";
 
 export const initialState = {
   category: {},
@@ -16,6 +19,14 @@ export const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
+      case ADD_CATEGORY:
+      return {
+          ...state,
+          categories: {
+              ...state.categories,
+              docs: [...state.categories.docs, action.payload]
+          }
+      };
     case GET_CATEGORY:
       return {
         ...state,

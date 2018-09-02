@@ -3,27 +3,31 @@ import {connect} from "react-redux";
 import Checkout from "../../components/basket/Checkout";
 import {
     addToCart, deleteFromCart, deleteFormationOrder, isSentOrder,
-    setDefaultIsSent
+    setDefaultIsSent, addInfoBuyer
 } from "../../store/Basket/actions";
 import {checkout} from "../../store/Order/actions";
 import {
     getBasketSelector,
     getBasketTotalQuantitiesSelector,
     getBasketTotalAmountSelector,
-    getBasketIsSentSelector
+    getBasketIsSentSelector,
+    getBasketInfoBuyerSelector
 } from "../../store/Basket/selectors";
 
 const mapStateToProps = state => ({
     docs: getBasketSelector(state),
     totalQuantities: getBasketTotalQuantitiesSelector(state),
     totalAmount: getBasketTotalAmountSelector(state),
-    isSent: getBasketIsSentSelector(state)
+    buyer: getBasketInfoBuyerSelector(state),
+    isSent: getBasketIsSentSelector(state),
+    errors: state.errors
 });
 
 const mapDispatchToProps = {
     addToCart,
     deleteFromCart,
     deleteFormationOrder,
+    addInfoBuyer,
     checkout,
     isSentOrder,
     setDefaultIsSent

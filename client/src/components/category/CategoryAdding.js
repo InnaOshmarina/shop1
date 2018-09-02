@@ -8,9 +8,9 @@ import {addCategory, getCategory, editCategory} from '../../store/Category/actio
 
 class CategoryAdding extends Component {
 
-    static defaultProps = {
-        errors: {}
-    };
+    // static defaultProps = {
+    //     errors: {}
+    // };
 
     constructor(props) {
         super(props);
@@ -53,6 +53,7 @@ class CategoryAdding extends Component {
         } else {
             this.props.addCategory(categoryData, this.props.history);
         }
+        console.log(this.state.errors);
     }
 
     onChange(e) {

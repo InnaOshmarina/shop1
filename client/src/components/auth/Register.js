@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { registerUser } from '../../store/Auth/actions'
 import TextFieldGroup from "../shared/TextFieldGroup";
+import {clearErrors} from "../../store/Error/actions";
 
 class Register extends Component {
     constructor() {
@@ -30,6 +31,10 @@ class Register extends Component {
         if(nextProps.errors) {
             this.setState({errors: nextProps.errors});
         }
+    }
+
+    componentWillUnmount() {
+        this.props.clearErrors();
     }
 
     onChange(e) {
@@ -113,4 +118,4 @@ const mapStateToProps = state => ({
     errors: state.errors
 });
 
-export default connect(mapStateToProps, { registerUser })(withRouter(Register));
+export default connect(mapStateToProps, { registerUser, clearErrors })(withRouter(Register));
