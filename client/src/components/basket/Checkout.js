@@ -74,8 +74,6 @@ class Checkout extends Component {
         event.preventDefault();
 
         this.props.checkout(this.props);
-        this.props.deleteFormationOrder(this.props);
-        //this.props.isSentOrder();
     };
 
     render() {

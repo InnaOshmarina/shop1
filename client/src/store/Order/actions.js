@@ -15,7 +15,8 @@ export const checkout = (orderData) => async dispatch => {
 
         dispatch(doneActionSuccess(checkoutCreator().type));
         createNotification('success', 'Your order is successfully placed!');
-        dispatch(isSentOrder())
+        dispatch(isSentOrder());
+        this.props.deleteFormationOrder(this.props);
     }
     catch(err) {
         createNotification('error', 'The field is blank or filled out incorrectly');
