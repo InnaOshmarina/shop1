@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const categoryRepository = require('../../repositories/CategoryRepository');
+const EmailService = require('../../services/EmailService');
 
 // Load Input Validation
 const validateCategoryInput = require('../../validation/category');
@@ -11,7 +12,16 @@ const Category = require('../../models/Category');
 
 // @route          GET api/categories/test
 // @description    Tests categories route
-router.get('/test', (req, res) => res.json({ msg: 'Categories Works' }));
+router.get('/test', (req, res) => {
+    const data = {
+        to: 'burgun90@mail.ru',
+        subject: 'send mail shop 1',
+        message: '<strong>Burger</strong>'
+    };
+
+    EmailService.sendEmail(data);
+    res.json({ msg: 'Categories Works' });
+});
 
 // @route          GET api/categories
 // @description    Get categories
