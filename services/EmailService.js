@@ -19,8 +19,6 @@ class EmailService {
             }],
             subject: `${data.subject}`
         };
-
-
         return SendGridMail.send(emailData);
     }
 }

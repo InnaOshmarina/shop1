@@ -14,9 +14,9 @@ const Category = require('../../models/Category');
 // @description    Tests categories route
 router.get('/test', (req, res) => {
     const data = {
-        to: 'burgun90@mail.ru',
+        to: 'inna.rose2305@gmail.com',
         subject: 'send mail shop 1',
-        message: '<strong>Burger</strong>'
+        message: '<strong>Inna and Sasha</strong>'
     };
 
     EmailService.sendEmail(data);

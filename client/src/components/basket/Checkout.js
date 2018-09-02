@@ -73,11 +73,19 @@ class Checkout extends Component {
     checkout = event => {
         event.preventDefault();
 
-        this.props.checkout(this.props);
+        const { docs, totalQuantities, totalAmount, buyer } = this.props;
+        const data = {
+            docs,
+            totalQuantities,
+            totalAmount,
+            buyer
+        };
+
+        this.props.checkout(data);
     };
 
     render() {
-        const {docs, totalQuantities, totalAmount, buyer, isSent } = this.props;
+        const {docs, totalQuantities, totalAmount, isSent } = this.props;
 
         const { errors } = this.state;
 

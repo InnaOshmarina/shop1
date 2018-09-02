@@ -3,7 +3,7 @@ import { getOrdersCreator, checkoutCreator, getOrderCreator } from "./actionCrea
 import { doneActionSuccess, initAction } from "../Action/actionCreators";
 import { checkoutApi, getOrdersApi, getOrderApi } from "../../api/orders";
 import {createNotification} from "../../helpers/NotificationsHelper";
-import {isSentOrder} from "../Basket/actions";
+import {deleteFormationOrder, isSentOrder} from "../Basket/actions";
 
 
 // Create Order
@@ -16,7 +16,8 @@ export const checkout = (orderData) => async dispatch => {
         dispatch(doneActionSuccess(checkoutCreator().type));
         createNotification('success', 'Your order is successfully placed!');
         dispatch(isSentOrder());
-        this.props.deleteFormationOrder(this.props);
+        dispatch(deleteFormationOrder());
+
     }
     catch(err) {
         createNotification('error', 'The field is blank or filled out incorrectly');
