@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import lodash from 'lodash';
+import classnames from 'classnames';
 
 import {TextFormat} from "../../helpers/TableHelper";
 import Actions from "./Actions";
@@ -31,14 +32,19 @@ class DataTable extends Component {
             total,
             limit,
             handleFilterChange,
-            currentFilter
+            currentFilter,
+            isLoading
         } = this.props;
 
         let tableContent;
 
+        const classNameTable = classnames('table table-striped table-bordered', {
+            isLoading: isLoading
+        });
+
         tableContent = (
             <div className="dataTable">
-                <table className="table table-striped table-bordered">
+                <table className={classNameTable}>
                     <thead>
                         <tr>
                             <th>N</th>
@@ -98,7 +104,8 @@ DataTable.propTypes = {
     data: PropTypes.array.isRequired,
     headers: PropTypes.array.isRequired,
     operations: PropTypes.array.isRequired,
-    getData: PropTypes.func.isRequired
+    getData: PropTypes.func.isRequired,
+    isLoading: PropTypes.bool
 };
 
 export default DataTable;

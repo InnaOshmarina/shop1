@@ -67,6 +67,7 @@ class CategoriesList extends Component {
                     handleFilterChange={this.props.handleFilterChange}
                 />
                 <DataTable
+                    isLoading={this.props.isLoading}
                     getData={this.props.getData}
                     currentFilter={this.props.currentFilter}
                     handleFilterChange={this.props.handleFilterChange}
@@ -86,7 +87,8 @@ class CategoriesList extends Component {
 CategoriesList.propTypes = {
     getData: PropTypes.func.isRequired,
     deleteCategory: PropTypes.func.isRequired,
-    categories: PropTypes.object.isRequired
+    categories: PropTypes.object.isRequired,
+    isLoading: PropTypes.bool,
 };
 
 export default CategoriesList;
