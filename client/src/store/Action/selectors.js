@@ -10,6 +10,7 @@ export const getActionInfo = createSelector(
     getActionsState,
     getActionName,
     (state, name) => {
+
         if (state.hasOwnProperty(name)) {
             return state[name];
         }
