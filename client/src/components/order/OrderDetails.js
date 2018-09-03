@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getOrder } from '../../store/Order/actions';
+import {TEXTFORMAT} from "../../constans/GlobalConstans";
+import DataTableDetails from "../shared/DataTableDetails";
 
 class OrderDetails extends Component {
 
@@ -11,7 +13,33 @@ class OrderDetails extends Component {
 
     render() {
         const { order } = this.props;
-        // console.log(order.products);
+        //console.log(order.buyer);
+
+        const pageHeader = 'buyer';
+
+        const headers = [
+            {
+                name: 'name',
+                options: {
+                    headerName: 'Name',
+                    type: TEXTFORMAT.string
+                }
+            },
+            {
+                name: 'email',
+                options: {
+                    headerName: 'Email',
+                    type: TEXTFORMAT.string
+                }
+            },
+            {
+                name: 'phoneNumber',
+                options: {
+                    headerName: 'Phone number',
+                    type: TEXTFORMAT.string
+                }
+            }
+        ];
 
         const tableContent = (
             <table className="table table-bordered  table-hover mb-5">
@@ -47,7 +75,13 @@ class OrderDetails extends Component {
 
         return (
             <div className="mt-4">
+                <h2 className="text-center mb-4">Detail view of the order</h2>
                 {tableContent}
+                <DataTableDetails
+                    pageHeader={pageHeader}
+                    headers={headers}
+                    currentItem={order.buyer}
+                />
             </div>
         );
     }

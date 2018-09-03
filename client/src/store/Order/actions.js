@@ -17,7 +17,6 @@ export const checkout = (orderData) => async dispatch => {
         createNotification('success', 'Your order is successfully placed!');
         dispatch(isSentOrder());
         dispatch(deleteFormationOrder());
-
     }
     catch(err) {
         createNotification('error', 'The field is blank or filled out incorrectly');
@@ -60,8 +59,8 @@ export const getOrder = id => async dispatch => {
     } catch(err) {
         dispatch({
             type: GET_ERRORS,
-            // payload: err.response.data
-            payload: {}
+            payload: err.response.data
+           // payload: {}
         })
     }
 };

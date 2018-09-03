@@ -7,7 +7,7 @@ import {
 export const initialState = {
     order: {
         products: [],
-        buyer: {}
+        // buyer: {}
     },
     orders: {
         docs: [],

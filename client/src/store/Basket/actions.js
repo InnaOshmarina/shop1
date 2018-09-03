@@ -9,6 +9,7 @@ import {
 
 import { doneActionSuccess, initAction } from "../Action/actionCreators";
 import {GET_ERRORS} from "../Error/types";
+import {createNotification} from "../../helpers/NotificationsHelper";
 
 // Add product to basket
 export const addToCart = (product, quantity) => dispatch => {
@@ -38,7 +39,9 @@ export const addInfoBuyer = buyerData => async dispatch => {
         dispatch(addInfoBuyerCreator(buyerData));
 
         dispatch(doneActionSuccess(addInfoBuyerCreator().type));
+        createNotification('success', 'Your contact details are confirmed.');
     } catch(err) {
+        createNotification('error', 'The field is blank or filled out incorrectly');
         dispatch({
             type: GET_ERRORS,
             payload: err.response.data

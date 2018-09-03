@@ -20,6 +20,20 @@ const OrderSchema = new Schema({
         type: Object,
         required: true
     },
+    // buyer: {
+    //     name: {
+    //         type: String,
+    //         required: true
+    //     },
+    //     email: {
+    //         type: String,
+    //         required: true
+    //     },
+    //     phoneNumber: {
+    //         type: String,
+    //         required: true
+    //     }
+    // },
     date: {
         type: Date,
         default: Date.now

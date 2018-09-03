@@ -67,7 +67,6 @@ class Checkout extends Component {
         };
 
         this.props.addInfoBuyer(buyerData);
-        createNotification('success', 'Your contact details are confirmed.');
     };
 
     checkout = event => {
@@ -81,6 +80,7 @@ class Checkout extends Component {
             buyer
         };
 
+        //console.log(data);
         this.props.checkout(data);
     };
 
@@ -224,7 +224,7 @@ Checkout.propTypes = {
     docs: PropTypes.array.isRequired,
     totalQuantities: PropTypes.string.isRequired,
     totalAmount: PropTypes.number.isRequired,
-    // buyer: PropTypes.object.isRequired,
+    buyer: PropTypes.object.isRequired,
     isSent: PropTypes.bool.isRequired,
     isSentOrder: PropTypes.func.isRequired,
     errors: PropTypes.object.isRequired

@@ -1,5 +1,3 @@
-
-
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
@@ -7,7 +5,7 @@ const queryHelper = require('../../helpers/queryHelper');
 const EmailService = require('../../services/EmailService');
 
 // Load Input Validation
-//const validateOrderInput = require('../../validation/order');
+const validateOrderInput = require('../../validation/order');
 
 // Order model
 const Order = require('../../models/Order');
@@ -26,7 +24,7 @@ router.get('/test', (req, res) => res.json({ msg: 'Orders Works' }));
 // @description    Add order
 // @access         Public
 router.post('/', (req, res) => {
-    //const { errors, isValid } = validateOrderInput(req.body);
+    const { errors, isValid } = validateOrderInput(req.body);
 
     // Check Validation
     // if(!isValid) {
@@ -48,7 +46,6 @@ router.post('/', (req, res) => {
     const data = {
         to: req.body.buyer.email,
         subject: 'send mail shop 1',
-        //message: '<strong>Inna and Sasha</strong>'
         message: `<pre>${JSON.stringify(req.body, 0, 2)}</pre>`
     };
 
