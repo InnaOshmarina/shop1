@@ -6,6 +6,7 @@ import productReducer from "./Product/reducer";
 import actionsReducer from "./Action/reducer";
 import basketReducer from "./Basket/reducer";
 import orderReducer from "./Order/reducer";
+import dashboardReducer from "./Dashboard/reducer";
 
 export default combineReducers({
     auth: authReducer,
@@ -14,5 +15,6 @@ export default combineReducers({
     category: categoryReducer,
     product: productReducer,
     basket: basketReducer,
-    order: orderReducer
+    order: orderReducer,
+    dashboard: dashboardReducer
 });

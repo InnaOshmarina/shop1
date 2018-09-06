@@ -82,6 +82,12 @@ class OrderDetails extends Component {
                     headers={headers}
                     currentItem={order.buyer}
                 />
+
+                <DataTableDetails
+                    pageHeader={pageHeader}
+                    headers={headers}
+                    currentItem={order.buyer}
+                />
             </div>
         );
     }

@@ -1,0 +1,17 @@
+.dashboard-allItems {
+    margin-top: 2rem
+}
+
+.dashboard-allItems i {
+    font-size: 3.5rem;
+    color: #ffffff;
+}
+
+.allItems {
+    font-size: 2.5rem;
+}
+
+.allItems-footer {
+    background-color: rgb(245, 245, 245);
+}
+

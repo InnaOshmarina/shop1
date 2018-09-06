@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
-import Dashboard from "../dashboard/Dashboard";
+import Dashboard from "../../containers/dashboard/Dashboard";
 import CategoriesList from '../../containers/category/CategoryList';
 import ProductsList from '../../containers/product/ProductList';
 import OrdersList from '../../containers/order/OrderList';
@@ -41,7 +41,6 @@ const navigations = [
 class ProtectedLayout extends Component {
 
     render() {
-        // const condition = (this.props.match.path === '/product-catalog');
 
         return (
             <Router>

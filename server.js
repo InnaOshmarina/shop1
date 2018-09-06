@@ -10,6 +10,8 @@ const users = require('./routes/api/users');
 const categories = require('./routes/api/categories');
 const products = require('./routes/api/products');
 const orders = require('./routes/api/orders');
+const dashboard = require('./routes/api/dashboard');
+
 
 const app = express();
 app.use(cors());
@@ -38,6 +40,7 @@ app.use('/api/users', users);
 app.use('/api/categories', categories);
 app.use('/api/products', products);
 app.use('/api/orders', orders);
+app.use('/api/dashboard', dashboard);
 
 // Server static assets if in production
 if(process.env.NODE_ENV === 'production') {
