@@ -2,46 +2,41 @@ import { createSelector } from 'reselect';
 
 import { initialState } from './reducer';
 
-export const getDashboardState = state => state || initialState;
+export const getDashboardState = state => state.dashboard || initialState;
 
-export const getDashboardSelector = createSelector(
+export const getCategoriesCountSelector = createSelector(
     getDashboardState,
-    state => state
-);
-
-export const getDashboardCategoriesSelector = createSelector(
-    getDashboardSelector,
     state => state.categories
 );
 
-export const getDashboardProductsSelector = createSelector(
-    getDashboardSelector,
+
+export const getProductsCountSelector = createSelector(
+    getDashboardState,
     state => state.products
 );
 
-export const getDashboardOrdersSelector = createSelector(
-    getDashboardSelector,
+
+export const getOrdersCountSelector = createSelector(
+    getDashboardState,
     state => state.orders
 );
 
-// export const getDashboardState = state => state.dashboard || initialState;
-//
-// export const getDashboardSelector = createSelector(
-//     getDashboardState,
-//     state => state.dashboard
-// );
-//
-// export const getDashboardCategoriesSelector = createSelector(
-//     getDashboardSelector,
-//     state => state.categories
-// );
-//
-// export const getDashboardProductsSelector = createSelector(
-//     getDashboardSelector,
-//     state => state.products
-// );
-//
-// export const getDashboardOrdersSelector = createSelector(
-//     getDashboardSelector,
-//     state => state.orders
-// );
+
+export const getChartDataSelector = createSelector(
+    getDashboardState,
+    state => {
+        let labels = [];
+        let data = [];
+
+        state.chartData.forEach(item => {
+           if(item.products.length > 0) {
+               labels.push(item.title);
+               data.push(item.products.length);
+           }
+        });
+        return {
+            labels,
+            data
+        }
+    }
+);

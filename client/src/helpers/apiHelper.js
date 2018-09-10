@@ -7,6 +7,7 @@ export const API_CATEGORIES_URL = `${BASE_API_URL}/categories`;
 export const API_PRODUCTS_URL = `${BASE_API_URL}/products`;
 export const API_ORDERS_URL = `${BASE_API_URL}/orders`;
 export const API_DASHBOARD_URL = `${BASE_API_URL}/dashboard/items-count`;
+export const API_CHART_URL = `${BASE_API_URL}/dashboard/items-count-in-category`;
 
 const axiosClient = axios.create({
     baseURL: BASE_API_URL

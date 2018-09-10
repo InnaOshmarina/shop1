@@ -30,7 +30,7 @@ class ProductCatalog extends Component {
     };
 
     componentDidMount() {
-        this.props.getCategories();
+        this.props.getCategories({limit: 1000});
     }
 
     handleClick = (event, id) => {

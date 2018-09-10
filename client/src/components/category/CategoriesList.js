@@ -88,7 +88,7 @@ CategoriesList.propTypes = {
     getData: PropTypes.func.isRequired,
     deleteCategory: PropTypes.func.isRequired,
     categories: PropTypes.object.isRequired,
-    isLoading: PropTypes.bool,
+    isLoading: PropTypes.bool
 };
 
 export default CategoriesList;

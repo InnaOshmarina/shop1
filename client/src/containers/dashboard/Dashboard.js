@@ -1,28 +1,30 @@
 import {connect} from "react-redux";
 
 import Dashboard from "../../components/dashboard/Dashboard";
-import { getCountItems } from "../../store/Dashboard/actions";
+import {getChartData, getCountItems} from "../../store/Dashboard/actions";
 import {
-    getDashboardSelector,
-    getDashboardCategoriesSelector,
-    getDashboardProductsSelector,
-    getDashboardOrdersSelector
+    getCategoriesCountSelector,
+    getProductsCountSelector,
+    getOrdersCountSelector,
+    getChartDataSelector
 } from "../../store/Dashboard/selectors";
 
 
 const mapStateToProps = state => ({
-    // dashboard: getDashboardSelector(state),
-    // categoriesCount: getDashboardCategoriesSelector(state),
-    // productsCount: getDashboardProductsSelector(state),
-    // ordersCount: getDashboardOrdersSelector(state)
-    categoriesCount: state.dashboard.categories,
-    productsCount: state.dashboard.products,
-    ordersCount: state.dashboard.orders
+    categoriesCount: getCategoriesCountSelector(state),
+    productsCount: getProductsCountSelector(state),
+    ordersCount: getOrdersCountSelector(state),
+    dataForChart: getChartDataSelector(state)
+
 });
 
 const mapDispatchToProps = {
-    getCountItems
+    getCountItems,
+    getChartData
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+
+
+
 

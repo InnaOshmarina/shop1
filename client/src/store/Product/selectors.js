@@ -28,3 +28,10 @@ export const getProductsTotalSelector = createSelector(
     getProductsSelector,
     state => state.total
 );
+
+export const getSpecificProductsSelector = createSelector(
+    getProductState,
+    state => {
+        return state.products.docs.map(product => product.category._id)
+    }
+);

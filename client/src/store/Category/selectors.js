@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 
 import { initialState } from './reducer';
 
-export const getCategoryState = (state) => state.category || initialState;
+export const getCategoryState = state => state.category || initialState;
 
 export const getCategoriesSelector = createSelector(
     getCategoryState,
@@ -31,3 +31,4 @@ export const getCategoriesTotalSelector = createSelector(
         return state.total;
     }
 );
+

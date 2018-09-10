@@ -38,6 +38,7 @@ export const getCategories = (queryParams = {}) => async dispatch => {
     }
 };
 
+
 // Get category by id
 export const getCategory = id => async dispatch => {
     try {

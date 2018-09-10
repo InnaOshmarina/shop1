@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const queryHelper = require('../../helpers/queryHelper');
 
 // Product model
 const Product = require('../../models/Product');
@@ -13,7 +14,7 @@ const Order = require('../../models/Order');
 router.get('/test', (req, res) => res.json({msg: 'Dashboard Works'}));
 
 
-// @route          GET api/dashboard
+// @route          GET api/dashboard/items-count
 // @description    Get the count of the items for each collection.
 router.get('/items-count', async (request, response) => {
     try {
@@ -25,6 +26,60 @@ router.get('/items-count', async (request, response) => {
     catch (err) {
         response.status(404).json({
             noitemsfound: 'No items found'
+        });
+    }
+});
+
+
+// @route          GET api/dashboard/items-count-in-category
+// @description    Get the count of the items in the category.
+router.get('/items-count-in-category', async (request, response) => {
+    try {
+        const limit = 1000;
+
+        const customOptions = {
+            // populate: 'category',
+            limit
+        };
+
+        const products = await queryHelper('Product', request, customOptions);
+
+        const customOptionsCategory = {
+            limit
+        };
+
+        const categories = await queryHelper('Category', request, customOptionsCategory);
+
+        let chartData = [];
+
+        chartData =  categories.docs.map(categoriesEl => {
+             const newObj = {
+                 _id: categoriesEl._id,
+                 title: categoriesEl.title,
+                 products: []
+             };
+             return newObj;
+        });
+
+        products.docs.map(product => {
+
+              const currentCategory = chartData.find(elCat => {
+                 // console.log(elCat, product)
+                  return  String(elCat._id) === String(product.category)
+              });
+
+            console.log(currentCategory);
+            if (currentCategory) {
+
+                currentCategory.products.push(product._id)
+            }
+        });
+
+        response.status(200).json(chartData);
+    }
+    catch (err) {
+        response.status(404).json({
+            nochartdatafound: 'No chart data found'
         });
     }
 });

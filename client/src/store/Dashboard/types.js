@@ -1,4 +1,6 @@
 export const GET_DATA_DASHBOARD = 'GET_DATA_DASHBOARD';
+export const GET_DATA_CHART = 'GET_DATA_CHART';
+
 
 
 

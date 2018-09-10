@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "chart.js": "^2.7.2",
     "classnames": "^2.2.6",
     "draft-js": "^0.10.5",
     "jwt-decode": "^2.2.0",
@@ -11,6 +12,7 @@
     "moment": "^2.22.2",
     "npm": "^6.2.0",
     "react": "^16.4.1",
+    "react-chartjs-2": "^2.7.4",
     "react-compose": "^2.0.0",
     "react-dom": "^16.4.1",
     "react-draft-wysiwyg": "^1.12.13",

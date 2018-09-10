@@ -35,7 +35,7 @@ class ProductAdding extends Component {
             this.props.getProduct(this.props.match.params.id);
         }
 
-        this.props.getCategories();
+        this.props.getCategories({limit: 100});
     }
 
     componentWillReceiveProps(nextProps) {
