@@ -1,10 +1,18 @@
 # Online store
 
->  ⚛ Small online store app built with the MERN stack.
+>  ⚛ Online store app built with the MERN stack.
+>
+> Shop1 is a Platform where you can add, edit product categories and products and sell them in the web application. It can be implemented in a store / shop or other business that registers their products to show and sell them to their customers.
 
 ## Quick Start
 
 ```bash
+# Cloning repository
+git clone https://github.com/InnaOshmarina/shop1.git
+
+# Open directory
+cd shop1
+
 # Install dependencies for server
 npm install
 
