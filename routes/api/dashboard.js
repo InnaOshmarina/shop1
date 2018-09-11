@@ -32,17 +32,16 @@ router.get('/items-count', async (request, response) => {
 
 
 // @route          GET api/dashboard/items-count-in-category
-// @description    Get the count of the items in the category.
+// @description    Get the count of the products in the category.
 router.get('/items-count-in-category', async (request, response) => {
     try {
-        const limit = 1000;
+        const limit = 500;
 
-        const customOptions = {
-            // populate: 'category',
+        const customOptionsProduct = {
             limit
         };
 
-        const products = await queryHelper('Product', request, customOptions);
+        const products = await queryHelper('Product', request, customOptionsProduct);
 
         const customOptionsCategory = {
             limit
@@ -52,17 +51,17 @@ router.get('/items-count-in-category', async (request, response) => {
 
         let chartData = [];
 
-        chartData =  categories.docs.map(categoriesEl => {
-             const newObj = {
-                 _id: categoriesEl._id,
-                 title: categoriesEl.title,
+        chartData =  categories.docs.map(element => {
+             const category = {
+                 _id: element._id,
+                 title: element.title,
                  products: []
              };
-             return newObj;
+             return category;
         });
 
-        products.docs.map(product => {
 
+        products.docs.map(product => {
               const currentCategory = chartData.find(elCat => {
                  // console.log(elCat, product)
                   return  String(elCat._id) === String(product.category)
@@ -70,7 +69,6 @@ router.get('/items-count-in-category', async (request, response) => {
 
             console.log(currentCategory);
             if (currentCategory) {
-
                 currentCategory.products.push(product._id)
             }
         });
