@@ -24,9 +24,8 @@ class Dashboard extends Component {
 
     render() {
         const {categoriesCount, productsCount, ordersCount, dataForChart} = this.props;
-        console.log(dataForChart);
 
-      const chartData = {
+        const chartData = {
             labels: dataForChart.labels,
             datasets: [
                         {
@@ -37,7 +36,7 @@ class Dashboard extends Component {
                             borderWidth: 1
                         }
                       ]
-      };
+        };
 
         return (
             <div className="container-fluid">

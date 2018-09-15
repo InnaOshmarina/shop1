@@ -14,9 +14,10 @@ import '../../css/ProtectedLayout.css';
 
 const style =
     {
-        backgroundColor: 'rgb(49, 48, 49)',
+        backgroundColor: 'rgb(75, 82, 88)',
         borderRadius: '0.625rem',
-        border: 'none'
+        border: 'none',
+        color: '#fff'
     };
 
 const navigations = [
@@ -46,9 +47,9 @@ class ProtectedLayout extends Component {
             <Router>
                 <div className="dashboard">
                     <div className="container-fluid content">
-                        <div className="row">
-                            <div className="col-md-3 ina">
-                                <div className="list-group">
+                        <div className="row d-flex justify-content-around">
+                            <div className="col-md-2">
+                                <div className="list-group protected-layout">
                                     {
                                         navigations.map((navigation, index) => (
                                             <NavLink

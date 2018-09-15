@@ -70,8 +70,8 @@ class ProductCatalog extends Component {
 
                 <div className="row product-catalog">
                        <div className="col-md-3">
-                           <div className="caption-category">Select the desired product category:</div>
-                           <div className="list-group">
+                           <div className="caption-category text-center">Select the desired product category:</div>
+                           <div className="list-group categories">
                                {listCategories}
                            </div>
                        </div>

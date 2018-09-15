@@ -8,21 +8,30 @@
     flex: 1 0 auto;
 }
 
-.col-md-3 {
+.col-md-2 {
     padding: 1.07rem;
-    background-color: rgb(94, 91, 94);
+    background-color: rgb(52, 58, 64);
     border-radius: 0.625rem;
-    box-shadow: 2px 2px 6px 1px rgb(3, 83, 3);
+    box-shadow: 2px 2px 6px 1px rgb(52, 58, 64);
 }
 
-.list-group a {
-    background-color: rgb(94, 91, 94);
-    color: #fff
+.protected-layout a {
+    background-color: rgb(52, 58, 64);
+    color: #ABB1B7;
+    border: none;
+    padding: 1.2rem;
+    font-size: 1.25rem;
 }
 
-.list-group a:hover {
-     color: #fff;
-     background-color: rgb(3, 83, 3);
+.protected-layout a:hover {
+    color: #fff;
+     background-color: rgb(112, 119, 125);
      border-radius: 0.625rem;
  }
+
+.tyuhg {
+    background-color: rgb(75, 82, 88);
+    border-radius: 0.625rem;
+    border: none;
+}
 

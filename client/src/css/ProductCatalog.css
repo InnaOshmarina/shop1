@@ -2,7 +2,7 @@ div.product-catalog .col-md-3 {
     background-color: #fff;
     padding: 1.07rem;
     border-radius: 0.625rem;
-    border: 0.1rem solid rgb(203, 221, 212);
+    border: 0.1rem solid rgb(223, 223, 223);
     box-shadow: 2px 2px 6px 1px rgb(228, 236, 248);
 }
 
@@ -17,7 +17,7 @@ div.caption-category {
     background-color: #fff;
 }
 
-.list-group a:hover {
+.categories a:hover {
     color: #000;
     background-color: rgb(228, 236, 248);
     cursor: pointer;
@@ -25,11 +25,12 @@ div.caption-category {
 
 .list-group a.active-category {
     color: #000;
-    background-color: rgb(203, 221, 212);
-    border-bottom-color: rgb(203, 221, 212);
+    font-weight: 600;
+    background-color: rgb(223, 223, 223);
+    border-bottom: solid #709B7B;
 }
 
-.list-group a.list-group-item {
+.categories a.list-group-item {
     border-width: 0 0 0.125rem 0;
     border-radius: 1.7rem;
 }

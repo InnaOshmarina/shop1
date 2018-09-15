@@ -47,26 +47,26 @@ class App extends Component {
         <Provider store={store}>
             <Router>
                 <div className="App">
-                  <Navbar />
-                  <Route exact path="/" component={Landing} />
-                  <div className="container">
-                      <NotificationContainer />
-                    <Route exact path="/register" component={Register} />
-                    <Route exact path="/login" component={Login} />
-                    <Switch>
-                        <Route path="/product-catalog" component={ProductCatalog} />
-                    </Switch>
+                      <Navbar />
+                      <Route exact path="/" component={Landing} />
+                      <div className="container">
+                          <NotificationContainer />
+                          <Route exact path="/register" component={Register} />
+                          <Route exact path="/login" component={Login} />
+                          <Switch>
+                              <Route path="/product-catalog" component={ProductCatalog} />
+                          </Switch>
 
                           <Route path="/products/detail/:id" component={ProductDetails}/>
 
-                    <Switch>
-                        <Route path="/checkout" component={Checkout} />
-                    </Switch>
-                  </div>
-                    <Switch>
-                        <PrivateRoute path="/" component={ProtectedLayout} />
-                    </Switch>
-                  <Footer />
+                          <Switch>
+                              <Route path="/checkout" component={Checkout} />
+                          </Switch>
+                      </div>
+                      <Switch>
+                          <PrivateRoute path="/" component={ProtectedLayout} />
+                      </Switch>
+                      <Footer />
                 </div>
             </Router>
         </Provider>
